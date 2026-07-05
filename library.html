@@ -229,13 +229,13 @@
                     `;
                 }
 
-                // If this is elden ring, clicking the row should let them open game details
-                let detailsUrl = game.isElden ? 'gamedetail.html?id=5' : '#';
-                let onclickRow = game.isElden ? `onclick="window.location.href='gamedetail.html?id=5'"` : '';
+                // Clicking any row opens its game detail page
+                let detailsUrl = `gamedetaillibrary.html?key=${game.id}`;
+                let onclickRow = `onclick="window.location.href='${detailsUrl}'"`;
 
                 container.innerHTML += `
                     <div class="library-row library-game-item" data-title="${game.title.toLowerCase()}" id="row-${game.id}">
-                        <div class="library-game-info" ${onclickRow} style="${game.isElden ? 'cursor:pointer;' : ''}">
+                        <div class="library-game-info" ${onclickRow} style="cursor:pointer;">
                             <img src="${game.img}" alt="${game.title}" class="library-game-thumb">
                             <div class="library-game-details">
                                 <h4 class="library-game-title">${game.title}</h4>

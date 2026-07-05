@@ -1482,3 +1482,151 @@ input[type="range"]::-webkit-slider-thumb:hover {
     box-shadow: 0 0 6px #38bdf8;
     transition: width 0.1s linear;
 }
+
+/* ==================== CUSTOM PEGI 16 & PLAYER OVERLAY ==================== */
+.pegi-screen-sim {
+    position: absolute;
+    inset: 0;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: opacity 0.5s ease;
+}
+
+.pegi-logo-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pegi-16-number {
+    background: #f59e0b;
+    color: #000;
+    font-size: 54px;
+    font-weight: 800;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #000;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    margin-bottom: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.pegi-url {
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.pegi-provisional {
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+/* Custom Video Player Control Bar */
+.video-controls-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+    z-index: 10;
+    padding: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-timeline-track {
+    background: rgba(255,255,255,0.15);
+    height: 4px;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+}
+
+.video-timeline-fill {
+    background: #8b5cf6;
+    height: 100%;
+    width: 15%;
+    box-shadow: 0 0 8px #8b5cf6;
+}
+
+.control-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.volume-slider {
+    background: rgba(255,255,255,0.2);
+    width: 60px;
+    height: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.volume-fill {
+    background: #fff;
+    width: 80%;
+    height: 100%;
+}
+
+.video-time {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ==================== STEAM BUTTON OVERRIDES ==================== */
+.btn-steam-blue {
+    background: #446e8c !important;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    transition: var(--transition);
+}
+
+.btn-steam-blue:hover {
+    background: #5080a1 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(68, 110, 140, 0.3);
+}
+
+.btn-steam-play {
+    background: #474454 !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    transition: var(--transition);
+}
+
+.btn-steam-play:hover {
+    background: #545063 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(71, 68, 84, 0.3);
+}
