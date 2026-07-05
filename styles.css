@@ -1,0 +1,52 @@
+:root {
+    --purple: #8b5cf6;
+    --dark: #0f0f1e;
+    --card: #1a1b2e;
+}
+
+body {
+    background: var(--dark);
+    color: #e0e0ff;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.navbar {
+    background: rgba(15, 15, 30, 0.98) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.btn-purple {
+    background: linear-gradient(90deg, #7c3aed, #c026d3);
+    border: none;
+    color: white;
+}
+
+.game-card {
+    background: var(--card);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+}
+
+.hero {
+    height: 480px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(transparent, #0f0f1e);
+}
