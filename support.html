@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - GameHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-window">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search support articles">
+            </div>
+
+            <div class="nav-pill-container">
+                <a href="index.html" class="nav-pill-item">Store</a>
+                <a href="library.html" class="nav-pill-item">Library</a>
+                <a href="community.html" class="nav-pill-item">Community</a>
+                <a href="friends.html" class="nav-pill-item">Friends</a>
+                <a href="settings.html" class="nav-pill-item active">More</a>
+            </div>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn-circle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
+                </a>
+                <a href="#" class="action-btn-circle">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="settings.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="app-body">
+            <!-- Left Side Menu -->
+            <aside class="about-menu">
+                <div class="about-menu-title">Support</div>
+                <div class="about-menu-desc">We're here to help</div>
+
+                <a href="settings.html" class="about-menu-item">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="support.html" class="about-menu-item active">
+                    <i class="far fa-question-circle"></i> Support
+                </a>
+                <a href="help.html" class="about-menu-item">
+                    <i class="far fa-life-ring"></i> Help
+                </a>
+                <a href="about.html" class="about-menu-item">
+                    <i class="fas fa-info-circle"></i> About
+                </a>
+            </aside>
+
+            <!-- Main Panel Viewport -->
+            <main class="main-viewport">
+                <div class="mb-4">
+                    <h3 class="fs-4 fw-semibold text-white mb-1">Support Center</h3>
+                    <p class="text-muted fs-6 mb-0">Get help with orders, technical issues, or your account.</p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Quick Support Options -->
+                    <div class="col-lg-4">
+                        <div class="support-option-card mb-3" onclick="showToast('Connecting you to Live Chat...')">
+                            <div class="support-option-icon"><i class="fas fa-comments"></i></div>
+                            <div>
+                                <div class="text-white fw-semibold" style="font-size: 14px;">Live Chat</div>
+                                <div class="text-muted" style="font-size: 12px;">Avg. wait time 2 mins</div>
+                            </div>
+                            <span class="status-indicator status-online ms-auto"></span>
+                        </div>
+                        <div class="support-option-card mb-3" onclick="showToast('Opening email composer...')">
+                            <div class="support-option-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <div class="text-white fw-semibold" style="font-size: 14px;">Email Us</div>
+                                <div class="text-muted" style="font-size: 12px;">support@gamehub.com</div>
+                            </div>
+                        </div>
+                        <div class="support-option-card" onclick="window.location.href='help.html'">
+                            <div class="support-option-icon"><i class="far fa-life-ring"></i></div>
+                            <div>
+                                <div class="text-white fw-semibold" style="font-size: 14px;">Help Center</div>
+                                <div class="text-muted" style="font-size: 12px;">Browse guides & FAQs</div>
+                            </div>
+                        </div>
+
+                        <div class="about-content-panel mt-4">
+                            <h5 class="about-panel-title" style="font-size: 13px;"><i class="fas fa-ticket-alt text-muted"></i> Your Tickets</h5>
+                            <div class="ticket-row">
+                                <div>
+                                    <div class="text-white" style="font-size: 13px; font-weight: 600;">#GH-48213</div>
+                                    <div class="text-muted" style="font-size: 11px;">Payment not reflected</div>
+                                </div>
+                                <span class="badge-ticket status-open">Open</span>
+                            </div>
+                            <div class="ticket-row" style="border-bottom: none;">
+                                <div>
+                                    <div class="text-white" style="font-size: 13px; font-weight: 600;">#GH-47990</div>
+                                    <div class="text-muted" style="font-size: 11px;">Game won't launch</div>
+                                </div>
+                                <span class="badge-ticket status-resolved">Resolved</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="col-lg-8">
+                        <div class="about-content-panel">
+                            <h5 class="about-panel-title"><i class="fas fa-paper-plane text-muted"></i> Submit a Ticket</h5>
+
+                            <form onsubmit="submitTicket(event)">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Category</label>
+                                        <select class="form-select form-control-custom select-custom w-100" required>
+                                            <option value="">Select an issue type</option>
+                                            <option>Billing & Payments</option>
+                                            <option>Technical Issue</option>
+                                            <option>Account Access</option>
+                                            <option>Game Bug Report</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Priority</label>
+                                        <select class="form-select form-control-custom select-custom w-100">
+                                            <option>Low</option>
+                                            <option selected>Normal</option>
+                                            <option>High</option>
+                                            <option>Urgent</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label-custom">Subject</label>
+                                        <input type="text" class="form-control form-control-custom w-100" placeholder="Briefly describe your issue" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label-custom">Message</label>
+                                        <textarea class="form-control form-control-custom w-100" rows="6" placeholder="Explain the issue in detail, including any error messages you saw..." required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label-custom">Attachment (optional)</label>
+                                        <input type="file" class="form-control form-control-custom w-100">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-solid-purple w-100 py-3 mt-4">Submit Ticket</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 99999;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.style.cssText = `background:#272435;color:white;padding:16px 24px;border-radius:12px;border-left:6px solid ${type === 'success' ? '#22c55e' : '#a855f7'};box-shadow:0 15px 30px rgba(0,0,0,0.5);margin-top:10px;font-size:14px;`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        function submitTicket(e) {
+            e.preventDefault();
+            showToast('🎫 Ticket submitted! Our team will respond within 24 hours.', 'success');
+            e.target.reset();
+        }
+
+        window.onload = function() {
+            updateCartBadge();
+        }
+    </script>
+</body>
+
+</html>
