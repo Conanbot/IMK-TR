@@ -21,7 +21,7 @@
             
             <div class="nav-pill-container">
                 <a href="index.html" class="nav-pill-item">Store</a>
-                <a href="about.html" class="nav-pill-item">Library</a>
+                <a href="library.html" class="nav-pill-item">Library</a>
                 <a href="community.html" class="nav-pill-item">Community</a>
                 <a href="friends.html" class="nav-pill-item">Friends</a>
                 <a href="about.html" class="nav-pill-item">More</a>
@@ -59,80 +59,224 @@
             <!-- Sidebar Navigation -->
             <aside class="sidebar-filter">
                 <div class="filter-section">
-                    <h5 class="sidebar-title">Game Info</h5>
+                    <h5 class="sidebar-title">Navigation</h5>
                     <div class="filter-item text-white">
                         <label><i class="fas fa-info-circle me-2"></i> Overview</label>
                     </div>
                     <div class="filter-item text-muted">
-                        <label><i class="far fa-image me-2"></i> Media Gallery</label>
+                        <label><i class="far fa-play-circle me-2"></i> Trailer & Media</label>
                     </div>
                     <div class="filter-item text-muted">
-                        <label><i class="fas fa-list me-2"></i> Requirements</label>
+                        <label><i class="fas fa-microchip me-2"></i> System Specs</label>
                     </div>
                 </div>
 
                 <div class="mt-auto">
-                    <a href="index.html" class="btn btn-sidebar-apply text-center text-decoration-none d-block"><i class="fas fa-arrow-left me-2"></i> Back to Store</a>
+                    <a href="index.html" class="btn btn-sidebar-apply text-center text-decoration-none d-block"><i class="fas fa-arrow-left me-2"></i> Store Home</a>
                 </div>
             </aside>
 
             <!-- Main Viewport -->
             <main class="main-viewport">
-                <div class="row g-4">
-                    <!-- Left Game Column -->
-                    <div class="col-lg-8">
-                        <img id="game-img" class="img-fluid w-100 rounded-4 border border-secondary mb-4 shadow" style="max-height: 440px; object-fit: cover;" alt="Game Banner">
-                        
-                        <h2 id="game-title" class="fw-bold text-white fs-3 mb-2"></h2>
-                        <div class="d-flex gap-3 align-items-center mb-4">
-                            <span class="badge" id="game-genre" style="background: rgba(124, 58, 237, 0.15); color: #a855f7; font-size: 12px;"></span>
-                            <span class="text-success" style="font-size: 13px;"><i class="fas fa-thumbs-up me-1"></i> Very Positive (94%)</span>
-                        </div>
-                        
-                        <div class="about-content-panel mb-4">
-                            <h5 class="about-panel-title text-white mb-3">About the Game</h5>
-                            <p id="game-desc" class="text-muted" style="line-height: 1.7; font-size: 14.5px;"></p>
-                        </div>
+                <!-- Title Block -->
+                <div class="mb-3">
+                    <h2 id="detail-title" class="fw-bold text-white fs-3 mb-1">ELDEN RING</h2>
+                    <div id="detail-sub" class="text-muted fs-7">
+                        <span class="text-white">FromSoftware</span> &nbsp;&bull;&nbsp; Publisher: <span class="text-white">Bandai Namco Entertainment</span>
+                    </div>
+                </div>
 
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="about-content-panel">
-                                    <div class="text-muted mb-1" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Developer</div>
-                                    <div class="text-white fw-semibold" id="game-dev" style="font-size: 14px;"></div>
+                <!-- Glowing Purple Title Progress Bar (Image 5 Style) -->
+                <div class="detail-progress-track" id="title-progress-bar">
+                    <div class="detail-progress-fill" id="title-progress-fill"></div>
+                </div>
+
+                <!-- Media Display Panel (16:9 + thumbnails) -->
+                <div class="detail-media-panel">
+                    <div class="detail-video-player">
+                        <!-- Simulated player overlay -->
+                        <div class="position-absolute inset-0 d-flex flex-column justify-content-between p-3" style="background: rgba(0,0,0,0.1); z-index: 5;">
+                            <div>
+                                <span class="badge bg-dark-50 text-white" style="backdrop-filter: blur(5px); font-size: 11px;">Trailer Preview</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="action-btn-circle" style="width: 50px; height: 50px; background: rgba(0,0,0,0.6);" onclick="playTrailer()"><i class="fas fa-play text-white fs-5"></i></button>
+                                <span class="badge bg-danger px-2 py-1" style="font-size: 10px; font-weight: bold; height: fit-content; border-radius: 4px;">PEGI 16</span>
+                            </div>
+                        </div>
+                        <img id="main-preview-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000" class="w-100 h-100 object-fit-cover" alt="Main Preview">
+                    </div>
+                    
+                    <div class="detail-screenshot-list">
+                        <div class="detail-screenshot-thumb active" onclick="changePreview(this, 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000')">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200" alt="Thumb 1">
+                        </div>
+                        <div class="detail-screenshot-thumb" onclick="changePreview(this, 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000')">
+                            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=200" alt="Thumb 2">
+                        </div>
+                        <div class="detail-screenshot-thumb" onclick="changePreview(this, 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1000')">
+                            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=200" alt="Thumb 3">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lower Layout Grid -->
+                <div class="row g-4">
+                    <!-- Left Tab details & News -->
+                    <div class="col-lg-8">
+                        <ul class="nav nav-tabs nav-tabs-custom" id="detailTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Overview</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">System Requirements</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" onclick="showToast('Loading Community Reviews...')">Reviews</button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="detailTabsContent">
+                            <!-- Overview Tab -->
+                            <div class="tab-pane fade show active text-muted" id="overview" role="tabpanel">
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="tag-pill active"><i class="fas fa-tag"></i> RPG</span>
+                                    <span class="tag-pill"><i class="fas fa-globe"></i> Open World</span>
+                                    <span class="tag-pill"><i class="fas fa-wand-magic-sparkles"></i> Fantasy</span>
+                                    <span class="tag-pill"><i class="fas fa-fire"></i> Action</span>
+                                </div>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6">
+                                        <div class="library-stat-label">Release Date</div>
+                                        <div class="text-white fw-bold" id="detail-release">25 Feb 2022</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="library-stat-label">Review Summary</div>
+                                        <div class="text-info fw-semibold" id="detail-review">Very Positive (92%)</div>
+                                    </div>
+                                </div>
+                                <p id="detail-desc" style="line-height: 1.7; font-size: 13.5px;"></p>
+                            </div>
+
+                            <!-- Requirements Tab -->
+                            <div class="tab-pane fade" id="specs" role="tabpanel">
+                                <div class="row g-4">
+                                    <!-- Minimum -->
+                                    <div class="col-md-6 specs-column">
+                                        <h6 class="specs-title"><i class="fab fa-windows"></i> Minimum</h6>
+                                        <div class="text-muted mb-2"><strong>OS:</strong> Windows 10 64-bit</div>
+                                        <div class="text-muted mb-2"><strong>Processor:</strong> Intel Core i5-8400 / AMD Ryzen 3 3300X</div>
+                                        <div class="text-muted mb-2"><strong>Graphics:</strong> NVIDIA GTX 1060 3GB / AMD Radeon RX 580 4GB</div>
+                                        <div class="text-muted mb-2"><strong>RAM:</strong> 12 GB</div>
+                                        <div class="text-muted mb-2"><strong>Storage:</strong> 60 GB SSD</div>
+                                        <div class="text-muted mb-2"><strong>DirectX:</strong> Version 12</div>
+                                    </div>
+                                    <!-- Recommended -->
+                                    <div class="col-md-6 specs-column">
+                                        <h6 class="specs-title"><i class="fab fa-windows"></i> Recommended</h6>
+                                        <div class="text-muted mb-2"><strong>OS:</strong> Windows 10/11 64-bit</div>
+                                        <div class="text-muted mb-2"><strong>Processor:</strong> Intel Core i7-8700K / AMD Ryzen 5 3600X</div>
+                                        <div class="text-muted mb-2"><strong>Graphics:</strong> NVIDIA RTX 2070 8GB / AMD Radeon RX 6700 XT 12GB</div>
+                                        <div class="text-muted mb-2"><strong>RAM:</strong> 16 GB</div>
+                                        <div class="text-muted mb-2"><strong>Storage:</strong> 60 GB SSD</div>
+                                        <div class="text-muted mb-2"><strong>DirectX:</strong> Version 12</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="about-content-panel">
-                                    <div class="text-muted mb-1" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Release Date</div>
-                                    <div class="text-white fw-semibold" id="game-release" style="font-size: 14px;"></div>
+                        </div>
+
+                        <!-- News Section -->
+                        <div class="mt-5">
+                            <div class="section-header">
+                                <h4 class="section-title text-white">Latest News & Events</h4>
+                                <button class="btn-see-all">View All</button>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="about-content-panel p-0 overflow-hidden" style="cursor: pointer;" onclick="showToast('Loading Event page...')">
+                                        <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400" class="w-100" style="height: 140px; object-fit: cover;" alt="News 1">
+                                        <div class="p-3">
+                                            <span class="badge mb-2" style="background: rgba(139,92,246,0.15); color: #a855f7; font-size: 10px;">Update</span>
+                                            <h6 class="text-white mb-1 text-truncate" style="font-size: 13.5px;">Shadow of the Erdtree expansion patch notes v1.12</h6>
+                                            <p class="text-muted mb-0" style="font-size: 11.5px;">Read the detailed balance adjust details and bug fixes.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="about-content-panel p-0 overflow-hidden" style="cursor: pointer;" onclick="showToast('Loading Merchandise page...')">
+                                        <img src="https://images.unsplash.com/photo-1544924222-35298d69037a?q=80&w=400" class="w-100" style="height: 140px; object-fit: cover;" alt="News 2">
+                                        <div class="p-3">
+                                            <span class="badge mb-2" style="background: rgba(56,189,248,0.15); color: #38bdf8; font-size: 10px;">News</span>
+                                            <h6 class="text-white mb-1 text-truncate" style="font-size: 13.5px;">Elden Ring Official Vinyl Soundtrack Pre-order now</h6>
+                                            <p class="text-muted mb-0" style="font-size: 11.5px;">Follow in the footsteps of Miquella with this collector album.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Purchase Column -->
+                    <!-- Right Buy / Action Card, Languages and Shares -->
                     <div class="col-lg-4">
-                        <div class="about-content-panel sticky-top" style="top: 20px;">
-                            <span class="sidebar-title" style="font-size: 10px;">Buy Offer</span>
-                            <h3 class="text-white fw-bold my-3 fs-3" id="game-price"></h3>
+                        <!-- Action Card with Vertical Cover -->
+                        <div class="about-content-panel mb-4 text-center">
+                            <img id="detail-cover-art" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400" class="img-fluid rounded-3 mb-4 shadow border border-secondary" style="max-height: 280px; object-fit: cover; aspect-ratio: 3/4;" alt="Game Cover">
                             
-                            <div class="d-grid gap-2 mt-4">
-                                <button class="btn btn-solid-purple py-3 text-uppercase fw-bold" onclick="addGameToCart()">
-                                    Add to Cart
-                                </button>
-                                <button class="btn btn-wishlist py-3" onclick="addGameToWishlist()">
-                                    <i class="far fa-heart me-2"></i> Add to Wishlist
-                                </button>
+                            <!-- State Button Wrapper -->
+                            <div class="d-grid gap-2" id="action-btn-wrapper">
+                                <!-- Dynamic primary action button -->
                             </div>
+                        </div>
 
-                            <hr class="border-secondary opacity-25 my-4">
+                        <!-- Languages Support Checklist -->
+                        <div class="about-content-panel mb-4">
+                            <h5 class="about-panel-title"><i class="fas fa-language text-muted"></i> Languages</h5>
+                            <table class="languages-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Interface</th>
+                                        <th>Full Audio</th>
+                                        <th>Subtitles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>English</td>
+                                        <td><i class="fas fa-check"></i></td>
+                                        <td><i class="fas fa-check"></i></td>
+                                        <td><i class="fas fa-check"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>French</td>
+                                        <td><i class="fas fa-check"></i></td>
+                                        <td>-</td>
+                                        <td><i class="fas fa-check"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Italian</td>
+                                        <td><i class="fas fa-check"></i></td>
+                                        <td>-</td>
+                                        <td><i class="fas fa-check"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>German</td>
+                                        <td><i class="fas fa-check"></i></td>
+                                        <td>-</td>
+                                        <td><i class="fas fa-check"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="#" class="text-info d-block text-center mt-3 text-decoration-underline" style="font-size: 11.5px;" onclick="showToast('Showing all 15 supported languages...')">See all 15 supported languages</a>
+                        </div>
 
-                            <div>
-                                <span class="sidebar-title" style="font-size: 9px; display: block; margin-bottom: 12px;">Platforms Supported</span>
-                                <div class="d-flex gap-3 text-muted" style="font-size: 18px;" id="game-platforms">
-                                    <!-- Dynamic Platform Icons -->
-                                </div>
-                            </div>
+                        <!-- Social shares -->
+                        <div class="d-flex justify-content-center gap-3 text-muted py-2" style="font-size: 16px;">
+                            <span>Share:</span>
+                            <a href="#" class="text-muted" onclick="showToast('Sharing on Facebook...')"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-muted" onclick="showToast('Sharing on Twitter...')"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted" onclick="showToast('Sharing on YouTube...')"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="text-muted" onclick="showToast('Sharing on Telegram...')"><i class="fab fa-telegram-plane"></i></a>
                         </div>
                     </div>
                 </div>
@@ -148,94 +292,167 @@
         // Database
         const gameDb = {
             1: {
-                title: "Subnautica 2",
-                price: "IDR 350,999",
-                genre: "Survival",
-                desc: "Immerse yourself in a new adventure with Subnautica 2, an open-water survival game from the creators of Subnautica. Play alone or with friends, exploring alluring biomes & discovering fascinating creatures. Craft vehicles, tools, & bases to survive this mysterious alien world.",
-                img: "https://images.unsplash.com/photo-1682687220063-4742bd7fd538?q=80&w=1200",
-                dev: "Unknown Worlds Entertainment",
-                release: "Oct 2026",
-                platforms: ["windows", "apple", "linux"]
+                id: "bioshock-1",
+                title: "Bioshock",
+                price: "IDR 250,000",
+                genre: "Action",
+                desc: "BioShock is a shooter unlike any you've ever played, loaded with weapons and tactics never seen. You'll have a complete arsenal at your disposal from simple revolvers to grenade launchers and chemical throwers, but you'll also be forced to genetically modify your DNA.",
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000",
+                dev: "2K Boston / 2K Australia",
+                release: "21 Aug 2007",
+                defaultState: "play"
             },
             2: {
-                title: "Grand Theft Auto VI",
-                price: "IDR 1,190,000",
+                id: "batman-origins",
+                title: "Batman: Arkham Origins",
+                price: "IDR 350,000",
                 genre: "Action",
-                desc: "Grand Theft Auto VI heads to the state of Leonida, home to the neon-soaked streets of Vice City and beyond in the biggest, most immersive evolution of the Grand Theft Auto series yet. Experience Rockstar Games' signature detail.",
-                img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200",
-                dev: "Rockstar Games",
-                release: "Fall 2025",
-                platforms: ["windows"]
+                desc: "Batman: Arkham Origins features an expanded Gotham City and introduces an original prequel storyline set several years before the events of Batman: Arkham Asylum and Batman: Arkham City.",
+                img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000",
+                dev: "WB Games Montreal",
+                release: "25 Oct 2013",
+                defaultState: "install"
             },
             3: {
-                title: "Resident Evil Requiem",
-                price: "IDR 910,000",
-                genre: "Horror",
-                desc: "Experience the heart-pounding survival horror. Survival is just the beginning. Solve cryptic puzzles, fight horrifying creatures, and explore dark desolate corridors in Resident Evil Requiem.",
-                img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=1200",
-                dev: "Capcom",
-                release: "March 2026",
-                platforms: ["windows", "apple"]
+                id: "batman-knight",
+                title: "Batman: Arkham Knight",
+                price: "IDR 500,000",
+                genre: "Action",
+                desc: "Batman: Arkham Knight brings the award-winning Arkham trilogy from Rocksteady Studios to its epic conclusion. Developed exclusively for New-Gen platforms, Batman: Arkham Knight introduces Rocksteady's uniquely designed version of the Batmobile.",
+                img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1000",
+                dev: "Rocksteady Studios",
+                release: "23 Jun 2015",
+                defaultState: "update"
             },
             4: {
-                title: "Forza Horizon 6",
+                id: "steel-sky",
+                title: "Beneath a Steel Sky",
+                price: "Free",
+                genre: "Adventure",
+                desc: "A science-fiction point and click adventure game set in a dystopian future. You play Robert Foster, an outcast who has been abducted and brought to Union City, a terrifying high-tech metropolis. Survive and uncover the dark secrets.",
+                img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000",
+                dev: "Revolution Software",
+                release: "Mar 1994",
+                defaultState: "play"
+            },
+            5: {
+                id: "elden-ring",
+                title: "Elden Ring",
                 price: "IDR 899,000",
-                genre: "Racing",
-                desc: "Your Ultimate Horizon Adventure awaits! Explore the vibrant and ever-evolving open world landscapes of Japan with limitless, fun driving action in hundreds of the world's greatest cars.",
-                img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200",
-                dev: "Playground Games",
-                release: "June 2026",
-                platforms: ["windows", "linux"]
+                genre: "RPG",
+                desc: "Elden Ring is an action RPG developed by FromSoftware, published by Bandai Namco Entertainment. It is set in the world of the Lands Between, ruled by the demi-god offspring of Queen Marika the Eternal, who have shattered the Elden Ring and claimed its shards, triggering a war called the Shattering.",
+                img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000",
+                dev: "FromSoftware",
+                release: "25 Feb 2022",
+                defaultState: "install"
             }
         };
 
         const params = new URLSearchParams(window.location.search);
-        const id = parseInt(params.get('id')) || 1;
-        const activeGame = gameDb[id] || gameDb[1];
+        let id = parseInt(params.get('id')) || 5; // Default to Elden Ring (5)
+        const activeGame = gameDb[id] || gameDb[5];
 
-        // Populate elements
-        document.getElementById('game-title').textContent = activeGame.title.toUpperCase();
-        document.getElementById('game-genre').textContent = activeGame.genre;
-        document.getElementById('game-price').textContent = activeGame.price;
-        document.getElementById('game-desc').textContent = activeGame.desc;
-        document.getElementById('game-img').src = activeGame.img;
-        document.getElementById('game-img').alt = activeGame.title;
-        document.getElementById('game-dev').textContent = activeGame.dev;
-        document.getElementById('game-release').textContent = activeGame.release;
+        // Populate basic text
+        document.getElementById('detail-title').textContent = activeGame.title.toUpperCase();
+        document.getElementById('detail-desc').textContent = activeGame.desc;
+        document.getElementById('detail-release').textContent = activeGame.release;
+        document.getElementById('detail-genre').innerHTML = `<i class="fas fa-tag"></i> ${activeGame.genre}`;
+        document.getElementById('main-preview-img').src = activeGame.img;
+        document.getElementById('detail-cover-art').src = activeGame.img;
+        
+        // Populate author text
+        document.getElementById('detail-sub').innerHTML = `
+            <span class="text-white">${activeGame.dev}</span> &nbsp;&bull;&nbsp; Publisher: <span class="text-white">Bandai Namco Entertainment</span>
+        `;
 
-        // Platform icons
-        const platWrapper = document.getElementById('game-platforms');
-        platWrapper.innerHTML = '';
-        activeGame.platforms.forEach(plat => {
-            let icon = '';
-            if (plat === 'windows') icon = '<i class="fab fa-windows" title="Windows"></i>';
-            if (plat === 'apple') icon = '<i class="fab fa-apple" title="macOS"></i>';
-            if (plat === 'linux') icon = '<i class="fab fa-linux" title="Linux"></i>';
-            platWrapper.innerHTML += icon;
-        });
+        function renderDetailButton() {
+            const btnWrapper = document.getElementById('action-btn-wrapper');
+            const stateKey = `lib-state-${activeGame.id}`;
+            const currentStatus = localStorage.getItem(stateKey) || activeGame.defaultState;
 
-        // Cart & Wishlist functions
-        function addGameToCart() {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (!cart.some(item => item.title === activeGame.title)) {
-                cart.push({ title: activeGame.title, price: activeGame.price });
-                localStorage.setItem('cart', JSON.stringify(cart));
-                showToast(`✅ ${activeGame.title} added to cart!`, "success");
-                updateCartBadge();
-            } else {
-                showToast("Already in cart!");
+            if (currentStatus === 'play') {
+                btnWrapper.innerHTML = `
+                    <button class="btn btn-solid-purple w-100 py-3 text-uppercase fw-bold" onclick="playGame()">
+                        <i class="fas fa-play me-2"></i> Play
+                    </button>
+                `;
+                document.getElementById('title-progress-bar').style.display = 'none';
+            } else if (currentStatus === 'install') {
+                btnWrapper.innerHTML = `
+                    <button class="btn btn-solid-purple w-100 py-3 text-uppercase fw-bold" style="background: #446e8c;" onclick="startInstall()">
+                        <i class="fas fa-download me-2"></i> Install
+                    </button>
+                `;
+                document.getElementById('title-progress-bar').style.display = 'none';
+            } else if (currentStatus === 'update') {
+                btnWrapper.innerHTML = `
+                    <button class="btn btn-solid-purple w-100 py-3 text-uppercase fw-bold" style="background: #475a80;" onclick="startInstall()">
+                        <i class="fas fa-sync-alt me-2"></i> Update
+                    </button>
+                `;
+                document.getElementById('title-progress-bar').style.display = 'none';
+            } else if (currentStatus === 'installing' || currentStatus === 'updating') {
+                let text = currentStatus === 'installing' ? 'Installing' : 'Updating';
+                let pct = localStorage.getItem(`lib-pct-${activeGame.id}`) || 0;
+                btnWrapper.innerHTML = `
+                    <button class="btn btn-solid-purple w-100 py-3 text-uppercase fw-bold" style="background: #272435; border: 1px solid rgba(255,255,255,0.05); color: var(--text-muted);" disabled>
+                        <i class="fas fa-spinner fa-spin me-2"></i> ${text}...
+                    </button>
+                `;
+                
+                // Show title bar progress
+                const bar = document.getElementById('title-progress-bar');
+                const fill = document.getElementById('title-progress-fill');
+                bar.style.display = 'block';
+                fill.style.width = pct + '%';
             }
+            updateCartBadge();
         }
 
-        function addGameToWishlist() {
-            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-            if (!wishlist.includes(activeGame.title)) {
-                wishlist.push(activeGame.title);
-                localStorage.setItem('wishlist', JSON.stringify(wishlist));
-                showToast(`❤️ ${activeGame.title} added to Wishlist!`, "success");
-            } else {
-                showToast("Already in Wishlist!");
-            }
+        function changePreview(thumb, url) {
+            document.querySelectorAll('.detail-screenshot-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+            document.getElementById('main-preview-img').src = url;
+        }
+
+        function playTrailer() {
+            showToast("Playing official high-definition gameplay trailer...", "info");
+        }
+
+        function playGame() {
+            showToast(`🚀 Launching ${activeGame.title}... Enjoy!`, "success");
+        }
+
+        // Install / Update simulation
+        function startInstall() {
+            const stateKey = `lib-state-${activeGame.id}`;
+            const pctKey = `lib-pct-${activeGame.id}`;
+            const curState = localStorage.getItem(stateKey) || activeGame.defaultState;
+            const action = curState === 'install' ? 'installing' : 'updating';
+
+            localStorage.setItem(stateKey, action);
+            localStorage.setItem(pctKey, '0');
+
+            renderDetailButton();
+
+            let pct = 0;
+            let interval = setInterval(() => {
+                pct += Math.floor(Math.random() * 8) + 4;
+                if (pct >= 100) {
+                    pct = 100;
+                    clearInterval(interval);
+                    localStorage.setItem(stateKey, 'play');
+                    localStorage.removeItem(pctKey);
+                    showToast(`🎉 ${activeGame.title} is now ready to play!`, "success");
+                    renderDetailButton();
+                } else {
+                    localStorage.setItem(pctKey, pct.toString());
+                    const fill = document.getElementById('title-progress-fill');
+                    if (fill) {
+                        fill.style.width = pct + '%';
+                    }
+                }
+            }, 250);
         }
 
         function updateCartBadge() {
@@ -256,8 +473,40 @@
             }, 3000);
         }
 
+        // Resume installer loop on reload if in-progress
         window.onload = function() {
-            updateCartBadge();
+            renderDetailButton();
+
+            const stateKey = `lib-state-${activeGame.id}`;
+            const currentStatus = localStorage.getItem(stateKey) || activeGame.defaultState;
+            if (currentStatus === 'installing' || currentStatus === 'updating') {
+                let startPct = parseInt(localStorage.getItem(`lib-pct-${activeGame.id}`)) || 0;
+                resumeInstall(startPct);
+            }
+        }
+
+        function resumeInstall(startPct) {
+            const stateKey = `lib-state-${activeGame.id}`;
+            const pctKey = `lib-pct-${activeGame.id}`;
+            let pct = startPct;
+
+            let interval = setInterval(() => {
+                pct += Math.floor(Math.random() * 8) + 4;
+                if (pct >= 100) {
+                    pct = 100;
+                    clearInterval(interval);
+                    localStorage.setItem(stateKey, 'play');
+                    localStorage.removeItem(pctKey);
+                    showToast(`🎉 ${activeGame.title} is now ready to play!`, "success");
+                    renderDetailButton();
+                } else {
+                    localStorage.setItem(pctKey, pct.toString());
+                    const fill = document.getElementById('title-progress-fill');
+                    if (fill) {
+                        fill.style.width = pct + '%';
+                    }
+                }
+            }, 250);
         }
     </script>
 </body>

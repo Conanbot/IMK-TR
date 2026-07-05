@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - GameHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-window">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="library-search" placeholder="Search games" onkeyup="filterLibrary()">
+            </div>
+            
+            <div class="nav-pill-container">
+                <a href="index.html" class="nav-pill-item">Store</a>
+                <a href="library.html" class="nav-pill-item active">Library</a>
+                <a href="community.html" class="nav-pill-item">Community</a>
+                <a href="friends.html" class="nav-pill-item">Friends</a>
+                <a href="about.html" class="nav-pill-item">More</a>
+            </div>
+            
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn-circle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
+                </a>
+                <a href="#" class="action-btn-circle">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="app-body">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar-filter">
+                <div class="filter-section">
+                    <h5 class="sidebar-title">Library</h5>
+                    <div class="filter-item text-white">
+                        <label><i class="fas fa-th-list me-2"></i> All Games</label>
+                        <span class="filter-count">8</span>
+                    </div>
+                    <div class="filter-item text-muted">
+                        <label><i class="far fa-star me-2"></i> Favorites</label>
+                        <span class="filter-count" id="favorite-count">0</span>
+                    </div>
+                    <div class="filter-item text-muted">
+                        <label><i class="fas fa-download me-2"></i> Downloads</label>
+                        <span class="filter-count" id="downloading-count">0</span>
+                    </div>
+                </div>
+                <div class="mt-auto">
+                    <a href="index.html" class="btn btn-sidebar-apply text-center text-decoration-none d-block"><i class="fas fa-shopping-bag me-2"></i> Buy More Games</a>
+                </div>
+            </aside>
+
+            <!-- Main Viewport -->
+            <main class="main-viewport">
+                <div class="section-header">
+                    <h3 class="section-title">Games</h3>
+                    <button class="btn btn-outline-light btn-sm border-secondary px-3" style="border-radius: 50px;" onclick="resetLibraryStates()">Reset States</button>
+                </div>
+
+                <div class="library-list" id="library-list-container">
+                    <!-- Dynamic rendering -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 99999;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Library game list DB
+        const libraryGames = [
+            {
+                id: "bioshock-1",
+                title: "Bioshock",
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=300",
+                lastPlayed: "21 Aug 2022",
+                playTime: "92 hours",
+                achievements: "20/65",
+                achievementsPct: 30,
+                diskSize: "50 GB",
+                defaultState: "play"
+            },
+            {
+                id: "bioshock-2",
+                title: "Bioshock 2",
+                img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=300",
+                lastPlayed: "21 Aug 2022",
+                playTime: "92 hours",
+                achievements: "20/65",
+                achievementsPct: 30,
+                diskSize: "50 GB",
+                defaultState: "play"
+            },
+            {
+                id: "bioshock-infinite",
+                title: "Bioshock Infinite",
+                img: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=300",
+                lastPlayed: "21 Aug 2022",
+                playTime: "92 hours",
+                achievements: "20/65",
+                achievementsPct: 30,
+                diskSize: "50 GB",
+                defaultState: "play"
+            },
+            {
+                id: "batman-origins",
+                title: "Batman: Arkham Origins",
+                img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=300",
+                lastPlayed: "21 Aug 2022",
+                playTime: "92 hours",
+                achievements: "20/65",
+                achievementsPct: 30,
+                diskSize: "50 GB",
+                defaultState: "install"
+            },
+            {
+                id: "batman-knight",
+                title: "Batman: Arkham Knight",
+                img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=300",
+                lastPlayed: "21 Aug 2022",
+                playTime: "92 hours",
+                achievements: "20/65",
+                achievementsPct: 30,
+                diskSize: "50 GB",
+                defaultState: "update"
+            },
+            {
+                id: "steel-sky",
+                title: "Beneath a Steel Sky",
+                img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=300",
+                lastPlayed: "21 Aug 2022",
+                playTime: "92 hours",
+                achievements: "20/65",
+                achievementsPct: 30,
+                diskSize: "50 GB",
+                defaultState: "play"
+            },
+            {
+                id: "elden-ring",
+                title: "Elden Ring",
+                img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=300",
+                lastPlayed: "25 Aug 2023",
+                playTime: "140 hours",
+                achievements: "45/45",
+                achievementsPct: 100,
+                diskSize: "60 GB",
+                defaultState: "install",
+                isElden: true
+            }
+        ];
+
+        function renderLibraryList() {
+            let container = document.getElementById('library-list-container');
+            container.innerHTML = '';
+
+            let favoriteList = JSON.parse(localStorage.getItem('library-favorites')) || [];
+            document.getElementById('favorite-count').textContent = favoriteList.length;
+
+            let downloadingCount = 0;
+
+            libraryGames.forEach(game => {
+                // Get persistent status
+                let stateKey = `lib-state-${game.id}`;
+                let currentStatus = localStorage.getItem(stateKey) || game.defaultState;
+                let isFav = favoriteList.includes(game.id);
+
+                let actionHtml = '';
+                if (currentStatus === 'play') {
+                    actionHtml = `
+                        <button class="btn btn-library-action btn-library-play" onclick="playGame('${game.title}')">
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                    `;
+                } else if (currentStatus === 'install') {
+                    actionHtml = `
+                        <button class="btn btn-library-action btn-library-install" onclick="startProcess('${game.id}', 'install')">
+                            <i class="fas fa-download"></i> Install
+                        </button>
+                    `;
+                } else if (currentStatus === 'update') {
+                    actionHtml = `
+                        <button class="btn btn-library-action btn-library-update" onclick="startProcess('${game.id}', 'update')">
+                            <i class="fas fa-sync-alt"></i> Update
+                        </button>
+                    `;
+                } else if (currentStatus === 'installing' || currentStatus === 'updating') {
+                    downloadingCount++;
+                    let label = currentStatus === 'installing' ? 'Installing' : 'Updating';
+                    let pct = localStorage.getItem(`lib-pct-${game.id}`) || 0;
+                    actionHtml = `
+                        <div class="library-install-progress-wrapper" id="progress-wrapper-${game.id}">
+                            <div class="library-install-label">
+                                <i class="fas fa-spinner fa-spin"></i> ${label} <span id="progress-text-${game.id}">${pct}%</span>
+                            </div>
+                            <div class="library-install-track">
+                                <div class="library-install-fill" id="progress-fill-${game.id}" style="width: ${pct}%"></div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // If this is elden ring, clicking the row should let them open game details
+                let detailsUrl = game.isElden ? 'gamedetail.html?id=5' : '#';
+                let onclickRow = game.isElden ? `onclick="window.location.href='gamedetail.html?id=5'"` : '';
+
+                container.innerHTML += `
+                    <div class="library-row library-game-item" data-title="${game.title.toLowerCase()}" id="row-${game.id}">
+                        <div class="library-game-info" ${onclickRow} style="${game.isElden ? 'cursor:pointer;' : ''}">
+                            <img src="${game.img}" alt="${game.title}" class="library-game-thumb">
+                            <div class="library-game-details">
+                                <h4 class="library-game-title">${game.title}</h4>
+                                <div class="library-action-col">
+                                    ${actionHtml}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Last Played -->
+                        <div class="library-stat-col">
+                            <div class="library-stat-icon"><i class="far fa-calendar-alt"></i></div>
+                            <div>
+                                <div class="library-stat-label">Last Played</div>
+                                <div class="library-stat-value">${game.lastPlayed}</div>
+                            </div>
+                        </div>
+
+                        <!-- Play Time -->
+                        <div class="library-stat-col">
+                            <div class="library-stat-icon"><i class="far fa-moon"></i></div>
+                            <div>
+                                <div class="library-stat-label">Play Time</div>
+                                <div class="library-stat-value">${game.playTime}</div>
+                            </div>
+                        </div>
+
+                        <!-- Achievements -->
+                        <div class="library-stat-col">
+                            <div class="library-stat-icon"><i class="far fa-star"></i></div>
+                            <div class="library-achievements-wrapper">
+                                <div class="library-stat-label">Achievements</div>
+                                <div class="library-stat-value">${game.achievements}</div>
+                                <div class="achievements-track">
+                                    <div class="achievements-fill" style="width: ${game.achievementsPct}%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Disk Size -->
+                        <div class="library-stat-col">
+                            <div class="library-stat-icon"><i class="far fa-file-alt"></i></div>
+                            <div>
+                                <div class="library-stat-label">Disk Size</div>
+                                <div class="library-stat-value">${game.diskSize}</div>
+                            </div>
+                        </div>
+
+                        <!-- Favorites and Settings -->
+                        <div class="library-row-actions">
+                            <button class="btn-library-icon ${isFav ? 'active' : ''}" onclick="toggleFavorite('${game.id}', this)" title="Add to Favorites">
+                                <i class="${isFav ? 'fas' : 'far'} fa-star"></i>
+                            </button>
+                            <button class="btn-library-icon" onclick="showSettings('${game.title}')" title="Settings">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('downloading-count').textContent = downloadingCount;
+            updateCartBadge();
+        }
+
+        // Action methods
+        function playGame(title) {
+            showToast(`🚀 Launching ${title}... Enjoy gaming!`, "success");
+        }
+
+        function toggleFavorite(id, btn) {
+            let favoriteList = JSON.parse(localStorage.getItem('library-favorites')) || [];
+            let isFav = favoriteList.includes(id);
+
+            if (isFav) {
+                favoriteList = favoriteList.filter(item => item !== id);
+                btn.classList.remove('active');
+                btn.querySelector('i').className = 'far fa-star';
+                showToast("Removed from favorites.");
+            } else {
+                favoriteList.push(id);
+                btn.classList.add('active');
+                btn.querySelector('i').className = 'fas fa-star';
+                showToast("Added to favorites!", "success");
+            }
+            localStorage.setItem('library-favorites', JSON.stringify(favoriteList));
+            document.getElementById('favorite-count').textContent = favoriteList.length;
+        }
+
+        function showSettings(title) {
+            showToast(`Opening client settings for ${title}...`);
+        }
+
+        // Install / Update Progress simulation
+        function startProcess(id, type) {
+            let stateKey = `lib-state-${id}`;
+            let pctKey = `lib-pct-${id}`;
+
+            localStorage.setItem(stateKey, type === 'install' ? 'installing' : 'updating');
+            localStorage.setItem(pctKey, '0');
+
+            renderLibraryList();
+
+            let pct = 0;
+            let interval = setInterval(() => {
+                pct += Math.floor(Math.random() * 8) + 4; // increment randomly
+                if (pct >= 100) {
+                    pct = 100;
+                    clearInterval(interval);
+                    localStorage.setItem(stateKey, 'play');
+                    localStorage.removeItem(pctKey);
+                    showToast(`🎉 ${libraryGames.find(g => g.id === id).title} is ready to play!`, "success");
+                    renderLibraryList();
+                } else {
+                    localStorage.setItem(pctKey, pct.toString());
+                    const fill = document.getElementById(`progress-fill-${id}`);
+                    const text = document.getElementById(`progress-text-${id}`);
+                    if (fill && text) {
+                        fill.style.width = pct + '%';
+                        text.textContent = pct + '%';
+                    }
+                }
+            }, 250);
+        }
+
+        function resetLibraryStates() {
+            libraryGames.forEach(game => {
+                localStorage.removeItem(`lib-state-${game.id}`);
+                localStorage.removeItem(`lib-pct-${game.id}`);
+            });
+            localStorage.removeItem('library-favorites');
+            showToast("Library game states reset to defaults!");
+            renderLibraryList();
+        }
+
+        function filterLibrary() {
+            const query = document.getElementById('library-search').value.toLowerCase();
+            const items = document.querySelectorAll('.library-game-item');
+            
+            items.forEach(item => {
+                const title = item.getAttribute('data-title');
+                if (title.includes(query)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.style.cssText = `background:#272435;color:white;padding:16px 24px;border-radius:12px;border-left:6px solid ${type === 'success' ? '#22c55e' : '#a855f7'};box-shadow:0 15px 30px rgba(0,0,0,0.5);margin-top:10px;font-size:14px;`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        // Resume active downloads/installs on reload
+        window.onload = function() {
+            renderLibraryList();
+            
+            // resume installing states
+            libraryGames.forEach(game => {
+                let status = localStorage.getItem(`lib-state-${game.id}`) || game.defaultState;
+                if (status === 'installing' || status === 'updating') {
+                    let pct = parseInt(localStorage.getItem(`lib-pct-${game.id}`)) || 0;
+                    let type = status === 'installing' ? 'install' : 'update';
+                    resumeProcess(game.id, type, pct);
+                }
+            });
+        }
+
+        function resumeProcess(id, type, startPct) {
+            let stateKey = `lib-state-${id}`;
+            let pctKey = `lib-pct-${id}`;
+            let pct = startPct;
+
+            let interval = setInterval(() => {
+                pct += Math.floor(Math.random() * 8) + 4;
+                if (pct >= 100) {
+                    pct = 100;
+                    clearInterval(interval);
+                    localStorage.setItem(stateKey, 'play');
+                    localStorage.removeItem(pctKey);
+                    showToast(`🎉 ${libraryGames.find(g => g.id === id).title} is ready to play!`, "success");
+                    renderLibraryList();
+                } else {
+                    localStorage.setItem(pctKey, pct.toString());
+                    const fill = document.getElementById(`progress-fill-${id}`);
+                    const text = document.getElementById(`progress-text-${id}`);
+                    if (fill && text) {
+                        fill.style.width = pct + '%';
+                        text.textContent = pct + '%';
+                    }
+                }
+            }, 250);
+        }
+    </script>
+</body>
+
+</html>
