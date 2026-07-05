@@ -1,34 +1,232 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart - GameHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">GameHub</a>
-        </div>
-    </nav>
+    <div class="app-window">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+            
+            <div class="nav-pill-container">
+                <a href="index.html" class="nav-pill-item">Store</a>
+                <a href="about.html" class="nav-pill-item">Library</a>
+                <a href="community.html" class="nav-pill-item">Community</a>
+                <a href="friends.html" class="nav-pill-item">Friends</a>
+                <a href="about.html" class="nav-pill-item">More</a>
+            </div>
+            
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn-circle active">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
+                </a>
+                <a href="#" class="action-btn-circle">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
 
-    <div class="container mt-5">
-        <h2>Shopping Cart</h2>
-        <div id="cart-items" class="list-group"></div>
-        <div class="text-end mt-4">
-            <h4>Total: <span id="total-price">IDR 0</span></h4>
-            <button class="btn btn-purple btn-lg" onclick="checkout()">Proceed to Payment</button>
+        <!-- Body -->
+        <div class="app-body">
+            <!-- Sidebar (Simple links back) -->
+            <aside class="sidebar-filter">
+                <div class="filter-section">
+                    <h5 class="sidebar-title">Checkout Steps</h5>
+                    <div class="filter-item text-white fw-semibold">
+                        <label><i class="fas fa-check-circle text-purple me-2"></i> 1. Review Cart</label>
+                    </div>
+                    <div class="filter-item text-muted">
+                        <label><i class="far fa-circle me-2"></i> 2. Payment Method</label>
+                    </div>
+                    <div class="filter-item text-muted">
+                        <label><i class="far fa-circle me-2"></i> 3. Receipt</label>
+                    </div>
+                </div>
+
+                <div class="mt-auto">
+                    <a href="index.html" class="btn btn-sidebar-apply text-center text-decoration-none d-block"><i class="fas fa-arrow-left me-2"></i> Back to Store</a>
+                </div>
+            </aside>
+
+            <!-- Main Viewport -->
+            <main class="main-viewport">
+                <h3 class="section-title mb-4">Your Shopping Cart</h3>
+
+                <div class="row g-4">
+                    <!-- Cart Items List -->
+                    <div class="col-lg-8">
+                        <div class="about-content-panel p-0 overflow-hidden" id="cart-panel" style="border: none;">
+                            <div class="list-group rounded-3 border-0 bg-transparent" id="cart-list">
+                                <!-- Dynamic Render -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Panel -->
+                    <div class="col-lg-4">
+                        <div class="about-content-panel">
+                            <h5 class="about-panel-title"><i class="fas fa-receipt text-muted"></i> Order Summary</h5>
+                            
+                            <div class="d-flex justify-content-between mb-3" style="font-size: 14px;">
+                                <span class="text-muted">Subtotal</span>
+                                <span id="summary-subtotal" class="text-white">IDR 0</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3" style="font-size: 14px;">
+                                <span class="text-muted">Tax (11%)</span>
+                                <span id="summary-tax" class="text-white">IDR 0</span>
+                            </div>
+                            <hr class="border-secondary opacity-25">
+                            <div class="d-flex justify-content-between mb-4">
+                                <span class="fw-semibold text-white">Estimated Total</span>
+                                <span id="summary-total" class="fw-bold text-white fs-5">IDR 0</span>
+                            </div>
+
+                            <button class="btn btn-solid-purple w-100 py-3 text-uppercase fw-bold" onclick="checkout()" id="btn-checkout">
+                                Proceed to Checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 
+    <!-- Toast container -->
+    <div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 99999;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Localized metadata for card images
+        const gameImages = {
+            "Subnautica 2": "https://images.unsplash.com/photo-1682687220063-4742bd7fd538?q=80&w=200",
+            "PRAGMATA": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=200",
+            "GRAND THEFT AUTO VI": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=200",
+            "RESIDENT EVIL REQUIEM": "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=200",
+            "FORZA HORIZON 6": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=200"
+        };
+
+        function renderCartPage() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+
+            const cartList = document.getElementById('cart-list');
+            const summarySubtotal = document.getElementById('summary-subtotal');
+            const summaryTax = document.getElementById('summary-tax');
+            const summaryTotal = document.getElementById('summary-total');
+            const btnCheckout = document.getElementById('btn-checkout');
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="text-center py-5" style="background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(255,255,255,0.04);">
+                        <i class="fas fa-shopping-basket mb-3 text-muted" style="font-size: 48px;"></i>
+                        <h4 class="fs-6 text-white mb-2">Your cart is currently empty</h4>
+                        <p class="text-muted mb-4" style="font-size: 13px;">Find something exciting in the store to get started.</p>
+                        <a href="index.html" class="btn btn-solid-purple px-4 py-2" style="font-size: 13px;">Go to Store</a>
+                    </div>
+                `;
+                summarySubtotal.textContent = "IDR 0";
+                summaryTax.textContent = "IDR 0";
+                summaryTotal.textContent = "IDR 0";
+                btnCheckout.disabled = true;
+                return;
+            }
+
+            btnCheckout.disabled = false;
+            cartList.innerHTML = '';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const priceVal = parseInt(item.price.replace(/[^\d]/g, '')) || 0;
+                subtotal += priceVal;
+
+                // get matching cover image
+                const imgUrl = gameImages[item.title.toUpperCase()] || gameImages[item.title] || "https://picsum.photos/id/100/200/200";
+
+                cartList.innerHTML += `
+                    <div class="list-group-item bg-transparent text-white border-0 border-bottom border-secondary py-3 px-4 d-flex justify-content-between align-items-center" style="border-color: rgba(255,255,255,0.05) !important; background: rgba(255,255,255,0.01) !important; margin-bottom: 8px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04) !important;">
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="${imgUrl}" alt="${item.title}" style="width: 70px; height: 90px; object-fit: cover; border-radius: 8px;">
+                            <div>
+                                <h6 class="mb-1 fw-bold fs-6">${item.title}</h6>
+                                <span class="badge" style="background: rgba(255,255,255,0.08); font-size: 10px;">Base Game</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-4">
+                            <span class="fw-semibold text-white">${item.price}</span>
+                            <button class="btn btn-outline-danger btn-sm border-0" onclick="removeFromCart(${index})" style="border-radius: 6px;"><i class="far fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const tax = Math.round(subtotal * 0.11);
+            const total = subtotal + tax;
+
+            summarySubtotal.textContent = "IDR " + subtotal.toLocaleString('id-ID');
+            summaryTax.textContent = "IDR " + tax.toLocaleString('id-ID');
+            summaryTotal.textContent = "IDR " + total.toLocaleString('id-ID');
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const removed = cart[index];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showToast(`🗑️ Removed ${removed.title} from cart!`);
+            renderCartPage();
+        }
+
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.style.cssText = `background:#272435;color:white;padding:16px 24px;border-radius:12px;border-left:6px solid ${type === 'success' ? '#22c55e' : '#a855f7'};box-shadow:0 15px 30px rgba(0,0,0,0.5);margin-top:10px;font-size:14px;`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
         function checkout() {
-            alert("Payment Successful! (Demo)");
-            window.location = "index.html";
+            showToast("🎉 Payment Successful! (Demo)", "success");
+            localStorage.removeItem('cart');
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1500);
+        }
+
+        window.onload = function() {
+            renderCartPage();
         }
     </script>
 </body>

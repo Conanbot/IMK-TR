@@ -1,25 +1,194 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishlist - GameHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">GameHub</a>
-        </div>
-    </nav>
+    <div class="app-window">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search wishlist">
+            </div>
+            
+            <div class="nav-pill-container">
+                <a href="index.html" class="nav-pill-item">Store</a>
+                <a href="about.html" class="nav-pill-item">Library</a>
+                <a href="community.html" class="nav-pill-item">Community</a>
+                <a href="friends.html" class="nav-pill-item">Friends</a>
+                <a href="about.html" class="nav-pill-item">More</a>
+            </div>
+            
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn-circle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
+                </a>
+                <a href="#" class="action-btn-circle">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 active" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
 
-    <div class="container mt-5">
-        <h2>Your Wishlist</h2>
-        <div class="row g-4" id="wishlist-grid"></div>
+        <!-- Body -->
+        <div class="app-body">
+            <!-- Sidebar navigation -->
+            <aside class="sidebar-filter">
+                <div class="filter-section">
+                    <h5 class="sidebar-title">Wishlist Options</h5>
+                    <div class="filter-item text-white">
+                        <label><i class="fas fa-heart me-2 text-danger"></i> Saved Items</label>
+                    </div>
+                </div>
+                <div class="mt-auto">
+                    <a href="index.html" class="btn btn-sidebar-apply text-center text-decoration-none d-block"><i class="fas fa-arrow-left me-2"></i> Back to Store</a>
+                </div>
+            </aside>
+
+            <!-- Main Viewport -->
+            <main class="main-viewport">
+                <div class="section-header">
+                    <h3 class="section-title">Your Wishlist</h3>
+                    <button class="btn btn-outline-light btn-sm border-secondary px-3" style="border-radius: 50px;" onclick="clearWishlist()">Clear All</button>
+                </div>
+
+                <div class="row g-4" id="wishlist-grid">
+                    <!-- Dynamic rendering -->
+                </div>
+            </main>
+        </div>
     </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 99999;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Game metadata database
+        const gameMeta = {
+            "Subnautica 2": { price: "IDR 350,999", img: "https://images.unsplash.com/photo-1682687220063-4742bd7fd538?q=80&w=600" },
+            "PRAGMATA": { price: "IDR 779,000", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600" },
+            "GRAND THEFT AUTO VI": { price: "IDR 1,190,000", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600" },
+            "RESIDENT EVIL REQUIEM": { price: "IDR 910,000", img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600" },
+            "FORZA HORIZON 6": { price: "IDR 899,000", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600" }
+        };
+
+        function renderWishlist() {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+
+            const grid = document.getElementById('wishlist-grid');
+
+            if (wishlist.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-12 text-center py-5" style="background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(255,255,255,0.04);">
+                        <i class="far fa-heart mb-3 text-muted" style="font-size: 48px;"></i>
+                        <h4 class="fs-6 text-white mb-2">Your wishlist is empty</h4>
+                        <p class="text-muted mb-4" style="font-size: 13px;">Save interesting games while browsing the store.</p>
+                        <a href="index.html" class="btn btn-solid-purple px-4 py-2" style="font-size: 13px;">Go to Store</a>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = '';
+            wishlist.forEach(gameTitle => {
+                // normalize title lookup
+                let key = gameTitle.toUpperCase();
+                let meta = gameMeta[key] || gameMeta[gameTitle] || { price: "IDR 499,000", img: "https://picsum.photos/id/100/300/400" };
+
+                grid.innerHTML += `
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="game-vertical-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 16px; padding: 12px; text-align: left;">
+                            <div class="card-img-wrapper" style="aspect-ratio: 3 / 4; overflow: hidden; border-radius: 12px;">
+                                <img src="${meta.img}" alt="${gameTitle}">
+                            </div>
+                            <div class="game-type">Base Game</div>
+                            <h4 class="game-card-title text-truncate text-white mb-1" style="font-size:14px; font-weight:600;">${gameTitle}</h4>
+                            <div class="game-price text-muted mb-3" style="font-size:13px;">${meta.price}</div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-solid-purple w-100 py-2 fs-7" style="font-size:12px;" onclick="addToCart('${gameTitle}', '${meta.price}')">Add to Cart</button>
+                                <button class="btn btn-outline-danger px-3" style="border-radius:10px;" onclick="removeFromWishlist('${gameTitle}')"><i class="far fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function addToCart(title, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (!cart.some(item => item.title === title)) {
+                cart.push({ title: title, price: price });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                showToast(`✅ ${title} added to cart!`, "success");
+                updateCartBadge();
+            } else {
+                showToast("Already in cart!");
+            }
+        }
+
+        function removeFromWishlist(title) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist = wishlist.filter(item => item !== title);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            showToast(`❤️ Removed ${title} from Wishlist`);
+            renderWishlist();
+        }
+
+        function clearWishlist() {
+            localStorage.removeItem('wishlist');
+            showToast("Wishlist cleared!", "info");
+            renderWishlist();
+        }
+
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.style.cssText = `background:#272435;color:white;padding:16px 24px;border-radius:12px;border-left:6px solid ${type === 'success' ? '#22c55e' : '#a855f7'};box-shadow:0 15px 30px rgba(0,0,0,0.5);margin-top:10px;font-size:14px;`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        window.onload = function() {
+            renderWishlist();
+        }
+    </script>
 </body>
 
 </html>

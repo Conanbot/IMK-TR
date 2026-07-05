@@ -1,28 +1,251 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friends - GameHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">GameHub</a>
-        </div>
-    </nav>
+    <div class="app-window">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+            
+            <div class="nav-pill-container">
+                <a href="index.html" class="nav-pill-item">Store</a>
+                <a href="about.html" class="nav-pill-item">Library</a>
+                <a href="community.html" class="nav-pill-item">Community</a>
+                <a href="friends.html" class="nav-pill-item active">Friends</a>
+                <a href="about.html" class="nav-pill-item">More</a>
+            </div>
+            
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn-circle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
+                </a>
+                <a href="#" class="action-btn-circle">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
 
-    <div class="container mt-5">
-        <h2>Friends</h2>
-        <div class="list-group">
-            <div class="list-group-item bg-dark">Zicho L. - Online (Playing Valorant)</div>
-            <div class="list-group-item bg-dark">Novina - Online</div>
+        <!-- Body -->
+        <div class="app-body">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar-filter">
+                <div class="filter-section">
+                    <h5 class="sidebar-title">Categories</h5>
+                    <div class="filter-item">
+                        <label><i class="fas fa-users me-2"></i> All Friends</label>
+                        <span class="filter-count">12</span>
+                    </div>
+                    <div class="filter-item">
+                        <label><i class="fas fa-circle text-success me-2" style="font-size: 8px;"></i> Online</label>
+                        <span class="filter-count">2</span>
+                    </div>
+                    <div class="filter-item">
+                        <label><i class="fas fa-clock me-2"></i> Pending Requests</label>
+                        <span class="filter-count">1</span>
+                    </div>
+                    <div class="filter-item">
+                        <label><i class="fas fa-user-slash me-2"></i> Blocked</label>
+                        <span class="filter-count">0</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto">
+                    <button class="btn btn-solid-purple w-100" data-bs-toggle="modal" data-bs-target="#addFriendModal">
+                        <i class="fas fa-user-plus me-2"></i> Add Friend
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Viewport -->
+            <main class="main-viewport">
+                <div class="section-header">
+                    <h3 class="section-title">Friends Online</h3>
+                    <button class="btn btn-outline-light btn-sm px-3 border-secondary" style="border-radius: 50px;">Sort by Activity</button>
+                </div>
+
+                <div class="row g-3">
+                    <!-- Friend 1 -->
+                    <div class="col-md-6">
+                        <div class="community-post-card mb-0 d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="position-relative">
+                                    <div class="post-author-avatar" style="width: 48px; height: 48px; font-size: 18px; background: #3b354e;">ZL</div>
+                                    <span class="position-absolute bottom-0 end-0 status-indicator status-ingame border border-dark"></span>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0 fs-6 fw-semibold">Zicho L.</h5>
+                                    <small class="text-info"><i class="fas fa-gamepad me-1"></i> Playing Valorant</small>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-glass-add py-2 px-3" onclick="showToast('Starting chat with Zicho...')"><i class="far fa-comment-dots"></i> Chat</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Friend 2 -->
+                    <div class="col-md-6">
+                        <div class="community-post-card mb-0 d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="position-relative">
+                                    <div class="post-author-avatar" style="width: 48px; height: 48px; font-size: 18px; background: #3b354e;">N</div>
+                                    <span class="position-absolute bottom-0 end-0 status-indicator status-online border border-dark"></span>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0 fs-6 fw-semibold">Novina</h5>
+                                    <small class="text-success"><i class="fas fa-circle me-1" style="font-size: 8px;"></i> Online</small>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-glass-add py-2 px-3" onclick="showToast('Starting chat with Novina...')"><i class="far fa-comment-dots"></i> Chat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
+
+    <!-- Add Friend Modal (Matches Image 2 Style) -->
+    <div class="modal fade" id="addFriendModal" tabindex="-1" aria-labelledby="addFriendModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-content-glass">
+                <div class="modal-header-glass d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="modal-title-custom mb-0 text-white" id="addFriendModalLabel">Add new Friend</h4>
+                        <div class="modal-subtitle-custom">Insert Username or ID</div>
+                    </div>
+                    <button class="modal-btn-close border-0" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body-glass">
+                    <!-- Search Input -->
+                    <div class="mb-4">
+                        <input type="text" class="form-control form-control-custom w-100 py-3" placeholder="Search username or ID..." style="background: rgba(255,255,255,0.03) !important;">
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="sidebar-title" style="font-size: 10px;">People you might know</span>
+                    </div>
+
+                    <!-- Recommended User 1 -->
+                    <div class="friend-item-row">
+                        <div class="friend-info-block">
+                            <div class="friend-avatar-circle"><i class="far fa-user"></i></div>
+                            <div>
+                                <div class="friend-name">Kai Landers</div>
+                                <div class="friend-handle">@kailanders</div>
+                                <div class="friend-mutuals">3 mutual friends</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-glass-add" onclick="sendFriendRequest('Kai Landers', this)">Add</button>
+                    </div>
+
+                    <!-- Recommended User 2 -->
+                    <div class="friend-item-row">
+                        <div class="friend-info-block">
+                            <div class="friend-avatar-circle"><i class="far fa-user"></i></div>
+                            <div>
+                                <div class="friend-name">Aria Tanaka</div>
+                                <div class="friend-handle">@ariatanaka</div>
+                                <div class="friend-mutuals">1 mutual friend</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-glass-add" onclick="sendFriendRequest('Aria Tanaka', this)">Add</button>
+                    </div>
+
+                    <!-- Recommended User 3 -->
+                    <div class="friend-item-row">
+                        <div class="friend-info-block">
+                            <div class="friend-avatar-circle"><i class="far fa-user"></i></div>
+                            <div>
+                                <div class="friend-name">Zack Morris</div>
+                                <div class="friend-handle">@zackm</div>
+                                <div class="friend-mutuals"><i class="fas fa-users me-1"></i> 2 mutual friends</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-glass-add" onclick="sendFriendRequest('Zack Morris', this)">Add</button>
+                    </div>
+
+                    <!-- Send Request Button -->
+                    <button class="btn btn-send-request" onclick="sendCustomRequest()">
+                        <i class="far fa-paper-plane"></i> Send Request
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 99999;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.style.cssText = `background:#272435;color:white;padding:16px 24px;border-radius:12px;border-left:6px solid ${type === 'success' ? '#22c55e' : '#a855f7'};box-shadow:0 15px 30px rgba(0,0,0,0.5);margin-top:10px;font-size:14px;`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        function sendFriendRequest(name, btn) {
+            btn.innerHTML = `<i class="fas fa-check"></i> Sent`;
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            showToast(`Friend request sent to ${name}!`, "success");
+        }
+
+        function sendCustomRequest() {
+            showToast("Friend request sent successfully!", "success");
+            // close modal using bootstrap api
+            const modalEl = document.getElementById('addFriendModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) modal.hide();
+        }
+
+        window.onload = function() {
+            updateCartBadge();
+        }
+    </script>
 </body>
 
 </html>

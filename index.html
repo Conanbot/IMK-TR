@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -11,77 +11,290 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold fs-3" href="index.html"><i class="fas fa-gamepad"></i> GameHub</a>
-            <div class="navbar-nav flex-row gap-4 mx-auto">
-                <a href="index.html" class="nav-link active">Store</a>
-                <a href="#" class="nav-link">Library</a>
-                <a href="#" class="nav-link">Community</a>
-                <a href="friends.html" class="nav-link">Friends</a>
+    <div class="app-window">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="search-bar" placeholder="Search">
             </div>
-            <div class="d-flex align-items-center gap-3">
-                <a href="cart.html" class="text-light position-relative">
-                    <i class="fas fa-shopping-cart fa-2x"></i>
+            
+            <div class="nav-pill-container">
+                <a href="index.html" class="nav-pill-item active">Store</a>
+                <a href="about.html" class="nav-pill-item">Library</a>
+                <a href="community.html" class="nav-pill-item">Community</a>
+                <a href="friends.html" class="nav-pill-item">Friends</a>
+                <a href="about.html" class="nav-pill-item">More</a>
+            </div>
+            
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn-circle" title="View Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
                 </a>
-                <a href="login.html" class="btn btn-outline-light">Login</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container-fluid pt-5 mt-5">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-lg-3 border-end p-4">
-                <h5>Genre</h5>
-                <div class="mb-4">
-                    <div class="form-check"><input type="checkbox" checked class="form-check-input"> Survival</div>
-                    <div class="form-check"><input type="checkbox" class="form-check-input"> Action</div>
-                    <div class="form-check"><input type="checkbox" class="form-check-input"> RPG</div>
-                    <div class="form-check"><input type="checkbox" class="form-check-input"> Horror</div>
+                <a href="#" class="action-btn-circle" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
                 </div>
-                <h5>Price Range</h5>
-                <input type="range" class="form-range">
             </div>
+        </header>
 
-            <!-- Main Content -->
-            <div class="col-lg-9 p-4">
-                <div class="hero mb-5" style="background-image: url('https://picsum.photos/id/1015/1920/1080')">
-                    <div class="position-absolute bottom-0 p-5">
-                        <h1 class="display-3 fw-bold text-white">SUBNAUTICA 2</h1>
-                        <a href="gamedetail.html?id=1" class="btn btn-purple btn-lg px-5">Buy Now</a>
+        <!-- Body -->
+        <div class="app-body">
+            <!-- Sidebar Filter -->
+            <aside class="sidebar-filter">
+                <div class="filter-section">
+                    <h5 class="sidebar-title">Genre</h5>
+                    <div class="filter-item">
+                        <label><input type="checkbox" id="genre-rpg" checked> Action RPGs</label>
+                        <span class="filter-count">2.1K</span>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox" id="genre-strategy"> Strategy</label>
+                        <span class="filter-count">2.7K</span>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox" id="genre-shooter" checked> Shooter</label>
+                        <span class="filter-count">2.5K</span>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox" id="genre-adventure"> Adventure</label>
+                        <span class="filter-count">1.1K</span>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox" id="genre-simulation"> Simulation</label>
+                        <span class="filter-count">3K</span>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox" id="genre-horror"> Horror</label>
+                        <span class="filter-count">2.2K</span>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox" id="genre-sports"> Sports</label>
+                        <span class="filter-count">1K</span>
                     </div>
                 </div>
 
-                <h4 class="mb-4">You might like</h4>
-                <div class="row g-4" id="game-grid"></div>
-            </div>
+                <div class="filter-section">
+                    <h5 class="sidebar-title">Price Range</h5>
+                    <div class="price-slider-wrapper">
+                        <input type="range" class="form-range" min="0" max="1500000" step="50000" value="500000" id="price-slider">
+                        <div class="price-range-labels">
+                            <span>Rp 0</span>
+                            <span id="price-val">Rp 500K</span>
+                        </div>
+                    </div>
+                    <div class="filter-item mt-2">
+                        <label><input type="checkbox" id="price-free"> Free to Play</label>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox" id="price-under-500" checked> Under IDR 500K</label>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox" id="price-top-500"> Top IDR 500K</label>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h5 class="sidebar-title">Tags</h5>
+                    <div class="tags-cloud">
+                        <a href="#" class="tag-pill active">Multiplayer</a>
+                        <a href="#" class="tag-pill">Singleplayer</a>
+                        <a href="#" class="tag-pill">Open World</a>
+                        <a href="#" class="tag-pill active">Story Rich</a>
+                        <a href="#" class="tag-pill">2D</a>
+                        <a href="#" class="tag-pill">3D</a>
+                        <a href="#" class="tag-pill">Co-op</a>
+                        <a href="#" class="tag-pill">VR</a>
+                        <a href="#" class="tag-pill">Sandbox</a>
+                        <a href="#" class="tag-pill">Pixel Art</a>
+                        <a href="#" class="tag-pill">Atmospheric</a>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h5 class="sidebar-title">Platform</h5>
+                    <div class="filter-item">
+                        <label><input type="checkbox" checked> Windows</label>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox"> macOS</label>
+                    </div>
+                    <div class="filter-item">
+                        <label><input type="checkbox"> Linux</label>
+                    </div>
+                </div>
+
+                <button class="btn-sidebar-apply" onclick="applyFilters()">Apply</button>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-viewport">
+                <!-- Hero Banner -->
+                <div class="hero-banner" style="background-image: url('https://images.unsplash.com/photo-1682687220063-4742bd7fd538?q=80&w=1200')">
+                    <div class="hero-overlay">
+                        <span class="badge-outnow">OUT NOW</span>
+                        <h1 class="hero-title">SUBNAUTICA 2</h1>
+                        <p class="hero-desc">Immerse yourself in a new adventure with Subnautica 2, an open-water survival game from the creators of Subnautica. Play alone or with friends, exploring alluring biomes & discovering fascinating creatures. Craft vehicles, tools, & bases to survive this mysterious alien world.</p>
+                        <div class="hero-actions">
+                            <a href="gamedetail.html?id=1" class="btn-buy-now">
+                                <span>Buy Now</span>
+                                <span class="btn-buy-now-accent">IDR 350,999</span>
+                            </a>
+                            <button class="btn-wishlist" onclick="addToWishlist('Subnautica 2', 'IDR 350,999')">
+                                <i class="far fa-heart"></i> Add to Wishlist
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-slider-arrows">
+                        <button class="action-btn-circle"><i class="fas fa-chevron-left"></i></button>
+                        <button class="action-btn-circle"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- You might like -->
+                <div class="section-header">
+                    <h3 class="section-title">You might like</h3>
+                    <button class="btn-see-all">See all</button>
+                </div>
+
+                <div class="row g-4" id="game-grid">
+                    <!-- Game 1 -->
+                    <div class="col-6 col-md-4 col-lg-3 game-card-col" data-title="Pragmata" data-genre="RPG" data-price="779000">
+                        <a href="gamedetail.html?id=1" class="game-vertical-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600" alt="Pragmata">
+                                <span class="card-badge-top">1:1</span>
+                            </div>
+                            <div class="game-type">Base Game</div>
+                            <h4 class="game-card-title">PRAGMATA</h4>
+                            <div class="game-price">IDR 779.000</div>
+                        </a>
+                    </div>
+                    <!-- Game 2 -->
+                    <div class="col-6 col-md-4 col-lg-3 game-card-col" data-title="Grand Theft Auto VI" data-genre="Action" data-price="1190000">
+                        <a href="gamedetail.html?id=2" class="game-vertical-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600" alt="GTA VI">
+                            </div>
+                            <div class="game-type">Base Game</div>
+                            <h4 class="game-card-title">GRAND THEFT AUTO VI</h4>
+                            <div class="game-price">IDR 1.190.000</div>
+                        </a>
+                    </div>
+                    <!-- Game 3 -->
+                    <div class="col-6 col-md-4 col-lg-3 game-card-col" data-title="Resident Evil Requiem" data-genre="Horror" data-price="910000">
+                        <a href="gamedetail.html?id=3" class="game-vertical-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600" alt="Resident Evil">
+                            </div>
+                            <div class="game-type">Base Game</div>
+                            <h4 class="game-card-title">RESIDENT EVIL REQUIEM</h4>
+                            <div class="game-price">IDR 910.000</div>
+                        </a>
+                    </div>
+                    <!-- Game 4 -->
+                    <div class="col-6 col-md-4 col-lg-3 game-card-col" data-title="Forza Horizon 6" data-genre="Racing" data-price="899000">
+                        <a href="gamedetail.html?id=4" class="game-vertical-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600" alt="Forza Horizon 6">
+                            </div>
+                            <div class="game-type">Base Game</div>
+                            <h4 class="game-card-title">FORZA HORIZON 6</h4>
+                            <div class="game-price">IDR 899.000</div>
+                        </a>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 
+    <!-- Toast message container -->
+    <div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 99999;"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const games = [
-            { id: 1, title: "Subnautica 2", price: "350.999" },
-            { id: 2, title: "GTA VI", price: "1.130.500" },
-            { id: 3, title: "Elden Ring", price: "239.990" },
-            { id: 4, title: "Forza Horizon 6", price: "719.200" }
-        ];
+        // Synchronize cart count
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
 
-        const grid = document.getElementById('game-grid');
-        games.forEach(game => {
-            grid.innerHTML += `
-                <div class="col-md-4 col-lg-3">
-                    <div class="game-card card h-100" onclick="window.location='gamedetail.html?id=${game.id}'">
-                        <img src="https://picsum.photos/id/1${game.id}0/300/380" class="card-img-top">
-                        <div class="card-body">
-                            <h6>${game.title}</h6>
-                            <strong>IDR ${game.price}</strong>
-                        </div>
-                    </div>
-                </div>
-            `;
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.style.cssText = `background:#272435;color:white;padding:16px 24px;border-radius:12px;border-left:6px solid ${type === 'success' ? '#22c55e' : '#a855f7'};box-shadow:0 15px 30px rgba(0,0,0,0.5);margin-top:10px;font-size:14px;`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        function addToWishlist(title, price) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            if (!wishlist.includes(title)) {
+                wishlist.push(title);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                showToast(`❤️ ${title} added to Wishlist!`, "success");
+            } else {
+                showToast(`Already in Wishlist!`);
+            }
+        }
+
+        // Apply dynamic filters
+        function applyFilters() {
+            const priceSlider = document.getElementById('price-slider');
+            const maxPrice = parseInt(priceSlider.value);
+            const searchBar = document.getElementById('search-bar');
+            const searchQuery = searchBar.value.toLowerCase();
+
+            const cards = document.querySelectorAll('.game-card-col');
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const price = parseInt(card.getAttribute('data-price'));
+                
+                let matchesSearch = title.includes(searchQuery);
+                let matchesPrice = price <= maxPrice;
+
+                if (matchesSearch && matchesPrice) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            showToast("Filters applied!", "info");
+        }
+
+        // Synchronize elements
+        document.getElementById('price-slider').addEventListener('input', function() {
+            const val = parseInt(this.value);
+            document.getElementById('price-val').textContent = val >= 1000000 ? `Rp ${(val/1000000).toFixed(1)}M` : `Rp ${(val/1000).toFixed(0)}K`;
         });
+
+        document.getElementById('search-bar').addEventListener('keyup', applyFilters);
+
+        // Initial running
+        window.onload = function() {
+            updateCartBadge();
+        }
     </script>
 </body>
 
