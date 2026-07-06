@@ -90,11 +90,12 @@
     <script>
         // Game metadata database
         const gameMeta = {
-            "Subnautica 2": { price: "IDR 350,999", img: "https://images.unsplash.com/photo-1682687220063-4742bd7fd538?q=80&w=600" },
-            "PRAGMATA": { price: "IDR 779,000", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600" },
-            "GRAND THEFT AUTO VI": { price: "IDR 1,190,000", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600" },
-            "RESIDENT EVIL REQUIEM": { price: "IDR 910,000", img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600" },
-            "FORZA HORIZON 6": { price: "IDR 899,000", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600" }
+            "Subnautica 2": { price: "IDR 350,999", img: "img/Subnautica_2_-_Leviathan_Art.png" },
+            "PRAGMATA": { price: "IDR 779,000", img: "img/pm-announcement-art.jpg" },
+            "GRAND THEFT AUTO VI": { price: "IDR 1,190,000", img: "img/Jason_and_Lucia_01_With_Logos_portrait.jpg" },
+            "RESIDENT EVIL REQUIEM": { price: "IDR 910,000", img: "img/RE_Requiem_TGA_Thumbart.webp" },
+            "FORZA HORIZON 6": { price: "IDR 899,000", img: "img/Forza_Horizon_6_3840_VERT_Final_7ee5f22b95.jpg" },
+            "ELDEN RING": { price: "IDR 899,000", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600" }
         };
 
         function renderWishlist() {
@@ -144,7 +145,14 @@
         function addToCart(title, price) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             if (!cart.some(item => item.title === title)) {
-                cart.push({ title: title, price: price });
+                let meta = gameMeta[title.toUpperCase()] || gameMeta[title] || { price: price, img: "https://picsum.photos/id/100/300/400" };
+                cart.push({
+                    id: title.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                    title: title,
+                    price: price,
+                    img: meta.img,
+                    genre: "Action"
+                });
                 localStorage.setItem('cart', JSON.stringify(cart));
                 showToast(`✅ ${title} added to cart!`, "success");
                 updateCartBadge();

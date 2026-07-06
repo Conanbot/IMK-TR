@@ -2015,3 +2015,36 @@ input[type="range"]::-webkit-slider-thumb:hover {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+/* HORIZONTAL SCROLL FOR YOU MIGHT LIKE SECTION */
+.horizontal-scroll-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    margin-top: 15px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.horizontal-scroll-container .game-card-col {
+    flex: 0 0 220px; /* fixed width for horizontal card */
+}

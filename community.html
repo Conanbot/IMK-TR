@@ -60,17 +60,20 @@
             <aside class="sidebar-filter">
                 <div class="filter-section">
                     <h5 class="sidebar-title">Trending hubs</h5>
-                    <div class="filter-item">
-                        <label><i class="fab fa-steam-symbol me-2"></i> GameHub Steam</label>
+                    <div class="filter-item text-white" style="cursor: pointer;" onclick="filterByGame('all', this)">
+                        <label><i class="fas fa-th-list me-2"></i> All Hubs</label>
                     </div>
-                    <div class="filter-item">
+                    <div class="filter-item text-muted" style="cursor: pointer;" onclick="filterByGame('Subnautica 2', this)">
                         <label><i class="fas fa-fire me-2 text-warning"></i> Subnautica 2</label>
                     </div>
-                    <div class="filter-item">
+                    <div class="filter-item text-muted" style="cursor: pointer;" onclick="filterByGame('Resident Evil', this)">
                         <label><i class="fas fa-ghost me-2 text-danger"></i> Resident Evil</label>
                     </div>
-                    <div class="filter-item">
+                    <div class="filter-item text-muted" style="cursor: pointer;" onclick="filterByGame('Forza Horizon', this)">
                         <label><i class="fas fa-car me-2 text-info"></i> Forza Horizon</label>
+                    </div>
+                    <div class="filter-item text-muted" style="cursor: pointer;" onclick="filterByGame('Elden Ring', this)">
+                        <label><i class="fab fa-steam-symbol me-2"></i> Elden Ring</label>
                     </div>
                 </div>
             </aside>
@@ -80,15 +83,15 @@
                 <!-- Sub Menu Bar -->
                 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
                     <div class="sub-nav-pill-wrapper mb-0 border-0 pb-0">
-                        <a href="#" class="sub-nav-pill active">All</a>
-                        <a href="#" class="sub-nav-pill">Screenshots</a>
-                        <a href="#" class="sub-nav-pill">Artworks</a>
-                        <a href="#" class="sub-nav-pill">Workshop</a>
-                        <a href="#" class="sub-nav-pill">Broadcasts</a>
-                        <a href="#" class="sub-nav-pill">Videos</a>
-                        <a href="#" class="sub-nav-pill">News</a>
-                        <a href="#" class="sub-nav-pill">Guides</a>
-                        <a href="#" class="sub-nav-pill">Reviews</a>
+                        <a href="#" class="sub-nav-pill active" onclick="filterCommunity('all', this)">All</a>
+                        <a href="#" class="sub-nav-pill" onclick="filterCommunity('screenshots', this)">Screenshots</a>
+                        <a href="#" class="sub-nav-pill" onclick="filterCommunity('artworks', this)">Artworks</a>
+                        <a href="#" class="sub-nav-pill" onclick="filterCommunity('workshop', this)">Workshop</a>
+                        <a href="#" class="sub-nav-pill" onclick="filterCommunity('broadcasts', this)">Broadcasts</a>
+                        <a href="#" class="sub-nav-pill" onclick="filterCommunity('videos', this)">Videos</a>
+                        <a href="#" class="sub-nav-pill" onclick="filterCommunity('news', this)">News</a>
+                        <a href="#" class="sub-nav-pill" onclick="filterCommunity('guides', this)">Guides</a>
+                        <a href="#" class="sub-nav-pill" onclick="filterCommunity('reviews', this)">Reviews</a>
                     </div>
                     
                     <div class="nav-pill-container" style="background: rgba(255,255,255,0.03);">
@@ -98,9 +101,9 @@
                 </div>
 
                 <!-- Feed Grid Layout -->
-                <div class="row g-4">
+                <div class="row g-4" id="community-posts-grid">
                     <!-- Post 1 (Image Post) -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 post-card-col" data-type="screenshots">
                         <div class="community-post-card">
                             <div class="post-header">
                                 <div class="post-author-info">
@@ -111,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="post-game-badges">
-                                    <span class="post-badge text-info"><i class="fas fa-globe"></i> Elite Dangerous</span>
+                                    <span class="post-badge text-info"><i class="fas fa-globe"></i> Subnautica 2</span>
                                 </div>
                             </div>
                             <img src="https://images.unsplash.com/photo-1544924222-35298d69037a?q=80&w=800" class="post-content-img" alt="Spacecraft screenshot">
@@ -124,7 +127,7 @@
                     </div>
 
                     <!-- Post 2 (Text Review) -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 post-card-col" data-type="reviews">
                         <div class="community-post-card">
                             <div class="post-header">
                                 <div class="post-author-info">
@@ -135,7 +138,7 @@
                                     </div>
                                 </div>
                                 <div class="post-game-badges">
-                                    <span class="post-badge text-warning"><i class="fas fa-rocket"></i> Stellaris</span>
+                                    <span class="post-badge text-warning"><i class="fas fa-ghost"></i> Resident Evil</span>
                                 </div>
                             </div>
                             
@@ -168,8 +171,8 @@
                         </div>
                     </div>
 
-                    <!-- Post 3 (Skyrim Review) -->
-                    <div class="col-lg-6">
+                    <!-- Post 3 (Forza Horizon Review) -->
+                    <div class="col-lg-6 post-card-col" data-type="reviews">
                         <div class="community-post-card">
                             <div class="post-header">
                                 <div class="post-author-info">
@@ -180,7 +183,7 @@
                                     </div>
                                 </div>
                                 <div class="post-game-badges">
-                                    <span class="post-badge text-light"><i class="fas fa-dragon"></i> Skyrim</span>
+                                    <span class="post-badge text-light"><i class="fas fa-car"></i> Forza Horizon</span>
                                 </div>
                             </div>
                             
@@ -210,7 +213,7 @@
                     </div>
 
                     <!-- Post 4 (Elden Ring Live) -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 post-card-col" data-type="broadcasts">
                         <div class="community-post-card">
                             <div class="post-header">
                                 <div class="post-author-info">
@@ -289,6 +292,47 @@
                 btn.style.color = '#a855f7';
                 showToast("Post liked!");
             }
+        }
+
+        let activePostType = 'all';
+        let activeGameFilter = 'all';
+
+        function filterCommunity(type, element) {
+            activePostType = type;
+            document.querySelectorAll('.sub-nav-pill').forEach(pill => {
+                pill.classList.remove('active');
+            });
+            element.classList.add('active');
+            applyFilters();
+        }
+
+        function filterByGame(game, element) {
+            activeGameFilter = game;
+            document.querySelectorAll('.sidebar-filter .filter-item').forEach(item => {
+                item.classList.remove('text-white');
+                item.classList.add('text-muted');
+            });
+            element.classList.add('text-white');
+            element.classList.remove('text-muted');
+            applyFilters();
+            showToast(game === 'all' ? "Showing all community hubs" : `Showing ${game} hub`);
+        }
+
+        function applyFilters() {
+            const posts = document.querySelectorAll('.post-card-col');
+            posts.forEach(post => {
+                const postType = post.getAttribute('data-type');
+                const badge = post.querySelector('.post-badge').textContent.toLowerCase();
+
+                const matchesType = activePostType === 'all' || postType === activePostType;
+                const matchesGame = activeGameFilter === 'all' || badge.includes(activeGameFilter.toLowerCase());
+
+                if (matchesType && matchesGame) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
         }
 
         window.onload = function() {

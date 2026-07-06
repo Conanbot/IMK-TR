@@ -60,15 +60,15 @@
             <aside class="sidebar-filter">
                 <div class="filter-section">
                     <h5 class="sidebar-title">Library</h5>
-                    <div class="filter-item text-white">
+                    <div class="filter-item text-white" style="cursor: pointer;" onclick="setLibraryTab('all', this)">
                         <label><i class="fas fa-th-list me-2"></i> All Games</label>
-                        <span class="filter-count">8</span>
+                        <span class="filter-count" id="all-games-count">7</span>
                     </div>
-                    <div class="filter-item text-muted">
+                    <div class="filter-item text-muted" style="cursor: pointer;" onclick="setLibraryTab('favorites', this)">
                         <label><i class="far fa-star me-2"></i> Favorites</label>
                         <span class="filter-count" id="favorite-count">0</span>
                     </div>
-                    <div class="filter-item text-muted">
+                    <div class="filter-item text-muted" style="cursor: pointer;" onclick="setLibraryTab('downloads', this)">
                         <label><i class="fas fa-download me-2"></i> Downloads</label>
                         <span class="filter-count" id="downloading-count">0</span>
                     </div>
@@ -179,12 +179,26 @@
             }
         ];
 
+        let activeLibraryTab = 'all';
+
+        function setLibraryTab(tab, element) {
+            activeLibraryTab = tab;
+            document.querySelectorAll('.sidebar-filter .filter-item').forEach(item => {
+                item.classList.remove('text-white');
+                item.classList.add('text-muted');
+            });
+            element.classList.remove('text-muted');
+            element.classList.add('text-white');
+            renderLibraryList();
+        }
+
         function renderLibraryList() {
             let container = document.getElementById('library-list-container');
             container.innerHTML = '';
 
             let favoriteList = JSON.parse(localStorage.getItem('library-favorites')) || [];
             document.getElementById('favorite-count').textContent = favoriteList.length;
+            document.getElementById('all-games-count').textContent = libraryGames.length;
 
             let downloadingCount = 0;
 
@@ -193,6 +207,14 @@
                 let stateKey = `lib-state-${game.id}`;
                 let currentStatus = localStorage.getItem(stateKey) || game.defaultState;
                 let isFav = favoriteList.includes(game.id);
+
+                if (currentStatus === 'installing' || currentStatus === 'updating') {
+                    downloadingCount++;
+                }
+
+                // Filter logic based on active tab
+                if (activeLibraryTab === 'favorites' && !isFav) return;
+                if (activeLibraryTab === 'downloads' && currentStatus !== 'installing' && currentStatus !== 'updating') return;
 
                 let actionHtml = '';
                 if (currentStatus === 'play') {
@@ -214,7 +236,6 @@
                         </button>
                     `;
                 } else if (currentStatus === 'installing' || currentStatus === 'updating') {
-                    downloadingCount++;
                     let label = currentStatus === 'installing' ? 'Installing' : 'Updating';
                     let pct = localStorage.getItem(`lib-pct-${game.id}`) || 0;
                     actionHtml = `
