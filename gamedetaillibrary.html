@@ -18,7 +18,7 @@
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="search-input" placeholder="Search">
             </div>
-            
+
             <div class="nav-pill-container">
                 <a href="index.html" class="nav-pill-item">Store</a>
                 <a href="library.html" class="nav-pill-item">Library</a>
@@ -26,7 +26,7 @@
                 <a href="friends.html" class="nav-pill-item">Friends</a>
                 <a href="about.html" class="nav-pill-item">More</a>
             </div>
-            
+
             <div class="header-actions">
                 <a href="cart.html" class="action-btn-circle">
                     <i class="fas fa-shopping-cart"></i>
@@ -36,7 +36,8 @@
                     <i class="fas fa-bell"></i>
                 </a>
                 <div class="dropdown">
-                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         <div class="user-avatar">U</div>
                         <div class="user-info">
                             <span class="user-name">User</span>
@@ -44,11 +45,18 @@
                         </div>
                         <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
-                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
-                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
-                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
-                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2"
+                        style="background: #272435; border-radius: 12px; padding: 8px;"
+                        aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html"
+                                style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i
+                                    class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider border-secondary opacity-25">
+                        </li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html"
+                                style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -72,7 +80,8 @@
                 </div>
 
                 <div class="mt-auto">
-                    <a href="index.html" class="btn btn-sidebar-apply text-center text-decoration-none d-block"><i class="fas fa-arrow-left me-2"></i> Store Home</a>
+                    <a href="index.html" class="btn btn-sidebar-apply text-center text-decoration-none d-block"><i
+                            class="fas fa-arrow-left me-2"></i> Store Home</a>
                 </div>
             </aside>
 
@@ -82,7 +91,8 @@
                 <div class="mb-3">
                     <h2 id="detail-title" class="fw-bold text-white fs-3 mb-1">ELDEN RING</h2>
                     <div id="detail-sub" class="text-muted fs-7">
-                        <span class="text-white">FromSoftware</span> &nbsp;&bull;&nbsp; Publisher: <span class="text-white">Bandai Namco Entertainment</span>
+                        <span class="text-white">FromSoftware</span> &nbsp;&bull;&nbsp; Publisher: <span
+                            class="text-white">Bandai Namco Entertainment</span>
                     </div>
                 </div>
 
@@ -110,34 +120,48 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center w-100 px-3 py-2">
                                 <div class="d-flex align-items-center gap-3">
-                                    <button class="control-btn" id="play-control-btn" onclick="togglePlayTrailer()"><i class="fas fa-play"></i></button>
-                                    <button class="control-btn" onclick="showToast('Next clip')"><i class="fas fa-step-forward"></i></button>
-                                    <button class="control-btn" onclick="toggleMute()"><i class="fas fa-volume-up" id="volume-icon"></i></button>
+                                    <button class="control-btn" id="play-control-btn" onclick="togglePlayTrailer()"><i
+                                            class="fas fa-play"></i></button>
+                                    <button class="control-btn" onclick="showToast('Next clip')"><i
+                                            class="fas fa-step-forward"></i></button>
+                                    <button class="control-btn" onclick="toggleMute()"><i class="fas fa-volume-up"
+                                            id="volume-icon"></i></button>
                                     <div class="volume-slider">
                                         <div class="volume-fill"></div>
                                     </div>
                                     <span class="video-time" id="video-time-text">01:00 / 11:53</span>
                                 </div>
                                 <div class="d-flex align-items-center gap-3">
-                                    <button class="control-btn" onclick="showToast('Settings')"><i class="fas fa-cog"></i></button>
-                                    <button class="control-btn" onclick="showToast('Subtitles')"><i class="fas fa-closed-captioning"></i></button>
-                                    <button class="control-btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
+                                    <button class="control-btn" onclick="showToast('Settings')"><i
+                                            class="fas fa-cog"></i></button>
+                                    <button class="control-btn" onclick="showToast('Subtitles')"><i
+                                            class="fas fa-closed-captioning"></i></button>
+                                    <button class="control-btn" onclick="toggleFullscreen()"><i
+                                            class="fas fa-expand"></i></button>
                                 </div>
                             </div>
                         </div>
 
-                        <img id="main-preview-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000" class="w-100 h-100 object-fit-cover" alt="Main Preview">
+                        <img id="main-preview-img"
+                            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000"
+                            class="w-100 h-100 object-fit-cover" alt="Main Preview">
                     </div>
-                    
+
                     <div class="detail-screenshot-list">
-                        <div class="detail-screenshot-thumb active" onclick="changePreview(this, 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000')">
-                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200" alt="Thumb 1">
+                        <div class="detail-screenshot-thumb active"
+                            onclick="changePreview(this, 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000')">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200"
+                                alt="Thumb 1">
                         </div>
-                        <div class="detail-screenshot-thumb" onclick="changePreview(this, 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000')">
-                            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=200" alt="Thumb 2">
+                        <div class="detail-screenshot-thumb"
+                            onclick="changePreview(this, 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000')">
+                            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=200"
+                                alt="Thumb 2">
                         </div>
-                        <div class="detail-screenshot-thumb" onclick="changePreview(this, 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1000')">
-                            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=200" alt="Thumb 3">
+                        <div class="detail-screenshot-thumb"
+                            onclick="changePreview(this, 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1000')">
+                            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=200"
+                                alt="Thumb 3">
                         </div>
                     </div>
                 </div>
@@ -148,13 +172,17 @@
                     <div class="col-lg-8">
                         <ul class="nav nav-tabs nav-tabs-custom" id="detailTabs" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Overview</button>
+                                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                                    data-bs-target="#overview" type="button" role="tab">Overview</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">System Requirements</button>
+                                <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs"
+                                    type="button" role="tab">System Requirements</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" onclick="showToast('Loading Community Reviews...')">Reviews</button>
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews"
+                                    type="button" role="tab"
+                                    onclick="showToast('Loading Community Reviews...')">Reviews</button>
                             </li>
                         </ul>
 
@@ -187,8 +215,10 @@
                                     <div class="col-md-6 specs-column">
                                         <h6 class="specs-title"><i class="fab fa-windows"></i> Minimum</h6>
                                         <div class="text-muted mb-2"><strong>OS:</strong> Windows 10 64-bit</div>
-                                        <div class="text-muted mb-2"><strong>Processor:</strong> Intel Core i5-8400 / AMD Ryzen 3 3300X</div>
-                                        <div class="text-muted mb-2"><strong>Graphics:</strong> NVIDIA GTX 1060 3GB / AMD Radeon RX 580 4GB</div>
+                                        <div class="text-muted mb-2"><strong>Processor:</strong> Intel Core i5-8400 /
+                                            AMD Ryzen 3 3300X</div>
+                                        <div class="text-muted mb-2"><strong>Graphics:</strong> NVIDIA GTX 1060 3GB /
+                                            AMD Radeon RX 580 4GB</div>
                                         <div class="text-muted mb-2"><strong>RAM:</strong> 12 GB</div>
                                         <div class="text-muted mb-2"><strong>Storage:</strong> 60 GB SSD</div>
                                         <div class="text-muted mb-2"><strong>DirectX:</strong> Version 12</div>
@@ -197,8 +227,10 @@
                                     <div class="col-md-6 specs-column">
                                         <h6 class="specs-title"><i class="fab fa-windows"></i> Recommended</h6>
                                         <div class="text-muted mb-2"><strong>OS:</strong> Windows 10/11 64-bit</div>
-                                        <div class="text-muted mb-2"><strong>Processor:</strong> Intel Core i7-8700K / AMD Ryzen 5 3600X</div>
-                                        <div class="text-muted mb-2"><strong>Graphics:</strong> NVIDIA RTX 2070 8GB / AMD Radeon RX 6700 XT 12GB</div>
+                                        <div class="text-muted mb-2"><strong>Processor:</strong> Intel Core i7-8700K /
+                                            AMD Ryzen 5 3600X</div>
+                                        <div class="text-muted mb-2"><strong>Graphics:</strong> NVIDIA RTX 2070 8GB /
+                                            AMD Radeon RX 6700 XT 12GB</div>
                                         <div class="text-muted mb-2"><strong>RAM:</strong> 16 GB</div>
                                         <div class="text-muted mb-2"><strong>Storage:</strong> 60 GB SSD</div>
                                         <div class="text-muted mb-2"><strong>DirectX:</strong> Version 12</div>
@@ -215,22 +247,32 @@
                             </div>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <div class="about-content-panel p-0 overflow-hidden" style="cursor: pointer;" onclick="showToast('Loading Event page...')">
-                                        <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400" class="w-100" style="height: 140px; object-fit: cover;" alt="News 1">
+                                    <div class="about-content-panel p-0 overflow-hidden" style="cursor: pointer;"
+                                        onclick="showToast('Loading Event page...')">
+                                        <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400"
+                                            class="w-100" style="height: 140px; object-fit: cover;" alt="News 1">
                                         <div class="p-3">
-                                            <span class="badge mb-2" style="background: rgba(139,92,246,0.15); color: #a855f7; font-size: 10px;">Update</span>
-                                            <h6 class="text-white mb-1 text-truncate" style="font-size: 13.5px;">Shadow of the Erdtree expansion patch notes v1.12</h6>
-                                            <p class="text-muted mb-0" style="font-size: 11.5px;">Read the detailed balance adjust details and bug fixes.</p>
+                                            <span class="badge mb-2"
+                                                style="background: rgba(139,92,246,0.15); color: #a855f7; font-size: 10px;">Update</span>
+                                            <h6 class="text-white mb-1 text-truncate" style="font-size: 13.5px;">Shadow
+                                                of the Erdtree expansion patch notes v1.12</h6>
+                                            <p class="text-muted mb-0" style="font-size: 11.5px;">Read the detailed
+                                                balance adjust details and bug fixes.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="about-content-panel p-0 overflow-hidden" style="cursor: pointer;" onclick="showToast('Loading Merchandise page...')">
-                                        <img src="https://images.unsplash.com/photo-1544924222-35298d69037a?q=80&w=400" class="w-100" style="height: 140px; object-fit: cover;" alt="News 2">
+                                    <div class="about-content-panel p-0 overflow-hidden" style="cursor: pointer;"
+                                        onclick="showToast('Loading Merchandise page...')">
+                                        <img src="https://images.unsplash.com/photo-1544924222-35298d69037a?q=80&w=400"
+                                            class="w-100" style="height: 140px; object-fit: cover;" alt="News 2">
                                         <div class="p-3">
-                                            <span class="badge mb-2" style="background: rgba(56,189,248,0.15); color: #38bdf8; font-size: 10px;">News</span>
-                                            <h6 class="text-white mb-1 text-truncate" style="font-size: 13.5px;">Elden Ring Official Vinyl Soundtrack Pre-order now</h6>
-                                            <p class="text-muted mb-0" style="font-size: 11.5px;">Follow in the footsteps of Miquella with this collector album.</p>
+                                            <span class="badge mb-2"
+                                                style="background: rgba(56,189,248,0.15); color: #38bdf8; font-size: 10px;">News</span>
+                                            <h6 class="text-white mb-1 text-truncate" style="font-size: 13.5px;">Elden
+                                                Ring Official Vinyl Soundtrack Pre-order now</h6>
+                                            <p class="text-muted mb-0" style="font-size: 11.5px;">Follow in the
+                                                footsteps of Miquella with this collector album.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -242,8 +284,11 @@
                     <div class="col-lg-4">
                         <!-- Action Card with Vertical Cover -->
                         <div class="about-content-panel mb-4 text-center">
-                            <img id="detail-cover-art" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400" class="img-fluid rounded-3 mb-4 shadow border border-secondary" style="max-height: 280px; object-fit: cover; aspect-ratio: 3/4;" alt="Game Cover">
-                            
+                            <img id="detail-cover-art"
+                                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400"
+                                class="img-fluid rounded-3 mb-4 shadow border border-secondary"
+                                style="max-height: 280px; object-fit: cover; aspect-ratio: 3/4;" alt="Game Cover">
+
                             <!-- State Button Wrapper -->
                             <div class="d-grid gap-2" id="action-btn-wrapper">
                                 <!-- Dynamic primary action button -->
@@ -289,16 +334,23 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="text-info d-block text-center mt-3 text-decoration-underline" style="font-size: 11.5px;" onclick="showToast('Showing all 15 supported languages...')">See all 15 supported languages</a>
+                            <a href="#" class="text-info d-block text-center mt-3 text-decoration-underline"
+                                style="font-size: 11.5px;"
+                                onclick="showToast('Showing all 15 supported languages...')">See all 15 supported
+                                languages</a>
                         </div>
 
                         <!-- Social shares -->
                         <div class="d-flex justify-content-center gap-3 text-muted py-2" style="font-size: 16px;">
                             <span>Share:</span>
-                            <a href="#" class="text-muted" onclick="showToast('Sharing on Facebook...')"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-muted" onclick="showToast('Sharing on Twitter...')"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="text-muted" onclick="showToast('Sharing on YouTube...')"><i class="fab fa-youtube"></i></a>
-                            <a href="#" class="text-muted" onclick="showToast('Sharing on Telegram...')"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="#" class="text-muted" onclick="showToast('Sharing on Facebook...')"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-muted" onclick="showToast('Sharing on Twitter...')"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted" onclick="showToast('Sharing on YouTube...')"><i
+                                    class="fab fa-youtube"></i></a>
+                            <a href="#" class="text-muted" onclick="showToast('Sharing on Telegram...')"><i
+                                    class="fab fa-telegram-plane"></i></a>
                         </div>
                     </div>
                 </div>
@@ -381,7 +433,7 @@
         document.getElementById('detail-genre').innerHTML = `<i class="fas fa-tag"></i> ${activeGame.genre}`;
         document.getElementById('main-preview-img').src = activeGame.img;
         document.getElementById('detail-cover-art').src = activeGame.img;
-        
+
         // Populate author text
         document.getElementById('detail-sub').innerHTML = `
             <span class="text-white">${activeGame.dev}</span> &nbsp;&bull;&nbsp; Publisher: <span class="text-white">Bandai Namco Entertainment</span>
@@ -421,7 +473,7 @@
                         <i class="fas fa-download" style="font-size: 14px;"></i> ${text}
                     </button>
                 `;
-                
+
                 // Show title bar progress
                 const bar = document.getElementById('title-progress-bar');
                 const fill = document.getElementById('title-progress-fill');
@@ -447,19 +499,19 @@
             const playBtn = document.getElementById('play-control-btn');
             const timeText = document.getElementById('video-time-text');
             const timeFill = document.getElementById('video-timeline-fill');
-            
+
             if (!isVideoPlaying) {
                 // Play
                 isVideoPlaying = true;
-                if(pegiScreen) {
+                if (pegiScreen) {
                     pegiScreen.style.opacity = '0';
                     pegiScreen.style.pointerEvents = 'none';
                 }
                 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                
+
                 videoInterval = setInterval(() => {
                     videoTime++;
-                    if(videoTime > 713) videoTime = 713; // 11:53 max
+                    if (videoTime > 713) videoTime = 713; // 11:53 max
                     timeText.textContent = `${formatTime(videoTime)} / 11:53`;
                     timeFill.style.width = ((videoTime / 713) * 100) + '%';
                 }, 1000);
@@ -475,16 +527,16 @@
             const track = e.currentTarget;
             const rect = track.getBoundingClientRect();
             const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-            
+
             const timeFill = document.getElementById('video-timeline-fill');
             timeFill.style.width = (pos * 100) + '%';
-            
+
             videoTime = Math.floor(pos * 713);
             document.getElementById('video-time-text').textContent = `${formatTime(videoTime)} / 11:53`;
-            
+
             // Auto hide PEGI screen if seeking
             const pegiScreen = document.getElementById('video-pegi-screen');
-            if(pegiScreen) {
+            if (pegiScreen) {
                 pegiScreen.style.opacity = '0';
                 pegiScreen.style.pointerEvents = 'none';
             }
@@ -492,7 +544,7 @@
 
         function toggleMute() {
             const icon = document.getElementById('volume-icon');
-            if(icon.classList.contains('fa-volume-up')) {
+            if (icon.classList.contains('fa-volume-up')) {
                 icon.className = 'fas fa-volume-mute text-danger';
             } else {
                 icon.className = 'fas fa-volume-up';
@@ -510,15 +562,15 @@
 
         function changePreview(thumb, url) {
             // Stop video if switching preview
-            if(isVideoPlaying) togglePlayTrailer();
+            if (isVideoPlaying) togglePlayTrailer();
 
             document.querySelectorAll('.detail-screenshot-thumb').forEach(t => t.classList.remove('active'));
             thumb.classList.add('active');
             document.getElementById('main-preview-img').src = url;
-            
+
             // Show PEGI screen again if first thumbnail, otherwise hide it
             const pegiScreen = document.getElementById('video-pegi-screen');
-            if(thumb === document.querySelectorAll('.detail-screenshot-thumb')[0]) {
+            if (thumb === document.querySelectorAll('.detail-screenshot-thumb')[0]) {
                 pegiScreen.style.opacity = '1';
                 pegiScreen.style.pointerEvents = 'auto';
                 videoTime = 60; // reset to 01:00
@@ -585,7 +637,7 @@
         }
 
         // Resume installer loop on reload if in-progress
-        window.onload = function() {
+        window.onload = function () {
             renderDetailButton();
 
             const stateKey = `lib-state-${activeGame.id}`;
