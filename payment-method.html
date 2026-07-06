@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Method - GameHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-window">
+        <!-- Header (same theme as other pages) -->
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+
+            <div class="nav-pill-container">
+                <a href="index.html" class="nav-pill-item">Store</a>
+                <a href="library.html" class="nav-pill-item">Library</a>
+                <a href="community.html" class="nav-pill-item">Community</a>
+                <a href="friends.html" class="nav-pill-item">Friends</a><a href="about.html" class="nav-pill-item">More</a>
+            </div>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn-circle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
+                </a>
+                <a href="#" class="action-btn-circle">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="app-body p-5">
+            <div class="payment-container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3 class="text-white mb-4">Payment Method</h3>
+
+                        <div class="about-content-panel mb-4">
+                            <h5 class="about-panel-title"><i class="fas fa-credit-card text-muted"></i> Choose a payment method</h5>
+
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="pm-card" value="card" checked>
+                                <label class="form-check-label ms-2 text-white" for="pm-card">Credit / Debit Card</label>
+                            </div>
+
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="pm-gopay" value="gopay">
+                                <label class="form-check-label ms-2 text-white" for="pm-gopay">E-Wallet (GoPay / OVO)</label>
+                            </div>
+
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="pm-bank" value="bank">
+                                <label class="form-check-label ms-2 text-white" for="pm-bank">Bank Transfer</label>
+                            </div>
+
+                        </div>
+
+                        <div class="about-content-panel mb-4">
+                            <h5 class="about-panel-title"><i class="fas fa-file-invoice text-muted"></i> Billing details</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input class="form-control bg-dark text-white border-0" id="card-name" placeholder="Name on card">
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control bg-dark text-white border-0" id="card-number" placeholder="Card number">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control bg-dark text-white border-0" id="card-exp" placeholder="MM/YY">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control bg-dark text-white border-0" id="card-cvc" placeholder="CVC">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control bg-dark text-white border-0" id="card-postal" placeholder="Postal code">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <a class="btn btn-outline-light" href="cart.html">Back to Cart</a>
+                            <button id="btn-proceed-payment" class="btn btn-solid-purple">Proceed to Payment</button>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="about-content-panel">
+                            <h5 class="about-panel-title"><i class="fas fa-receipt text-muted"></i> Order Summary</h5>
+                            <div id="pm-items" class="mb-3"></div>
+                            <div class="d-flex justify-content-between mb-2"><span class="text-muted">Subtotal</span><span id="pm-subtotal" class="text-white">IDR 0</span></div>
+                            <div class="d-flex justify-content-between mb-2"><span class="text-muted">Tax (11%)</span><span id="pm-tax" class="text-white">IDR 0</span></div>
+                            <hr class="border-secondary opacity-25">
+                            <div class="d-flex justify-content-between"><strong class="text-white">Total</strong><strong id="pm-total" class="text-white">IDR 0</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 99999;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Load cart from localStorage and render summary
+        function renderPaymentMethod() {
+            let cart = [];
+            try { cart = JSON.parse(localStorage.getItem('cart')) || []; } catch (e) { cart = []; }
+            const itemsEl = document.getElementById('pm-items');
+            const subtotalEl = document.getElementById('pm-subtotal');
+            const taxEl = document.getElementById('pm-tax');
+            const totalEl = document.getElementById('pm-total');
+
+            if (!itemsEl) return;
+            itemsEl.innerHTML = '';
+            if (cart.length === 0) {
+                itemsEl.innerHTML = '<div class="text-muted">No items in cart</div>';
+                document.getElementById('btn-proceed-payment').disabled = true;
+            } else {
+                cart.forEach(it => {
+                    const row = document.createElement('div');
+                    row.className = 'd-flex justify-content-between mb-2';
+                    row.innerHTML = `<div>${it.title}</div><div class="text-white">${typeof it.price === 'number' ? ('IDR ' + it.price.toLocaleString('id-ID')) : it.price}</div>`;
+                    itemsEl.appendChild(row);
+                });
+                document.getElementById('btn-proceed-payment').disabled = false;
+            }
+
+            const subtotal = cart.reduce((s, i) => s + (typeof i.price === 'number' ? i.price : parseInt((i.price||'0').toString().replace(/[^\d]/g,'')) ), 0);
+            const tax = Math.round(subtotal * 0.11);
+            const total = subtotal + tax;
+            subtotalEl.textContent = 'IDR ' + subtotal.toLocaleString('id-ID');
+            taxEl.textContent = 'IDR ' + tax.toLocaleString('id-ID');
+            totalEl.textContent = 'IDR ' + total.toLocaleString('id-ID');
+        }
+
+        function finalizePayment() {
+            // demo: mark as paid, save an order record, clear cart and go to confirmation
+            showToast('Processing payment...', 'success');
+            const methodInput = document.querySelector('input[name="paymentMethod"]:checked');
+            const selectedMethod = methodInput ? methodInput.value : 'card';
+            const methodLabel = selectedMethod === 'gopay' ? 'GoPay / OVO' : selectedMethod === 'bank' ? 'Bank Transfer' : 'Credit / Debit Card';
+            let paymentDetail = methodLabel;
+            if (selectedMethod === 'card') {
+                const raw = (document.getElementById('card-number').value || '').replace(/[^0-9]/g, '');
+                const last4 = raw.slice(-4);
+                paymentDetail = last4 ? '•••• •••• •••• ' + last4 : methodLabel;
+            }
+            // build order from stored cart
+            let cartItems = [];
+            try { cartItems = JSON.parse(localStorage.getItem('cart')) || []; } catch (e) { cartItems = []; }
+            const subtotal = cartItems.reduce((s, i) => s + (typeof i.price === 'number' ? i.price : parseInt((i.price||'0').toString().replace(/[^\d]/g,'')) ), 0);
+            const tax = Math.round(subtotal * 0.11);
+            const total = subtotal + tax;
+            const order = {
+                id: 'GH-' + Date.now(),
+                date: new Date().toISOString(),
+                items: cartItems,
+                subtotal,
+                tax,
+                total,
+                paymentMethod: methodLabel,
+                paymentDetail
+            };
+            try {
+                // persist last order and append to orders list
+                localStorage.setItem('lastOrder', JSON.stringify(order));
+                const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+                orders.unshift(order);
+                localStorage.setItem('orders', JSON.stringify(orders));
+            } catch (e) {}
+            // clear stored cart
+            try { localStorage.removeItem('cart'); } catch (e) {}
+            setTimeout(() => { window.location.href = 'payment-confirmation.html'; }, 800);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof updateCartBadge === 'function') updateCartBadge();
+            renderPaymentMethod();
+            const btn = document.getElementById('btn-proceed-payment');
+            const name = document.getElementById('card-name');
+            const number = document.getElementById('card-number');
+            const exp = document.getElementById('card-exp');
+            const cvc = document.getElementById('card-cvc');
+
+            // Luhn algorithm for basic card number validation
+            function luhnCheck(num) {
+                if (!num) return false;
+                let sum = 0;
+                let shouldDouble = false;
+                for (let i = num.length - 1; i >= 0; i--) {
+                    let digit = parseInt(num.charAt(i), 10);
+                    if (shouldDouble) {
+                        digit *= 2;
+                        if (digit > 9) digit -= 9;
+                    }
+                    sum += digit;
+                    shouldDouble = !shouldDouble;
+                }
+                return (sum % 10) === 0;
+            }
+
+            function validateExpiry(val) {
+                if (!val) return false;
+                // accept MM/YY or MM/YYYY
+                const m = val.match(/^(0?[1-9]|1[0-2])[\/:\s]?(\d{2}|\d{4})$/);
+                if (!m) return false;
+                const month = parseInt(m[1], 10);
+                let year = parseInt(m[2], 10);
+                if (m[2].length === 2) year += 2000;
+                const now = new Date();
+                const expDate = new Date(year, month - 1, 1);
+                // card valid through end of month
+                expDate.setMonth(expDate.getMonth() + 1);
+                return expDate > now;
+            }
+
+            function validateCVC(val) {
+                if (!val) return false;
+                return /^\d{3,4}$/.test(val);
+            }
+
+            function validatePaymentForm() {
+                const nm = name && name.value.trim();
+                const numv = number && (number.value || '').toString().replace(/[^0-9]/g, '');
+                const expv = exp && exp.value.trim();
+                const cvcv = cvc && cvc.value.trim();
+                if (!nm) return false;
+                if (!/^[0-9]{12,19}$/.test(numv)) return false;
+                if (!luhnCheck(numv)) return false;
+                if (!validateExpiry(expv)) return false;
+                if (!validateCVC(cvcv)) return false;
+                return true;
+            }
+
+            function updateBtnState() {
+                if (!btn) return;
+                btn.disabled = !validatePaymentForm();
+            }
+
+            [name, number, exp, cvc].forEach(el => { if (el) el.addEventListener('input', updateBtnState); });
+            updateBtnState();
+
+            if (btn) btn.addEventListener('click', function (e) {
+                if (!validatePaymentForm()) {
+                    showToast('Please complete valid payment details', 'info');
+                    return;
+                }
+                finalizePayment();
+            });
+        });
+
+        // input formatting: group card number by 4 and format expiry as MM/YY
+        (function attachFormatting(){
+            const numEl = document.getElementById('card-number');
+            const expEl = document.getElementById('card-exp');
+            if (numEl) {
+                numEl.addEventListener('input', function (e) {
+                    let start = numEl.selectionStart || 0;
+                    const raw = (numEl.value || '').replace(/[^0-9]/g, '').slice(0,19);
+                    const parts = raw.match(/.{1,4}/g) || [];
+                    numEl.value = parts.join(' ');
+                    // attempt to restore cursor near end
+                    try { numEl.selectionStart = numEl.selectionEnd = numEl.value.length; } catch (e) {}
+                });
+            }
+            if (expEl) {
+                expEl.addEventListener('input', function () {
+                    let v = (expEl.value || '').replace(/[^0-9]/g, '').slice(0,6);
+                    if (v.length >= 3) {
+                        const mm = v.slice(0,2);
+                        let yy = v.slice(2);
+                        if (yy.length === 4) yy = yy.slice(2);
+                        expEl.value = mm + '/' + yy;
+                    } else {
+                        expEl.value = v;
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>

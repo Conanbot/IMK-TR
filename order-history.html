@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - GameHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-window">
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+            <div class="nav-pill-container">
+                <a href="index.html" class="nav-pill-item">Store</a>
+                <a href="library.html" class="nav-pill-item">Library</a>
+                <a href="community.html" class="nav-pill-item">Community</a>
+                <a href="friends.html" class="nav-pill-item">Friends</a>
+                <a href="about.html" class="nav-pill-item">More</a>
+            </div>
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn-circle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
+                </a>
+                <a href="#" class="action-btn-circle">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <div class="app-body p-5">
+            <div class="order-history-container">
+                <h3 class="text-white mb-4">Order History</h3>
+                <div id="orders-list" class="row g-4"></div>
+                <div id="empty-orders" class="text-center text-muted" style="display:none;">
+                    <i class="fas fa-box-open fa-3x mb-3" style="color: rgba(255,255,255,0.35);"></i>
+                    <p>No orders yet. Complete a purchase to see it here.</p>
+                    <a href="index.html" class="btn btn-solid-purple">Browse Store</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function renderOrderHistory() {
+            if (typeof updateCartBadge === 'function') updateCartBadge();
+            let orders = [];
+            try { orders = JSON.parse(localStorage.getItem('orders') || '[]'); } catch (e) { orders = []; }
+            const list = document.getElementById('orders-list');
+            const empty = document.getElementById('empty-orders');
+            if (!list || !empty) return;
+            list.innerHTML = '';
+            if (!orders.length) {
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+            orders.forEach(order => {
+                const card = document.createElement('div');
+                card.className = 'col-lg-6';
+                card.innerHTML = `
+                    <div class="about-content-panel p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="mb-1">Order ${order.id}</h5>
+                                <div class="text-muted" style="font-size: 13px;">${new Date(order.date).toLocaleString()}</div>
+                            </div>
+                            <div class="text-white fw-bold">IDR ${order.total.toLocaleString('id-ID')}</div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="badge bg-secondary me-2">${order.paymentMethod}</span>
+                            <span class="text-muted" style="font-size: 13px;">${order.paymentDetail}</span>
+                        </div>
+                        <div class="list-group">
+                            ${(order.items || []).map(item => `
+                                <div class="list-group-item bg-transparent border-0 px-0 py-2 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="fw-semibold">${item.title}</div>
+                                        <small class="text-muted">${item.genre || ''}</small>
+                                    </div>
+                                    <div class="text-white">${typeof item.price === 'number' ? ('IDR ' + item.price.toLocaleString('id-ID')) : item.price}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+        window.addEventListener('load', renderOrderHistory);
+    </script>
+</body>
+
+</html>

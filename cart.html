@@ -218,11 +218,11 @@
         }
 
         function checkout() {
-            showToast("🎉 Payment Successful! (Demo)", "success");
-            localStorage.removeItem('cart');
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 1500);
+            if (cart.length === 0) return;
+
+            // persist cart for the payment flow to read
+            try { localStorage.setItem('cart', JSON.stringify(cart)); } catch (e) {}
+            window.location.href = 'payment-method.html';
         }
 
         window.onload = function() {

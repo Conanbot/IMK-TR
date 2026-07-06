@@ -146,23 +146,39 @@ function renderCart(container) {
 
 function addToCart(game) {
     cart.push(game);
-    updateCartCount();
+    updateCartBadge();
     showToast(`✅ ${game.title} added to cart`);
 }
 
+
 function removeFromCart(index) {
     cart.splice(index, 1);
-    updateCartCount();
+    updateCartBadge();
     renderCart(document.getElementById('main-content'));
 }
 
+
 function checkout() {
     if (cart.length === 0) return;
+
+    // If this is the full-page cart (non-SPA), navigate to payment confirmation
+    // Detect by presence of the server-rendered cart panel or by URL
+    const isFullCartPage = !!document.getElementById('cart-panel') || (window.location.pathname || '').toLowerCase().endsWith('/cart.html');
+    if (isFullCartPage) {
+        // persist cart for the payment flow to read
+        try { localStorage.setItem('cart', JSON.stringify(cart)); } catch (e) {}
+        // redirect to payment method step (intermediate page)
+        window.location.href = 'payment-method.html';
+        return;
+    }
+
+    // SPA fallback behavior: demo success, clear cart and return to store
     showToast("🎉 Payment successful! (Demo)", "success");
     cart = [];
-    updateCartCount();
+    updateCartBadge();
     setTimeout(() => navigateTo('store'), 1500);
 }
+
 
 // ==================== WISHLIST ====================
 function addToWishlist(id) {
@@ -219,9 +235,27 @@ function renderFriends(container) {
 }
 
 // ==================== UTILITIES ====================
-function updateCartCount() {
+// Reusable cart badge updater for all pages
+function updateCartBadge() {
     const countEl = document.getElementById('cart-count');
-    if (countEl) countEl.textContent = cart.length;
+    if (!countEl) return;
+
+    let count = cart.length;
+    try {
+        const storedCart = JSON.parse(localStorage.getItem('cart'));
+        if (Array.isArray(storedCart)) {
+            count = storedCart.length;
+        }
+    } catch (error) {
+        // ignore invalid localStorage contents
+    }
+
+    countEl.textContent = count;
+}
+
+// Backward compatible alias (existing code might call updateCartCount)
+function updateCartCount() {
+    updateCartBadge();
 }
 
 function showToast(msg, type = "info") {
@@ -232,7 +266,311 @@ function showToast(msg, type = "info") {
     setTimeout(() => toast.remove(), 3000);
 }
 
-// ==================== INIT ====================
-window.onload = () => {
-    navigateTo('store');
+// ==================== VIDEO PREVIEW (shared utility) ====================
+// Ensure a single modal exists on the page; if not, inject it.
+function ensureVideoModal() {
+    if (document.getElementById('video-preview-modal')) return;
+    const container = document.createElement('div');
+    container.id = 'video-preview-modal';
+    container.className = 'video-preview-modal';
+    container.hidden = true;
+    container.innerHTML = `
+        <div class="video-overlay" id="video-overlay"></div>
+        <div class="video-wrapper">
+            <button class="video-close-btn" id="video-close-btn" aria-label="Close preview">&times;</button>
+            <video id="preview-video" controls playsinline></video>
+        </div>
+    `;
+    document.body.appendChild(container);
+}
+
+// Create modal early so shared handlers can rely on its presence
+ensureVideoModal();
+function slugify(title) {
+    return title.toString().toLowerCase().trim()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+}
+
+const detailPreviewMap = {
+    'pragmata': '7Nh9nP4xCXQ',
+    'grand-theft-auto-vi': 'QdBZY2fkU-0',
+    'resident-evil-requiem': '9lrThxCoznw',
+    'forza-horizon-6': 'oYhaW-Vr4wg'
 };
+
+function getYouTubePreviewId(title) {
+    return detailPreviewMap[slugify(title || '')] || null;
+}
+
+function createYouTubeEmbed(id) {
+    const iframe = document.createElement('iframe');
+    iframe.id = 'detail-preview-iframe';
+    iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = '0';
+    iframe.style.objectFit = 'cover';
+    iframe.loading = 'lazy';
+    return iframe;
+}
+
+function openVideoPreview(title) {
+    const modal = document.getElementById('video-preview-modal');
+    const video = document.getElementById('preview-video');
+    if (!modal || !video) return;
+    const slug = slugify(title || 'preview');
+    // remove any previous placeholder
+    removePreviewPlaceholder(modal);
+    // store title for placeholder fallback
+    modal.dataset.previewTitle = title || '';
+    video.src = `img/games/${slug}-preview.mp4`;
+    video.currentTime = 0;
+    // show modal immediately; if video fails, placeholder will show from error handler
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    video.play().catch(() => {});
+}
+
+function closeVideoPreview() {
+    const modal = document.getElementById('video-preview-modal');
+    const video = document.getElementById('preview-video');
+    if (!modal || !video) return;
+    video.pause();
+    video.removeAttribute('src');
+    removePreviewPlaceholder(modal);
+    modal.hidden = true;
+    // clear stored preview title
+    try { delete modal.dataset.previewTitle; } catch (e) { modal.dataset.previewTitle = ''; }
+    document.body.style.overflow = '';
+}
+
+// Global event delegation for preview buttons and modal controls
+document.addEventListener('click', function (e) {
+    const playBtn = e.target.closest('.preview-play-btn');
+    if (playBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        // find title source: card data-title or img alt or inner text
+        const col = playBtn.closest('.game-card-col') || playBtn.closest('.card') || playBtn.closest('.game-card-col');
+        let title = null;
+        if (col && col.getAttribute) title = col.getAttribute('data-title') || col.dataset.title;
+        if (!title) {
+            const img = playBtn.closest('.card-img-wrapper') ? playBtn.closest('.card-img-wrapper').querySelector('img') : null;
+            if (img) title = img.alt || img.getAttribute('alt');
+        }
+        if (title) {
+            // redirect to game detail page instead of opening modal
+            const slug = slugify(title);
+            window.location.href = `gamedetail.html?key=${encodeURIComponent(slug)}`;
+        }
+        return;
+    }
+
+    const watchBtn = e.target.closest('#watch-preview-btn');
+    if (watchBtn) {
+        e.preventDefault();
+        // attempt to play inside detail page media area if present
+        const titleEl = document.getElementById('detail-title') || document.querySelector('h2') || document.querySelector('.display-3');
+        const title = titleEl ? titleEl.textContent.trim() : 'preview';
+        // if we are on a game detail page with media container, play inline there
+        if (document.getElementById('main-player-container') || document.getElementById('main-preview-img')) {
+            playPreviewInDetail(title);
+        } else {
+            const slug = slugify(title);
+            window.location.href = `gamedetail.html?key=${encodeURIComponent(slug)}`;
+        }
+        return;
+    }
+
+    const closeBtn = e.target.closest('.video-close-btn');
+    if (closeBtn) { e.preventDefault(); closeVideoPreview(); return; }
+
+    const overlay = e.target.closest('.video-overlay');
+    if (overlay) { closeVideoPreview(); return; }
+});
+
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeVideoPreview(); });
+
+// ==================== HOVER-MUTED PREVIEW + FALLBACK ====================
+let hoverEnabled = true;
+function startHoverPreview(wrapper) {
+    if (!hoverEnabled) return;
+    if (!window.location.pathname.toLowerCase().includes('gamedetail.html')) return;
+    if (wrapper._hovering) return;
+    wrapper._hovering = true;
+    const img = wrapper.querySelector('img');
+    let title = null;
+    const col = wrapper.closest('.game-card-col');
+    if (col) title = col.getAttribute('data-title') || col.dataset.title;
+    if (!title && img) title = img.alt || img.getAttribute('alt');
+    if (!title) return;
+    const slug = slugify(title);
+    const video = document.createElement('video');
+    video.className = 'hover-preview-video';
+    video.muted = true;
+    video.autoplay = true;
+    video.loop = true;
+    video.playsInline = true;
+    // try small preview first, fallback to full preview
+    video.src = `img/games/${slug}-preview-small.mp4`;
+    video.onerror = function () {
+        if (video.src && video.src.includes('-preview-small.mp4')) {
+            video.src = `img/games/${slug}-preview.mp4`;
+            video.play().catch(() => {});
+            return;
+        }
+        // both small and full previews failed — show a small hover placeholder
+        video.remove();
+        wrapper._hoverVideo = null;
+        wrapper._hovering = false;
+        showHoverPlaceholder(wrapper);
+    };
+    wrapper.appendChild(video);
+    video.play().catch(() => {});
+    wrapper._hoverVideo = video;
+}
+
+function stopHoverPreview(wrapper) {
+    if (!wrapper._hovering) return;
+    wrapper._hovering = false;
+    const v = wrapper._hoverVideo;
+    if (v) { try { v.pause(); } catch (e) {} v.remove(); wrapper._hoverVideo = null; }
+    removeHoverPlaceholder(wrapper);
+}
+
+function showHoverPlaceholder(wrapper) {
+    // Do not show hover placeholder on listing/store pages (index)
+    const path = (window.location.pathname || '').toLowerCase();
+    if (path.endsWith('/index.html') || path === '/' || path === '') return;
+    removeHoverPlaceholder(wrapper);
+    const ph = document.createElement('div');
+    ph.className = 'hover-placeholder';
+    ph.textContent = 'Preview not available';
+    wrapper.appendChild(ph);
+    wrapper._hoverPlaceholder = ph;
+}
+
+function removeHoverPlaceholder(wrapper) {
+    if (!wrapper) return;
+    if (wrapper._hoverPlaceholder) { wrapper._hoverPlaceholder.remove(); wrapper._hoverPlaceholder = null; }
+}
+
+// Delegated hover handling (mouseover/mouseout bubbles)
+document.addEventListener('mouseover', function (e) {
+    const wrapper = e.target.closest('.card-img-wrapper');
+    if (!wrapper) return;
+    // avoid triggering when moving within same wrapper
+    const related = e.relatedTarget;
+    if (related && wrapper.contains(related)) return;
+    startHoverPreview(wrapper);
+});
+
+document.addEventListener('mouseout', function (e) {
+    const wrapper = e.target.closest('.card-img-wrapper');
+    if (!wrapper) return;
+    const related = e.relatedTarget;
+    if (related && wrapper.contains(related)) return;
+    stopHoverPreview(wrapper);
+});
+
+// Modal error handling for large preview
+(function attachModalErrorHandler(){
+    // modal is injected by ensureVideoModal(); find it
+    const check = () => {
+        const vid = document.getElementById('preview-video');
+        if (!vid) return setTimeout(check, 200);
+        vid.addEventListener('error', function () {
+            // Instead of closing modal, show a friendly placeholder so UX stays consistent
+            const modal = document.getElementById('video-preview-modal');
+            showPreviewPlaceholder(modal, vid);
+        });
+    };
+    check();
+})();
+
+// Show a visual placeholder inside the modal when no video is available
+function showPreviewPlaceholder(modal, videoEl) {
+    if (!modal) return;
+    removePreviewPlaceholder(modal);
+    const placeholder = document.createElement('div');
+    placeholder.className = 'preview-placeholder';
+
+    // Attempt to show a poster image based on slug if available
+    const titleText = modal.dataset.previewTitle || (document.getElementById('detail-title') || document.querySelector('h2') || {}).textContent || '';
+    const slug = slugify(titleText || 'preview');
+    const imgPath = `img/games/${slug}.jpg`;
+
+    // Build inner content (SVG animation + optional image)
+    placeholder.innerHTML = `
+        <div class="preview-placeholder-inner">
+            <div class="preview-anim"></div>
+            <div class="preview-text">Preview not available — showing demo placeholder</div>
+        </div>
+    `;
+
+    // insert before/after video element
+    if (videoEl && videoEl.parentNode) {
+        videoEl.style.display = 'none';
+        videoEl.parentNode.appendChild(placeholder);
+    } else {
+        modal.appendChild(placeholder);
+    }
+}
+
+function removePreviewPlaceholder(modal) {
+    if (!modal) return;
+    const existing = modal.querySelector('.preview-placeholder');
+    if (existing) existing.remove();
+    const vid = modal.querySelector('video');
+    if (vid) vid.style.display = '';
+}
+
+// Play preview inside game detail media area (replaces main-preview-img)
+function playPreviewInDetail(title) {
+    const slug = slugify(title || 'preview');
+    const container = document.getElementById('main-player-container');
+    const img = document.getElementById('main-preview-img');
+    if (!container || !img) {
+        // fallback to modal if detail area missing
+        openVideoPreview(title);
+        return;
+    }
+
+    // remove any existing embed/video playback before creating new preview
+    const oldVideo = container.querySelector('video#detail-preview-video');
+    const oldFrame = container.querySelector('iframe#detail-preview-iframe');
+    if (oldVideo) oldVideo.remove();
+    if (oldFrame) oldFrame.remove();
+
+    const previewOverlay = container.querySelector('.video-controls-bar');
+    const pegiScreen = container.querySelector('.pegi-screen-sim');
+    if (previewOverlay) previewOverlay.style.display = 'none';
+    if (pegiScreen) pegiScreen.style.display = 'none';
+
+    const youtubeId = getYouTubePreviewId(title);
+    if (youtubeId) {
+        img.style.display = 'none';
+        const iframe = createYouTubeEmbed(youtubeId);
+        container.appendChild(iframe);
+        return;
+    }
+
+    // If no YouTube preview is available for this title, keep the existing image and restore overlay UI.
+    if (previewOverlay) previewOverlay.style.display = '';
+    if (pegiScreen) pegiScreen.style.display = '';
+    showToast('Preview is only available on selected game detail pages.', 'info');
+}
+
+// ==================== INIT ====================
+// Use load event listener to avoid overwriting other page handlers
+window.addEventListener('load', () => {
+    if (document.getElementById('cart-count')) updateCartBadge();
+    // Only initialize SPA store view when a `main-content` container exists
+    if (document.getElementById('main-content')) {
+        try { navigateTo('store'); } catch (e) { console.error(e); }
+    }
+});
