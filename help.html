@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - GameHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-window">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="help-search" placeholder="Search help articles">
+            </div>
+
+            <div class="nav-pill-container">
+                <a href="index.html" class="nav-pill-item">Store</a>
+                <a href="library.html" class="nav-pill-item">Library</a>
+                <a href="community.html" class="nav-pill-item">Community</a>
+                <a href="friends.html" class="nav-pill-item">Friends</a>
+                <a href="settings.html" class="nav-pill-item active">More</a>
+            </div>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn-circle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
+                </a>
+                <a href="#" class="action-btn-circle">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="settings.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="app-body">
+            <!-- Left Side Menu -->
+            <aside class="about-menu">
+                <div class="about-menu-title">Help Center</div>
+                <div class="about-menu-desc">Guides, FAQs & documentation</div>
+
+                <a href="settings.html" class="about-menu-item">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="support.html" class="about-menu-item">
+                    <i class="far fa-question-circle"></i> Support
+                </a>
+                <a href="help.html" class="about-menu-item active">
+                    <i class="far fa-life-ring"></i> Help
+                </a>
+                <a href="about.html" class="about-menu-item">
+                    <i class="fas fa-info-circle"></i> About
+                </a>
+            </aside>
+
+            <!-- Main Panel Viewport -->
+            <main class="main-viewport">
+                <div class="mb-4">
+                    <h3 class="fs-4 fw-semibold text-white mb-1">How can we help you?</h3>
+                    <p class="text-secondary fs-6 mb-0">Browse popular topics below or search for an answer.</p>
+                </div>
+
+                <!-- Help Categories -->
+                <div class="row g-4 mb-4">
+                    <div class="col-6 col-md-3">
+                        <div class="help-category-card" onclick="filterFaq('account')">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Account & Login</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="help-category-card" onclick="filterFaq('payment')">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Payments & Refunds</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="help-category-card" onclick="filterFaq('technical')">
+                            <i class="fas fa-tools"></i>
+                            <span>Technical Issues</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="help-category-card" onclick="filterFaq('games')">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Games & Downloads</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Accordion -->
+                <div class="about-content-panel">
+                    <h5 class="about-panel-title"><i class="fas fa-list-ul text-muted"></i> Frequently Asked Questions</h5>
+
+                    <div class="accordion accordion-glass" id="faqAccordion">
+                        <div class="accordion-item" data-faq-category="account">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How do I reset my password?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Go to the Sign In page and click "Forgot password?". We'll send a reset link to the email address associated with your account. The link expires after 30 minutes for security reasons.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" data-faq-category="payment">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    How do refunds work?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    You can request a refund within 14 days of purchase, as long as the game has been played for less than 2 hours. Visit your Order History and select "Request Refund" next to the eligible item.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" data-faq-category="technical">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    A game keeps crashing on launch. What should I do?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    First, verify the integrity of the game files from your Library. Update your graphics drivers, and make sure your system meets the minimum requirements. If the issue persists, submit a support ticket with your crash log attached.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" data-faq-category="games">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Where are my downloaded games stored?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    By default, games are installed to your system drive under GameHub's install folder. You can change the default install location from Settings before downloading a new game.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" data-faq-category="account">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    Can I merge two GameHub accounts?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Account merging isn't supported automatically. Please submit a support ticket with both account usernames and we'll manually review your request.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" data-faq-category="payment">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                    What payment methods are supported?
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We accept major credit/debit cards, e-wallets, and bank transfers depending on your region. Available options are shown automatically at checkout.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4" id="no-faq-results" style="display: none;">
+                        <p class="text-muted" style="font-size: 13px;">No articles matched your search. Try a different keyword or <a href="support.html" style="color:#a855f7;">contact support</a>.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 99999;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.style.cssText = `background:#272435;color:white;padding:16px 24px;border-radius:12px;border-left:6px solid ${type === 'success' ? '#22c55e' : '#a855f7'};box-shadow:0 15px 30px rgba(0,0,0,0.5);margin-top:10px;font-size:14px;`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        function filterFaq(category) {
+            let visibleCount = 0;
+            document.querySelectorAll('.accordion-item').forEach(item => {
+                if (item.getAttribute('data-faq-category') === category) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            document.getElementById('no-faq-results').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function searchFaq() {
+            const query = document.getElementById('help-search').value.toLowerCase();
+            let visibleCount = 0;
+            document.querySelectorAll('.accordion-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const matches = text.includes(query);
+                item.style.display = matches ? 'block' : 'none';
+                if (matches) visibleCount++;
+            });
+            document.getElementById('no-faq-results').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        document.getElementById('help-search').addEventListener('keyup', searchFaq);
+
+        window.onload = function() {
+            updateCartBadge();
+        }
+    </script>
+</body>
+
+</html>

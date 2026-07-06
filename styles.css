@@ -2199,3 +2199,148 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .opacity-range-input::-webkit-slider-thumb:hover {
     transform: scale(1.2);
 }
+/* Help Page */
+.help-category-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    height: 100%;
+}
+
+.help-category-card i {
+    font-size: 26px;
+    color: #a855f7;
+}
+
+.help-category-card span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.help-category-card:hover {
+    border-color: var(--accent-purple);
+    background: rgba(124, 58, 237, 0.06);
+    transform: translateY(-2px);
+}
+
+.accordion-glass .accordion-item {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.accordion-glass .accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-glass .accordion-button {
+    background: transparent;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 18px 4px;
+    box-shadow: none;
+}
+
+.accordion-glass .accordion-button:not(.collapsed) {
+    background: transparent;
+    color: #a855f7;
+    box-shadow: none;
+}
+
+.accordion-glass .accordion-button::after {
+    filter: invert(1) grayscale(100%) brightness(2);
+}
+
+.accordion-glass .accordion-body {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.7;
+    padding: 0 4px 20px;
+}
+
+/* Responsive utility */
+@media (max-width: 991.98px) {
+    body {
+        padding: 10px;
+    }
+    .app-window {
+        border-radius: 12px;
+    }
+    .app-body {
+        flex-direction: column;
+    }
+    .sidebar-filter, .about-menu {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        height: auto;
+    }
+}
+/* Support Page */
+.support-option-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.support-option-card:hover {
+    border-color: var(--accent-purple);
+    background: rgba(124, 58, 237, 0.06);
+}
+
+.support-option-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(124, 58, 237, 0.12);
+    color: #a855f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.ticket-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.badge-ticket {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-ticket.status-open {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+}
+
+.badge-ticket.status-resolved {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
