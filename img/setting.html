@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - GameHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <div class="app-window">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+
+            <div class="nav-pill-container">
+                <a href="../index.html" class="nav-pill-item">Store</a>
+                <a href="../library.html" class="nav-pill-item">Library</a>
+                <a href="../community.html" class="nav-pill-item">Community</a>
+                <a href="../friends.html" class="nav-pill-item">Friends</a>
+                <a href="../about.html" class="nav-pill-item active">More</a>
+            </div>
+
+            <div class="header-actions">
+                <a href="../cart.html" class="action-btn-circle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="btn-badge" id="cart-count">0</span>
+                </a>
+                <a href="#" class="action-btn-circle">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <div class="user-avatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name">User</span>
+                            <span class="user-tag">@username</span>
+                        </div>
+                        <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2"
+                        style="background: #272435; border-radius: 12px; padding: 8px;"
+                        aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="../wishlist.html"
+                                style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="setting.html" style="font-size: 14px;"><i
+                                    class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider border-secondary opacity-25">
+                        </li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="../login.html"
+                                style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="app-body">
+            <!-- Left Side Settings Menu -->
+            <aside class="about-menu">
+                <div class="about-menu-title">Settings</div>
+                <div class="about-menu-desc">Manage your account and preferences</div>
+
+                <a href="#" class="about-menu-item active">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="../support.html" class="about-menu-item">
+                    <i class="far fa-question-circle"></i> Support
+                </a>
+                <a href="../help.html" class="about-menu-item">
+                    <i class="far fa-life-ring"></i> Help
+                </a>
+                <a href="../about.html" class="about-menu-item">
+                    <i class="fas fa-info-circle"></i> About
+                </a>
+            </aside>
+
+            <!-- Main Panel Viewport -->
+            <main class="main-viewport">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h3 class="fs-4 fw-semibold text-white mb-1">System Preferences</h3>
+                        <p class="about-menu-desc fs-6 mb-0">Customize your gaming environment and hardware settings.</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-light btn-sm py-2 px-3 text-uppercase fw-semibold border-secondary"
+                            style="font-size: 11px; border-radius: 6px; letter-spacing: 0.5px;"
+                            onclick="resetSettings()">
+                            Reset Defaults
+                        </button>
+                        <button class="btn btn-solid-purple btn-sm py-2 px-3 text-uppercase text-dark bg-white border-0 fw-semibold"
+                            id="btn-apply"
+                            style="font-size: 11px; border-radius: 6px; letter-spacing: 0.5px;"
+                            onclick="applySettings()">
+                            Apply Changes
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Client Behavior Panel -->
+                    <div class="col-lg-7">
+                        <div class="about-content-panel d-flex flex-column gap-4">
+                            <h5 class="about-panel-title mb-0"><i class="fas fa-window-restore text-muted"></i> Client Behavior</h5>
+
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <div class="text-white fw-medium" style="font-size: 14px;">Run client when my computer starts</div>
+                                    <div class="text-muted" style="font-size: 12px; margin-top: 2px;">Automatically launch in the background.</div>
+                                </div>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="run-starts-switch" checked>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <div class="text-white fw-medium" style="font-size: 14px;">Enable GPU accelerated rendering</div>
+                                    <div class="text-muted" style="font-size: 12px; margin-top: 2px;">Improves performance in web views. Requires restart.</div>
+                                </div>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="gpu-switch" checked>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="form-label-custom">Start Up Location</label>
+                                <div class="text-muted mb-2" style="font-size: 12px; margin-top: -6px;">The default page shown when opening.</div>
+                                <div class="custom-dropdown-container" id="startup-dropdown">
+                                    <div class="custom-dropdown-trigger">
+                                        <span class="selected-val">Store</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                    <div class="custom-dropdown-options">
+                                        <div class="custom-dropdown-option selected" data-value="Store">Store</div>
+                                        <div class="custom-dropdown-option" data-value="Library">Library</div>
+                                        <div class="custom-dropdown-option" data-value="Community">Community</div>
+                                        <div class="custom-dropdown-option" data-value="Friends">Friends</div>
+                                        <div class="custom-dropdown-option" data-value="More">More</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Localization Panel -->
+                    <div class="col-lg-5">
+                        <div class="about-content-panel d-flex flex-column gap-4">
+                            <h5 class="about-panel-title mb-0"><i class="fas fa-globe text-muted"></i> Localization</h5>
+
+                            <div>
+                                <label class="form-label-custom">Display Language</label>
+                                <div class="custom-dropdown-container" id="lang-dropdown">
+                                    <div class="custom-dropdown-trigger">
+                                        <span class="selected-val">English (US)</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                    <div class="custom-dropdown-options">
+                                        <div class="custom-dropdown-option selected" data-value="en">English (US)</div>
+                                        <div class="custom-dropdown-option" data-value="id">Bahasa Indonesia</div>
+                                        <div class="custom-dropdown-option" data-value="ja">日本語</div>
+                                        <div class="custom-dropdown-option" data-value="zh">中文</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="form-label-custom">Content Region</label>
+                                <div class="custom-dropdown-container" id="region-dropdown">
+                                    <div class="custom-dropdown-trigger">
+                                        <span class="selected-val">North America</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                    <div class="custom-dropdown-options">
+                                        <div class="custom-dropdown-option selected" data-value="na">North America</div>
+                                        <div class="custom-dropdown-option" data-value="sa">South America</div>
+                                        <div class="custom-dropdown-option" data-value="eu">Europe</div>
+                                        <div class="custom-dropdown-option" data-value="ap">Asia-Pasific</div>
+                                        <div class="custom-dropdown-option" data-value="af">Africa</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-muted mt-auto" style="font-size: 11px;">
+                                Affects store pricing and download servers.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- In-Game Overlay Panel -->
+                    <div class="col-12">
+                        <div class="about-content-panel d-flex flex-column gap-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h5 class="about-panel-title mb-0"><i class="fas fa-layer-group text-muted"></i> In-Game Overlay</h5>
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="text-white" style="font-size: 13px; font-weight: 500;">Enable Overlay</span>
+                                    <div class="form-check form-switch mb-0">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="overlay-switch" checked>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="opacity-slider-container">
+                                        <div class="opacity-slider-header">
+                                            <span class="form-label-custom mb-0">Overlay Opacity</span>
+                                            <span class="opacity-slider-val" id="opacity-val">85%</span>
+                                        </div>
+                                        <input type="range" class="opacity-range-input" id="opacity-slider" min="0" max="100" value="85">
+                                        <div class="d-flex justify-content-between" style="font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px;">
+                                            <span>TRANSPARENT</span>
+                                            <span>SOLID</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="d-flex flex-column gap-2">
+                                        <label class="form-label-custom mb-0">Overlay Shortcut Key</label>
+                                        <div class="d-flex gap-2">
+                                            <input type="text" class="form-control form-control-custom text-center fw-semibold" id="shortcut-input" readonly value="Shift + Tab" style="max-width: 240px; letter-spacing: 0.5px;">
+                                            <button class="btn btn-glass-add px-4" id="btn-assign-shortcut">Assign</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="border-secondary opacity-10 my-1">
+
+                            <div class="d-flex flex-wrap gap-4">
+                                <div class="form-check d-flex align-items-center gap-2">
+                                    <input class="form-check-input mt-0" type="checkbox" id="check-fps" checked>
+                                    <label class="form-check-label text-white" for="check-fps" style="font-size: 13px; cursor: pointer;">Show FPS Counter</label>
+                                </div>
+                                <div class="form-check d-flex align-items-center gap-2">
+                                    <input class="form-check-input mt-0" type="checkbox" id="check-browser" checked>
+                                    <label class="form-check-label text-white" for="check-browser" style="font-size: 13px; cursor: pointer;">Enable Web Browser</label>
+                                </div>
+                                <div class="form-check d-flex align-items-center gap-2">
+                                    <input class="form-check-input mt-0" type="checkbox" id="check-highcontrast">
+                                    <label class="form-check-label text-white" for="check-highcontrast" style="font-size: 13px; cursor: pointer;">High Contrast Mode</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 99999;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Update Cart Badge from Local Storage
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        // Show premium UI toasts
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.style.cssText = `background:#272435;color:white;padding:16px 24px;border-radius:12px;border-left:6px solid ${type === 'success' ? '#22c55e' : '#a855f7'};box-shadow:0 15px 30px rgba(0,0,0,0.5);margin-top:10px;font-size:14px;`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        // Setup custom dropdown functionality
+        function setupDropdowns() {
+            const dropdowns = document.querySelectorAll('.custom-dropdown-container');
+
+            dropdowns.forEach(dropdown => {
+                const trigger = dropdown.querySelector('.custom-dropdown-trigger');
+                const options = dropdown.querySelectorAll('.custom-dropdown-option');
+
+                // Toggle dropdown menu visibility
+                trigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // Close other dropdowns first
+                    dropdowns.forEach(d => {
+                        if (d !== dropdown) d.classList.remove('active');
+                    });
+                    dropdown.classList.toggle('active');
+                });
+
+                // Select option
+                options.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const selectedValEl = trigger.querySelector('.selected-val');
+                        selectedValEl.textContent = option.textContent;
+
+                        // Toggle active selected classes
+                        options.forEach(opt => opt.classList.remove('selected'));
+                        option.classList.add('selected');
+
+                        dropdown.classList.remove('active');
+                        showToast(`Selected: ${option.textContent}`, "info");
+                    });
+                });
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', () => {
+                dropdowns.forEach(d => d.classList.remove('active'));
+            });
+        }
+
+        // Setup Opacity slider percentage listener
+        function setupOpacitySlider() {
+            const slider = document.getElementById('opacity-slider');
+            const valLabel = document.getElementById('opacity-val');
+
+            slider.addEventListener('input', () => {
+                valLabel.textContent = `${slider.value}%`;
+            });
+        }
+
+        // Setup shortcut key configuration listener
+        function setupShortcutConfig() {
+            const input = document.getElementById('shortcut-input');
+            const button = document.getElementById('btn-assign-shortcut');
+            let isAssigning = false;
+
+            button.addEventListener('click', () => {
+                if (!isAssigning) {
+                    isAssigning = true;
+                    button.textContent = "Press Keys...";
+                    button.style.background = "rgba(124, 58, 237, 0.25)";
+                    button.style.borderColor = "#7c3aed";
+                    input.value = "Listening...";
+                } else {
+                    resetAssigningState();
+                }
+            });
+
+            function resetAssigningState() {
+                isAssigning = false;
+                button.textContent = "Assign";
+                button.style.background = "";
+                button.style.borderColor = "";
+            }
+
+            window.addEventListener('keydown', (e) => {
+                if (!isAssigning) return;
+                e.preventDefault();
+
+                let keys = [];
+
+                if (e.ctrlKey) keys.push("Ctrl");
+                if (e.shiftKey) keys.push("Shift");
+                if (e.altKey) keys.push("Alt");
+                if (e.metaKey) keys.push("Win");
+
+                // Get key name
+                let keyName = e.key;
+                if (keyName === "Control" || keyName === "Shift" || keyName === "Alt" || keyName === "Meta") {
+                    // Modifier keys are already captured
+                    if (keys.length > 0) {
+                        input.value = keys.join(" + ");
+                    }
+                } else {
+                    // Standard keys
+                    if (keyName === " ") keyName = "Space";
+                    if (keyName.length === 1) keyName = keyName.toUpperCase();
+                    keys.push(keyName);
+                    input.value = keys.join(" + ");
+                    resetAssigningState();
+                    showToast(`Shortcut updated to: ${input.value}`, "success");
+                }
+            });
+        }
+
+        // Reset Settings button action
+        function resetSettings() {
+            // Reset switches to default (true)
+            document.getElementById('run-starts-switch').checked = true;
+            document.getElementById('gpu-switch').checked = true;
+            document.getElementById('overlay-switch').checked = true;
+
+            // Reset checkboxes
+            document.getElementById('check-fps').checked = true;
+            document.getElementById('check-browser').checked = true;
+            document.getElementById('check-highcontrast').checked = false;
+
+            // Reset slider
+            document.getElementById('opacity-slider').value = 85;
+            document.getElementById('opacity-val').textContent = '85%';
+
+            // Reset shortcut key
+            document.getElementById('shortcut-input').value = 'Shift + Tab';
+
+            // Reset custom dropdown values
+            document.querySelector('#startup-dropdown .selected-val').textContent = 'Store';
+            document.querySelectorAll('#startup-dropdown .custom-dropdown-option').forEach(o => {
+                o.classList.remove('selected');
+                if (o.getAttribute('data-value') === 'Store') o.classList.add('selected');
+            });
+
+            document.querySelector('#lang-dropdown .selected-val').textContent = 'English (US)';
+            document.querySelectorAll('#lang-dropdown .custom-dropdown-option').forEach(o => {
+                o.classList.remove('selected');
+                if (o.getAttribute('data-value') === 'en') o.classList.add('selected');
+            });
+
+            document.querySelector('#region-dropdown .selected-val').textContent = 'North America';
+            document.querySelectorAll('#region-dropdown .custom-dropdown-option').forEach(o => {
+                o.classList.remove('selected');
+                if (o.getAttribute('data-value') === 'na') o.classList.add('selected');
+            });
+
+            showToast("System preferences reset to default values.", "success");
+        }
+
+        // Apply settings changes with action spinner
+        function applySettings() {
+            const btn = document.getElementById('btn-apply');
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i> Applying...`;
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = `Apply Changes`;
+                btn.disabled = false;
+                showToast("System preferences successfully saved!", "success");
+            }, 1200);
+        }
+
+        window.onload = function () {
+            updateCartBadge();
+            setupDropdowns();
+            setupOpacitySlider();
+            setupShortcutConfig();
+        }
+    </script>
+</body>
+
+</html>
