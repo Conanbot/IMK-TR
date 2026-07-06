@@ -18,7 +18,7 @@
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="search-input" placeholder="Search settings">
             </div>
-            
+
             <div class="nav-pill-container">
                 <a href="index.html" class="nav-pill-item">Store</a>
                 <a href="library.html" class="nav-pill-item">Library</a>
@@ -26,7 +26,7 @@
                 <a href="friends.html" class="nav-pill-item">Friends</a>
                 <a href="about.html" class="nav-pill-item active">More</a>
             </div>
-            
+
             <div class="header-actions">
                 <a href="cart.html" class="action-btn-circle">
                     <i class="fas fa-shopping-cart"></i>
@@ -36,7 +36,8 @@
                     <i class="fas fa-bell"></i>
                 </a>
                 <div class="dropdown">
-                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="user-profile-card" id="profileDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         <div class="user-avatar">U</div>
                         <div class="user-info">
                             <span class="user-name">User</span>
@@ -44,11 +45,18 @@
                         </div>
                         <i class="fas fa-chevron-down ms-1" style="font-size: 10px; color: var(--text-muted);"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2" style="background: #272435; border-radius: 12px; padding: 8px;" aria-labelledby="profileDropdown">
-                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html" style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
-                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i class="fas fa-cog me-2"></i> Settings</a></li>
-                        <li><hr class="dropdown-divider border-secondary opacity-25"></li>
-                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html" style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg mt-2"
+                        style="background: #272435; border-radius: 12px; padding: 8px;"
+                        aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="wishlist.html"
+                                style="font-size: 14px;"><i class="fas fa-heart me-2 text-danger"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3" href="about.html" style="font-size: 14px;"><i
+                                    class="fas fa-cog me-2"></i> Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider border-secondary opacity-25">
+                        </li>
+                        <li><a class="dropdown-item py-2 px-3 rounded-3 text-danger" href="login.html"
+                                style="font-size: 14px;"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -60,7 +68,7 @@
             <aside class="about-menu">
                 <div class="about-menu-title">About</div>
                 <div class="about-menu-desc">View client info and updates</div>
-                
+
                 <a href="#" class="about-menu-item" onclick="showToast('Loading Settings...')">
                     <i class="fas fa-cog"></i> Settings
                 </a>
@@ -80,9 +88,12 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <h3 class="fs-4 fw-semibold text-white mb-1">About GameHub</h3>
-                        <p class="text-muted fs-6 mb-0">Check your current version, legal information, and release notes.</p>
+                        <p class="about-menu-desc fs-6 mb-0">Check your current version, legal information, and release
+                            notes.</p>
                     </div>
-                    <button class="btn btn-outline-light btn-sm py-2 px-3 text-uppercase fw-semibold border-secondary" style="font-size: 11px; border-radius: 6px; letter-spacing: 0.5px;" onclick="checkForUpdates(this)">
+                    <button class="btn btn-outline-light btn-sm py-2 px-3 text-uppercase fw-semibold border-secondary"
+                        style="font-size: 11px; border-radius: 6px; letter-spacing: 0.5px;"
+                        onclick="checkForUpdates(this)">
                         <i class="fas fa-sync-alt me-2"></i> Check for Updates
                     </button>
                 </div>
@@ -92,19 +103,28 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="about-content-panel">
                             <div class="d-flex align-items-start gap-3">
-                                <div class="bg-dark p-3 rounded-3 text-white fs-3 d-flex align-items-center justify-content-center" style="width: 54px; height: 54px; background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255,255,255,0.05);">
+                                <div class="bg-dark p-3 rounded-3 text-white fs-3 d-flex align-items-center justify-content-center"
+                                    style="width: 54px; height: 54px; background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255,255,255,0.05);">
                                     <i class="fas fa-gamepad"></i>
                                 </div>
                                 <div>
                                     <h4 class="fs-5 fw-bold text-white mb-1">GameHub Client</h4>
                                     <div class="d-flex gap-2 align-items-center mb-3">
-                                        <span class="badge" style="background: rgba(124, 58, 237, 0.15); color: #a855f7; font-size: 11px;">v2.4.19-beta</span>
-                                        <span class="text-muted" style="font-size: 11px;">Build 99281a</span>
+                                        <span class="badge"
+                                            style="background: rgba(124, 58, 237, 0.15); color: #a855f7; font-size: 11px;">v2.4.19-beta</span>
+                                        <span class="text-white" style="font-size: 11px;">Build 99281a</span>
                                     </div>
-                                    <p class="text-muted mb-4" style="font-size: 13.5px; line-height: 1.6;">The next-generation hub for your digital library. Built for performance, designed for immersion. GameHub keeps your games up to date and your community connected.</p>
+                                    <p class="about-menu-desc mb-4" style="font-size: 13.5px; line-height: 1.6;">The
+                                        next-generation hub for your digital library. Built for performance, designed
+                                        for immersion. GameHub keeps your games up to date and your community connected.
+                                    </p>
                                     <div class="d-flex gap-3">
-                                        <a href="#" class="text-white text-decoration-underline" style="font-size: 13px;" onclick="showToast('Displaying Release Notes...')">Release Notes</a>
-                                        <a href="#" class="text-white text-decoration-underline" style="font-size: 13px;" onclick="showToast('Opening ticket submission...')">Report a Bug</a>
+                                        <a href="#" class="text-white text-decoration-underline"
+                                            style="font-size: 13px;"
+                                            onclick="showToast('Displaying Release Notes...')">Release Notes</a>
+                                        <a href="#" class="text-white text-decoration-underline"
+                                            style="font-size: 13px;"
+                                            onclick="showToast('Opening ticket submission...')">Report a Bug</a>
                                     </div>
                                 </div>
                             </div>
@@ -114,24 +134,29 @@
                     <!-- System Environment Panel -->
                     <div class="col-md-6 col-lg-6">
                         <div class="about-content-panel">
-                            <h5 class="about-panel-title"><i class="fas fa-desktop text-muted"></i> System Environment</h5>
-                            
+                            <h5 class="about-panel-title"><i class="fas fa-desktop text-muted"></i> System Environment
+                            </h5>
+
                             <div class="mb-3">
                                 <label class="form-label-custom">Operating System</label>
-                                <input type="text" class="form-control form-control-custom w-100" readonly value="Win_11 Pro (10.0.22621)">
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label-custom">Architecture</label>
-                                <input type="text" class="form-control form-control-custom w-100" readonly value="x64 (AMD64)">
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label class="form-label-custom">Installation Path</label>
-                                <input type="text" class="form-control form-control-custom w-100" readonly value="C:\Program Files\GameHubs\client">
+                                <input type="text" class="form-control form-control-custom w-100" readonly
+                                    value="Win_11 Pro (10.0.22621)">
                             </div>
 
-                            <button class="btn btn-outline-light w-100 py-2 border-secondary" style="border-radius: 8px; font-size: 13px;" onclick="copySystemInfo()">
+                            <div class="mb-3">
+                                <label class="form-label-custom">Architecture</label>
+                                <input type="text" class="form-control form-control-custom w-100" readonly
+                                    value="x64 (AMD64)">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label-custom">Installation Path</label>
+                                <input type="text" class="form-control form-control-custom w-100" readonly
+                                    value="C:\Program Files\GameHubs\client">
+                            </div>
+
+                            <button class="btn btn-outline-light w-100 py-2 border-secondary"
+                                style="border-radius: 8px; font-size: 13px;" onclick="copySystemInfo()">
                                 <i class="far fa-copy me-2"></i> Copy System Info
                             </button>
                         </div>
@@ -139,23 +164,36 @@
 
                     <!-- Legal & Privacy Links -->
                     <div class="col-md-6 col-lg-6">
-                        <div class="about-content-panel p-0 overflow-hidden" style="background: transparent; border: none;">
-                            <h5 class="about-panel-title px-3"><i class="fas fa-shield-alt text-muted"></i> Legal & Privacy</h5>
-                            
+                        <div class="about-content-panel p-0 overflow-hidden"
+                            style="background: transparent; border: none;">
+                            <h5 class="about-panel-title px-3"><i class="fas fa-shield-alt text-muted"></i> Legal &
+                                Privacy</h5>
+
                             <div class="list-group rounded-3 border-0" style="background: rgba(255,255,255,0.02);">
-                                <a href="#" class="list-group-item list-group-item-action bg-transparent text-white border-0 border-bottom border-secondary py-3 px-4 d-flex justify-content-between align-items-center" style="border-color: rgba(255,255,255,0.05) !important;" onclick="showToast('Loading Terms of Service...')">
+                                <a href="#"
+                                    class="list-group-item list-group-item-action bg-transparent text-white border-0 border-bottom border-secondary py-3 px-4 d-flex justify-content-between align-items-center"
+                                    style="border-color: rgba(255,255,255,0.05) !important;"
+                                    onclick="showToast('Loading Terms of Service...')">
                                     <span>Terms of Service</span>
                                     <i class="fas fa-chevron-right text-muted" style="font-size: 12px;"></i>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action bg-transparent text-white border-0 border-bottom border-secondary py-3 px-4 d-flex justify-content-between align-items-center" style="border-color: rgba(255,255,255,0.05) !important;" onclick="showToast('Loading Privacy Policy...')">
+                                <a href="#"
+                                    class="list-group-item list-group-item-action bg-transparent text-white border-0 border-bottom border-secondary py-3 px-4 d-flex justify-content-between align-items-center"
+                                    style="border-color: rgba(255,255,255,0.05) !important;"
+                                    onclick="showToast('Loading Privacy Policy...')">
                                     <span>Privacy Policy</span>
                                     <i class="fas fa-chevron-right text-muted" style="font-size: 12px;"></i>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action bg-transparent text-white border-0 border-bottom border-secondary py-3 px-4 d-flex justify-content-between align-items-center" style="border-color: rgba(255,255,255,0.05) !important;" onclick="showToast('Loading Third-Party Licenses...')">
+                                <a href="#"
+                                    class="list-group-item list-group-item-action bg-transparent text-white border-0 border-bottom border-secondary py-3 px-4 d-flex justify-content-between align-items-center"
+                                    style="border-color: rgba(255,255,255,0.05) !important;"
+                                    onclick="showToast('Loading Third-Party Licenses...')">
                                     <span>Third-Party Licenses</span>
                                     <i class="fas fa-chevron-right text-muted" style="font-size: 12px;"></i>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action bg-transparent text-white border-0 py-3 px-4 d-flex justify-content-between align-items-center" onclick="showToast('Loading Cookie Preferences...')">
+                                <a href="#"
+                                    class="list-group-item list-group-item-action bg-transparent text-white border-0 py-3 px-4 d-flex justify-content-between align-items-center"
+                                    onclick="showToast('Loading Cookie Preferences...')">
                                     <span>Cookie Preferences</span>
                                     <i class="fas fa-chevron-right text-muted" style="font-size: 12px;"></i>
                                 </a>
@@ -165,9 +203,12 @@
 
                     <!-- Client Logo / Brand Footer -->
                     <div class="col-md-6 col-lg-6">
-                        <div class="about-content-panel d-flex flex-column align-items-center justify-content-center text-center py-5" style="border-style: dashed;">
-                            <div class="fs-1 fw-bold text-white mb-2"><i class="fas fa-gamepad me-2 text-purple"></i>GameHub</div>
-                            <div class="text-muted" style="font-size: 12px;">&copy; 2026 IMK Gaming Corp.<br>All rights reserved.</div>
+                        <div class="about-content-panel d-flex flex-column align-items-center justify-content-center text-center py-5"
+                            style="border-style: dashed;">
+                            <div class="fs-1 fw-bold text-white mb-2"><i
+                                    class="fas fa-gamepad me-2 text-purple"></i>GameHub</div>
+                            <div class="text-muted" style="font-size: 12px;">&copy; 2026 IMK Gaming Corp.<br>All rights
+                                reserved.</div>
                         </div>
                     </div>
                 </div>
@@ -211,7 +252,7 @@
             }, 2000);
         }
 
-        window.onload = function() {
+        window.onload = function () {
             updateCartBadge();
         }
     </script>
