@@ -64,245 +64,140 @@
 
         <!-- Body -->
         <div class="app-body">
-            <!-- Sidebar Navigation -->
-            <aside class="sidebar-filter">
-                <div class="filter-section">
-                    <h5 class="sidebar-title">Navigation</h5>
-                    <div class="filter-item text-white">
-                        <label><i class="fas fa-info-circle me-2"></i> Overview</label>
-                    </div>
-                    <div class="filter-item text-muted">
-                        <label><i class="far fa-play-circle me-2"></i> Trailer & Media</label>
-                    </div>
-                    <div class="filter-item text-muted">
-                        <label><i class="fas fa-microchip me-2"></i> System Specs</label>
-                    </div>
-                </div>
-
-                <div class="mt-auto">
-                    <a href="index.html" class="btn btn-sidebar-apply text-center text-decoration-none d-block"><i
-                            class="fas fa-arrow-left me-2"></i> Store Home</a>
-                </div>
-            </aside>
-
             <!-- Main Viewport -->
             <main class="main-viewport">
-                <!-- Title Block -->
-                <div class="mb-3">
-                    <h2 id="detail-title" class="fw-bold text-white fs-3 mb-1">ELDEN RING</h2>
-                    <div id="detail-sub" class="text-muted fs-7">
-                        <span class="text-white">FromSoftware</span> &nbsp;&bull;&nbsp; Publisher: <span
-                            class="text-white">Bandai Namco Entertainment</span>
-                    </div>
-                </div>
-
-                <!-- Glowing Purple Title Progress Bar (Image 5 Style) -->
-                <div class="detail-progress-track" id="title-progress-bar">
-                    <div class="detail-progress-fill" id="title-progress-fill"></div>
-                </div>
-
-                <!-- Media Display Panel (16:9 + thumbnails) -->
-                <div class="detail-media-panel">
-                    <div class="detail-video-player" id="main-player-container">
-                        <!-- Simulated PEGI 16 Screen overlay -->
-                        <div class="pegi-screen-sim" id="video-pegi-screen">
-                            <div class="pegi-logo-box">
-                                <div class="pegi-16-number">16</div>
-                                <div class="pegi-url">www.pegi.info</div>
-                            </div>
-                            <div class="pegi-provisional">PROVISIONAL</div>
-                        </div>
-
-                        <!-- Video timeline controls bar overlay -->
-                        <div class="video-controls-bar">
-                            <div class="video-timeline-track" onclick="seekVideo(event)">
-                                <div class="video-timeline-fill" id="video-timeline-fill" style="width: 8%;"></div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center w-100 px-3 py-2">
-                                <div class="d-flex align-items-center gap-3">
-                                    <button class="control-btn" id="play-control-btn" onclick="togglePlayTrailer()"><i
-                                            class="fas fa-play"></i></button>
-                                    <button class="control-btn" onclick="showToast('Next clip')"><i
-                                            class="fas fa-step-forward"></i></button>
-                                    <button class="control-btn" onclick="toggleMute()"><i class="fas fa-volume-up"
-                                            id="volume-icon"></i></button>
-                                    <div class="volume-slider">
-                                        <div class="volume-fill"></div>
-                                    </div>
-                                    <span class="video-time" id="video-time-text">01:00 / 11:53</span>
-                                </div>
-                                <div class="d-flex align-items-center gap-3">
-                                    <button class="control-btn" onclick="showToast('Settings')"><i
-                                            class="fas fa-cog"></i></button>
-                                    <button class="control-btn" onclick="showToast('Subtitles')"><i
-                                            class="fas fa-closed-captioning"></i></button>
-                                    <button class="control-btn" onclick="toggleFullscreen()"><i
-                                            class="fas fa-expand"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <img id="main-preview-img"
-                            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000"
-                            class="w-100 h-100 object-fit-cover" alt="Main Preview">
-                    </div>
-
-                    <div class="detail-screenshot-list">
-                        <div class="detail-screenshot-thumb active"
-                            onclick="changePreview(this, 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000')">
-                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200"
-                                alt="Thumb 1">
-                        </div>
-                        <div class="detail-screenshot-thumb"
-                            onclick="changePreview(this, 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000')">
-                            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=200"
-                                alt="Thumb 2">
-                        </div>
-                        <div class="detail-screenshot-thumb"
-                            onclick="changePreview(this, 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1000')">
-                            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=200"
-                                alt="Thumb 3">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lower Layout Grid -->
                 <div class="row g-4">
-                    <!-- Left Tab details & News -->
-                    <div class="col-lg-8">
-                        <ul class="nav nav-tabs nav-tabs-custom" id="detailTabs" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
-                                    data-bs-target="#overview" type="button" role="tab">Overview</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs"
-                                    type="button" role="tab">System Requirements</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews"
-                                    type="button" role="tab"
-                                    onclick="showToast('Loading Community Reviews...')">Reviews</button>
-                            </li>
-                        </ul>
+                    <!-- Left Column (Media, Title, Progress, Info, Specs, News) -->
+                    <div class="col-lg-8 d-flex flex-column gap-4">
+                        <!-- Title Block -->
+                        <div>
+                            <h2 id="detail-title" class="fw-bold text-white fs-3 mb-1"></h2>
+                            <div id="detail-sub" class="text-muted fs-7">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
 
-                        <div class="tab-content" id="detailTabsContent">
-                            <!-- Overview Tab -->
-                            <div class="tab-pane fade show active text-muted" id="overview" role="tabpanel">
-                                <div class="d-flex flex-wrap gap-2 mb-3">
-                                    <span class="tag-pill active"><i class="fas fa-tag"></i> RPG</span>
-                                    <span class="tag-pill"><i class="fas fa-globe"></i> Open World</span>
-                                    <span class="tag-pill"><i class="fas fa-wand-magic-sparkles"></i> Fantasy</span>
-                                    <span class="tag-pill"><i class="fas fa-fire"></i> Action</span>
-                                </div>
-                                <div class="row g-3 mb-4">
-                                    <div class="col-6">
-                                        <div class="library-stat-label">Release Date</div>
-                                        <div class="text-white fw-bold" id="detail-release">25 Feb 2022</div>
+                        <!-- Glowing Purple Title Progress Bar -->
+                        <div class="detail-progress-track" id="title-progress-bar">
+                            <div class="detail-progress-fill" id="title-progress-fill"></div>
+                        </div>
+
+                        <!-- Media Showcase -->
+                        <div class="detail-media-panel">
+                            <div class="detail-video-player" id="main-player-container">
+                                <!-- PEGI 16 Screen Overlay -->
+                                <div class="pegi-screen-sim" id="video-pegi-screen">
+                                    <div class="pegi-logo-box">
+                                        <div class="pegi-16-number">16</div>
+                                        <div class="pegi-url">www.pegi.info</div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="library-stat-label">Review Summary</div>
-                                        <div class="text-info fw-semibold" id="detail-review">Very Positive (92%)</div>
+                                    <div class="pegi-provisional">PROVISIONAL</div>
+                                </div>
+                                <!-- Video timeline controls overlay -->
+                                <div class="video-controls-bar">
+                                    <div class="video-timeline-track" onclick="seekVideo(event)">
+                                        <div class="video-timeline-fill" id="video-timeline-fill" style="width: 8%;"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center w-100 px-3 py-2">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <button class="control-btn" id="play-control-btn" onclick="togglePlayTrailer()"><i class="fas fa-play"></i></button>
+                                            <button class="control-btn" onclick="showToast('Next clip')"><i class="fas fa-step-forward"></i></button>
+                                            <button class="control-btn" onclick="toggleMute()"><i class="fas fa-volume-up" id="volume-icon"></i></button>
+                                            <div class="volume-slider">
+                                                <div class="volume-fill"></div>
+                                            </div>
+                                            <span class="video-time" id="video-time-text">01:00 / 11:53</span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <button class="control-btn" onclick="showToast('Settings')"><i class="fas fa-cog"></i></button>
+                                            <button class="control-btn" onclick="showToast('Subtitles')"><i class="fas fa-closed-captioning"></i></button>
+                                            <button class="control-btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <p id="detail-desc" class="about-menu-desc"></p>
+                                <img id="main-preview-img" src="" class="w-100 h-100 object-fit-cover" alt="Main Preview">
+                            </div>
+                            
+                            <!-- Sidebar Screenshots Thumbnails -->
+                            <div class="detail-screenshot-list" id="detail-screenshot-list">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Cards Grid (Overview & Specs/Reviews side-by-side) -->
+                        <div class="row g-4">
+                            <!-- Left Card: Overview -->
+                            <div class="col-md-6">
+                                <div class="gamedetail-panel">
+                                    <h5 class="gamedetail-panel-title">Overview</h5>
+                                    <!-- Tag Pills -->
+                                    <div class="d-flex flex-wrap gap-2 mb-3" id="overview-tags">
+                                        <!-- Populated dynamically -->
+                                    </div>
+                                    <!-- Release Date & Review Summary -->
+                                    <div class="row g-2 mb-3">
+                                        <div class="col-6">
+                                            <div class="overview-stat-box">
+                                                <div class="overview-stat-label">Release Date</div>
+                                                <div class="overview-stat-val" id="detail-release"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="overview-stat-box">
+                                                <div class="overview-stat-label">Review Summary</div>
+                                                <div class="overview-stat-val highlight-blue" id="detail-review"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p id="detail-desc" style="line-height: 1.7; font-size: 12.5px; margin: 0; color: var(--text-muted);"></p>
+                                </div>
                             </div>
 
-                            <!-- Requirements Tab -->
-                            <div class="tab-pane fade" id="specs" role="tabpanel">
-                                <div class="row g-4">
-                                    <!-- Minimum -->
-                                    <div class="col-md-6 specs-column">
-                                        <h6 class="specs-title"><i class="fab fa-windows"></i> Minimum</h6>
-                                        <div class="about-menu-desc mb-2"><strong>OS:</strong> Windows 10 64-bit</div>
-                                        <div class="about-menu-desc mb-2"><strong>Processor:</strong> Intel Core i5-8400
-                                            /
-                                            AMD Ryzen 3 3300X</div>
-                                        <div class="about-menu-desc mb-2"><strong>Graphics:</strong> NVIDIA GTX 1060 3GB
-                                            /
-                                            AMD Radeon RX 580 4GB</div>
-                                        <div class="about-menu-desc mb-2"><strong>RAM:</strong> 12 GB</div>
-                                        <div class="about-menu-desc mb-2"><strong>Storage:</strong> 60 GB SSD</div>
-                                        <div class="about-menu-desc mb-2"><strong>DirectX:</strong> Version 12</div>
+                            <!-- Right Card: System Requirements & Reviews -->
+                            <div class="col-md-6">
+                                <div class="gamedetail-panel">
+                                    <div class="specs-tab-header">
+                                        <button class="specs-tab-btn active" id="btn-tab-specs" onclick="switchSpecsTab('specs')">System Requirements</button>
+                                        <button class="specs-tab-btn" id="btn-tab-reviews" onclick="switchSpecsTab('reviews')">Reviews</button>
                                     </div>
-                                    <!-- Recommended -->
-                                    <div class="col-md-6 specs-column">
-                                        <h6 class="specs-title"><i class="fab fa-windows"></i> Recommended</h6>
-                                        <div class="about-menu-desc mb-2"><strong>OS:</strong> Windows 10/11 64-bit
+                                    
+                                    <div id="specs-tab-content">
+                                        <!-- Specs Columns (Minimum & Recommended) -->
+                                        <div class="specs-sub-container" id="specs-container">
+                                            <!-- Populated dynamically -->
                                         </div>
-                                        <div class="about-menu-desc mb-2"><strong>Processor:</strong> Intel Core
-                                            i7-8700K /
-                                            AMD Ryzen 5 3600X</div>
-                                        <div class="about-menu-desc mb-2"><strong>Graphics:</strong> NVIDIA RTX 2070 8GB
-                                            /
-                                            AMD Radeon RX 6700 XT 12GB</div>
-                                        <div class="about-menu-desc mb-2"><strong>RAM:</strong> 16 GB</div>
-                                        <div class="about-menu-desc mb-2"><strong>Storage:</strong> 60 GB SSD</div>
-                                        <div class="about-menu-desc mb-2"><strong>DirectX:</strong> Version 12</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- News Section -->
-                        <div class="mt-5">
-                            <div class="section-header">
-                                <h4 class="section-title text-white">Latest News & Events</h4>
-                                <button class="btn-see-all">View All</button>
+                        <!-- Latest News & Events -->
+                        <div class="gamedetail-panel">
+                            <div class="section-header border-0 mb-3 p-0" style="display: flex; align-items: center; justify-content: space-between;">
+                                <h4 class="section-title text-white mb-0" style="font-size: 16px;">Latest News & Events</h4>
+                                <button class="btn-see-all" onclick="showToast('Loading all events...')">View All</button>
                             </div>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="about-content-panel p-0 overflow-hidden" style="cursor: pointer;"
-                                        onclick="showToast('Loading Event page...')">
-                                        <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400"
-                                            class="w-100" style="height: 140px; object-fit: cover;" alt="News 1">
-                                        <div class="p-3">
-                                            <span class="badge mb-2"
-                                                style="background: rgba(139,92,246,0.15); color: #a855f7; font-size: 10px;">Update</span>
-                                            <h6 class="text-white mb-1 text-truncate" style="font-size: 13.5px;">Shadow
-                                                of the Erdtree expansion patch notes v1.12</h6>
-                                            <p class="text-muted mb-0" style="font-size: 11.5px;">Read the detailed
-                                                balance adjust details and bug fixes.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="about-content-panel p-0 overflow-hidden" style="cursor: pointer;"
-                                        onclick="showToast('Loading Merchandise page...')">
-                                        <img src="https://images.unsplash.com/photo-1544924222-35298d69037a?q=80&w=400"
-                                            class="w-100" style="height: 140px; object-fit: cover;" alt="News 2">
-                                        <div class="p-3">
-                                            <span class="badge mb-2"
-                                                style="background: rgba(56,189,248,0.15); color: #38bdf8; font-size: 10px;">News</span>
-                                            <h6 class="text-white mb-1 text-truncate" style="font-size: 13.5px;">Elden
-                                                Ring Official Vinyl Soundtrack Pre-order now</h6>
-                                            <p class="text-muted mb-0" style="font-size: 11.5px;">Follow in the
-                                                footsteps of Miquella with this collector album.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="row g-3" id="news-grid-container">
+                                <!-- Populated dynamically -->
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Buy / Action Card, Languages and Shares -->
-                    <div class="col-lg-4">
-                        <!-- Action Card with Vertical Cover -->
-                        <div class="about-content-panel mb-4 text-center">
-                            <img id="detail-cover-art"
-                                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400"
-                                class="img-fluid rounded-3 mb-4 shadow border border-secondary"
-                                style="max-height: 280px; object-fit: cover; aspect-ratio: 3/4;" alt="Game Cover">
-
-                            <!-- State Button Wrapper -->
+                    <!-- Right Column (Cover, Actions, Languages, Share) -->
+                    <div class="col-lg-4 d-flex flex-column gap-4">
+                        <!-- Cover and Action Card -->
+                        <div class="gamedetail-right-card text-center">
+                            <img id="detail-cover-art" src="" class="gamedetail-cover-img" alt="Game Cover">
+                            
+                            <!-- Action Button Wrapper -->
                             <div class="d-grid gap-2" id="action-btn-wrapper">
-                                <!-- Dynamic primary action button -->
+                                <!-- Dynamic Install / Play / Update button -->
                             </div>
                         </div>
 
-                        <!-- Languages Support Checklist -->
-                        <div class="about-content-panel mb-4">
-                            <h5 class="about-panel-title"><i class="fas fa-language text-muted"></i> Languages</h5>
+                        <!-- Languages Card -->
+                        <div class="gamedetail-right-card">
+                            <h5 class="gamedetail-lang-title">Languages</h5>
                             <table class="languages-table">
                                 <thead>
                                     <tr>
@@ -312,50 +207,20 @@
                                         <th>Subtitles</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>English</td>
-                                        <td><i class="fas fa-check"></i></td>
-                                        <td><i class="fas fa-check"></i></td>
-                                        <td><i class="fas fa-check"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>French</td>
-                                        <td><i class="fas fa-check"></i></td>
-                                        <td>-</td>
-                                        <td><i class="fas fa-check"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Italian</td>
-                                        <td><i class="fas fa-check"></i></td>
-                                        <td>-</td>
-                                        <td><i class="fas fa-check"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>German</td>
-                                        <td><i class="fas fa-check"></i></td>
-                                        <td>-</td>
-                                        <td><i class="fas fa-check"></i></td>
-                                    </tr>
+                                <tbody id="languages-table-body">
+                                    <!-- Populated dynamically -->
                                 </tbody>
                             </table>
-                            <a href="#" class="text-info d-block text-center mt-3 text-decoration-underline"
-                                style="font-size: 11.5px;"
-                                onclick="showToast('Showing all 15 supported languages...')">See all 15 supported
-                                languages</a>
+                            <a href="#" class="gamedetail-lang-link" onclick="showToast('Showing all 15 supported languages...')">See all 15 supported languages</a>
                         </div>
 
                         <!-- Social shares -->
-                        <div class="d-flex justify-content-center gap-3 text-muted py-2" style="font-size: 16px;">
-                            <span>Share:</span>
-                            <a href="#" class="text-muted" onclick="showToast('Sharing on Facebook...')"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-muted" onclick="showToast('Sharing on Twitter...')"><i
-                                    class="fab fa-twitter"></i></a>
-                            <a href="#" class="text-muted" onclick="showToast('Sharing on YouTube...')"><i
-                                    class="fab fa-youtube"></i></a>
-                            <a href="#" class="text-muted" onclick="showToast('Sharing on Telegram...')"><i
-                                    class="fab fa-telegram-plane"></i></a>
+                        <div class="gamedetail-share-wrapper">
+                            <span>Share</span>
+                            <a href="#" class="gamedetail-share-btn" onclick="showToast('Sharing on Facebook...')"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="gamedetail-share-btn" onclick="showToast('Sharing on Twitter...')"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="gamedetail-share-btn" onclick="showToast('Sharing on YouTube...')"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="gamedetail-share-btn" onclick="showToast('Sharing on Telegram...')"><i class="fab fa-telegram-plane"></i></a>
                         </div>
                     </div>
                 </div>
@@ -370,79 +235,480 @@
     <script>
         // Database
         const gameDb = {
-            1: {
+            "bioshock-1": {
                 id: "bioshock-1",
                 title: "Bioshock",
-                price: "IDR 250,000",
+                dev: "2K Boston / 2K Australia",
+                publisher: "2K",
+                release: "21 Aug 2007",
+                rating: "Very Positive (95%)",
                 genre: "Action",
+                tags: ["Sci-fi", "Shooter", "Atmospheric", "Action"],
                 desc: "BioShock is a shooter unlike any you've ever played, loaded with weapons and tactics never seen. You'll have a complete arsenal at your disposal from simple revolvers to grenade launchers and chemical throwers, but you'll also be forced to genetically modify your DNA.",
                 img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000",
-                dev: "2K Boston / 2K Australia",
-                release: "21 Aug 2007",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800",
+                    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800",
+                    "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800"
+                ],
+                minRequirements: {
+                    os: "Windows 7 64-bit",
+                    processor: "Intel Core 2 Duo / AMD Athlon 64 X2",
+                    graphics: "NVIDIA 7800GT / AMD Radeon X1900",
+                    ram: "2 GB",
+                    storage: "20 GB",
+                    directx: "Version 9"
+                },
+                recRequirements: {
+                    os: "Windows 10 64-bit",
+                    processor: "Intel Core i5 / AMD Ryzen 3",
+                    graphics: "NVIDIA GTX 660 / AMD Radeon HD 7850",
+                    ram: "4 GB",
+                    storage: "20 GB SSD",
+                    directx: "Version 11"
+                },
+                news: {
+                    img1: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600",
+                    img2: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600",
+                    text2: "BioShock franchise celebrates anniversary with new developer updates and artwork showcases..."
+                },
+                languages: [
+                    { name: "English", interface: true, audio: true, subtitles: true },
+                    { name: "French", interface: true, audio: false, subtitles: true },
+                    { name: "German", interface: true, audio: false, subtitles: true }
+                ],
                 defaultState: "play"
             },
-            2: {
+            "bioshock-2": {
+                id: "bioshock-2",
+                title: "Bioshock 2",
+                dev: "2K Marin / 2K China",
+                publisher: "2K",
+                release: "9 Feb 2010",
+                rating: "Very Positive (91%)",
+                genre: "Action",
+                tags: ["Sci-fi", "Shooter", "Atmospheric", "Action"],
+                desc: "Set approximately 10 years after the events of the original BioShock, the halls of Rapture once again echo with sins of the past. Along the Atlantic coastline, a monster has been snatching little girls and bringing them back to the undersea city.",
+                img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=300",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800",
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800",
+                    "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800"
+                ],
+                minRequirements: {
+                    os: "Windows 7 64-bit",
+                    processor: "Intel Core 2 Duo / AMD Athlon 64 X2",
+                    graphics: "NVIDIA 8600GT / AMD Radeon HD 2600XT",
+                    ram: "2 GB",
+                    storage: "11 GB",
+                    directx: "Version 10"
+                },
+                recRequirements: {
+                    os: "Windows 10 64-bit",
+                    processor: "Intel Core i5 / AMD Ryzen 3",
+                    graphics: "NVIDIA GTX 470 / AMD Radeon HD 6870",
+                    ram: "4 GB",
+                    storage: "11 GB SSD",
+                    directx: "Version 11"
+                },
+                news: {
+                    img1: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600",
+                    img2: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600",
+                    text2: "BioShock 2 classic multiplayer map updates are detailed by developers in this retrospective..."
+                },
+                languages: [
+                    { name: "English", interface: true, audio: true, subtitles: true },
+                    { name: "French", interface: true, audio: false, subtitles: true },
+                    { name: "German", interface: true, audio: false, subtitles: true }
+                ],
+                defaultState: "play"
+            },
+            "bioshock-infinite": {
+                id: "bioshock-infinite",
+                title: "Bioshock Infinite",
+                dev: "Irrational Games",
+                publisher: "2K",
+                release: "26 Mar 2013",
+                rating: "Overwhelmingly Positive (96%)",
+                genre: "Action",
+                tags: ["Sci-fi", "Story Rich", "Shooter", "Action"],
+                desc: "Indebted to the wrong people, with his life on the line, veteran of the U.S. Cavalry and now hired gun, Booker DeWitt has only one opportunity to wipe his slate clean. He must rescue Elizabeth, a mysterious girl imprisoned since childhood.",
+                img: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=300",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800",
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800",
+                    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800"
+                ],
+                minRequirements: {
+                    os: "Windows 7 32-bit",
+                    processor: "Intel Core 2 DUO 2.4 GHz / AMD Athlon X2 2.7 GHz",
+                    graphics: "NVIDIA 8800 GT 512MB / AMD Radeon HD 3870",
+                    ram: "2 GB",
+                    storage: "20 GB",
+                    directx: "Version 10"
+                },
+                recRequirements: {
+                    os: "Windows 7 64-bit",
+                    processor: "Intel Quad Core / AMD Phenom II X4",
+                    graphics: "NVIDIA GTX 560 / AMD Radeon HD 6950",
+                    ram: "4 GB",
+                    storage: "30 GB SSD",
+                    directx: "Version 11"
+                },
+                news: {
+                    img1: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600",
+                    img2: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=600",
+                    text2: "BioShock Infinite's cloud city of Columbia turns 10! Check out this exclusive developers discussion."
+                },
+                languages: [
+                    { name: "English", interface: true, audio: true, subtitles: true },
+                    { name: "French", interface: true, audio: false, subtitles: true },
+                    { name: "German", interface: true, audio: false, subtitles: true }
+                ],
+                defaultState: "play"
+            },
+            "batman-origins": {
                 id: "batman-origins",
                 title: "Batman: Arkham Origins",
-                price: "IDR 350,000",
+                dev: "WB Games Montreal",
+                publisher: "Warner Bros. Games",
+                release: "25 Oct 2013",
+                rating: "Very Positive (88%)",
                 genre: "Action",
+                tags: ["Batman", "Open World", "Action", "Adventure"],
                 desc: "Batman: Arkham Origins features an expanded Gotham City and introduces an original prequel storyline set several years before the events of Batman: Arkham Asylum and Batman: Arkham City.",
                 img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000",
-                dev: "WB Games Montreal",
-                release: "25 Oct 2013",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800",
+                    "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=800",
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800"
+                ],
+                minRequirements: {
+                    os: "Windows 7 64-bit",
+                    processor: "Intel Core 2 Duo 2.4 GHz / AMD Athlon X2 2.8 GHz",
+                    graphics: "NVIDIA GeForce 8800 GTS / AMD Radeon HD 3850",
+                    ram: "2 GB",
+                    storage: "20 GB",
+                    directx: "Version 10"
+                },
+                recRequirements: {
+                    os: "Windows 7/8/10 64-bit",
+                    processor: "Intel Core i5-750 2.67 GHz / AMD Phenom II X4 965",
+                    graphics: "NVIDIA GeForce GTX 560 / AMD Radeon HD 6950",
+                    ram: "4 GB",
+                    storage: "20 GB SSD",
+                    directx: "Version 11"
+                },
+                news: {
+                    img1: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600",
+                    img2: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600",
+                    text2: "Arkham Origins Cold Cold Heart expansion patch details and bug fixes are now live..."
+                },
+                languages: [
+                    { name: "English", interface: true, audio: true, subtitles: true },
+                    { name: "French", interface: true, audio: false, subtitles: true },
+                    { name: "German", interface: true, audio: false, subtitles: true }
+                ],
                 defaultState: "install"
             },
-            3: {
+            "batman-knight": {
                 id: "batman-knight",
                 title: "Batman: Arkham Knight",
-                price: "IDR 500,000",
+                dev: "Rocksteady Studios",
+                publisher: "Warner Bros. Games",
+                release: "23 Jun 2015",
+                rating: "Very Positive (90%)",
                 genre: "Action",
+                tags: ["Batman", "Open World", "Action", "Adventure"],
                 desc: "Batman: Arkham Knight brings the award-winning Arkham trilogy from Rocksteady Studios to its epic conclusion. Developed exclusively for New-Gen platforms, Batman: Arkham Knight introduces Rocksteady's uniquely designed version of the Batmobile.",
                 img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1000",
-                dev: "Rocksteady Studios",
-                release: "23 Jun 2015",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=800",
+                    "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800",
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800"
+                ],
+                minRequirements: {
+                    os: "Windows 7 SP1 64-bit",
+                    processor: "Intel Core i5-750 2.67 GHz / AMD Phenom II X4 965 3.4 GHz",
+                    graphics: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7870",
+                    ram: "6 GB",
+                    storage: "45 GB",
+                    directx: "Version 11"
+                },
+                recRequirements: {
+                    os: "Windows 7 SP1 / 8.1 / 10 64-bit",
+                    processor: "Intel Core i7-3770 3.4 GHz / AMD FX-8350 4.0 GHz",
+                    graphics: "NVIDIA GeForce GTX 760 / AMD Radeon R9 280",
+                    ram: "8 GB",
+                    storage: "55 GB SSD",
+                    directx: "Version 11"
+                },
+                news: {
+                    img1: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600",
+                    img2: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600",
+                    text2: "Batmobile skin packages released for Arkham Knight, celebrating comic history!"
+                },
+                languages: [
+                    { name: "English", interface: true, audio: true, subtitles: true },
+                    { name: "French", interface: true, audio: false, subtitles: true },
+                    { name: "German", interface: true, audio: false, subtitles: true }
+                ],
                 defaultState: "update"
             },
-            4: {
+            "steel-sky": {
                 id: "steel-sky",
                 title: "Beneath a Steel Sky",
-                price: "Free",
+                dev: "Revolution Software",
+                publisher: "Revolution Software",
+                release: "Mar 1994",
+                rating: "Very Positive (90%)",
                 genre: "Adventure",
+                tags: ["Cyberpunk", "Point & Click", "Adventure", "Retro"],
                 desc: "A science-fiction point and click adventure game set in a dystopian future. You play Robert Foster, an outcast who has been abducted and brought to Union City, a terrifying high-tech metropolis. Survive and uncover the dark secrets.",
                 img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000",
-                dev: "Revolution Software",
-                release: "Mar 1994",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800",
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800",
+                    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800"
+                ],
+                minRequirements: {
+                    os: "Windows XP / Vista / 7 / 8 / 10",
+                    processor: "1.0 GHz Processor",
+                    graphics: "3D graphics card compatible with DirectX 7",
+                    ram: "256 MB",
+                    storage: "1 GB"
+                },
+                recRequirements: {
+                    os: "Windows 7 / 8 / 10 64-bit",
+                    processor: "1.4 GHz Processor",
+                    graphics: "3D graphics card compatible with DirectX 9",
+                    ram: "512 MB",
+                    storage: "1 GB SSD"
+                },
+                news: {
+                    img1: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600",
+                    img2: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=60&w=600",
+                    text2: "Dystopian adventure game remains a cult classic after decades of updates."
+                },
+                languages: [
+                    { name: "English", interface: true, audio: true, subtitles: true },
+                    { name: "French", interface: true, audio: false, subtitles: true }
+                ],
                 defaultState: "play"
             },
-            5: {
+            "elden-ring": {
                 id: "elden-ring",
                 title: "Elden Ring",
-                price: "IDR 899,000",
+                dev: "FromSoftware",
+                publisher: "Bandai Namco Entertainment",
+                release: "25 Feb 2022",
+                rating: "Very Positive (92%)",
                 genre: "RPG",
+                tags: ["RPG", "Open World", "Fantasy", "Action"],
                 desc: "Elden Ring is an action RPG developed by FromSoftware, published by Bandai Namco Entertainment. It is set in the world of the Lands Between, ruled by the demi-god offspring of Queen Marika the Eternal, who have shattered the Elden Ring and claimed its shards, triggering a war called the Shattering.",
                 img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000",
-                dev: "FromSoftware",
-                release: "25 Feb 2022",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800", // golden tree
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800", // ruins / knight
+                    "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=800"  // dark tree
+                ],
+                minRequirements: {
+                    os: "Windows 10 64-bit",
+                    processor: "Intel Core i5-8400 / AMD Ryzen 3 3300X",
+                    graphics: "NVIDIA GTX 1060 3GB / AMD Radeon RX 580 4GB",
+                    ram: "12 GB",
+                    vram: "3-4 GB",
+                    storage: "60 GB",
+                    directx: "Version 12"
+                },
+                recRequirements: {
+                    os: "Windows 10/11 64-bit",
+                    processor: "Intel Core i7-8700K / AMD Ryzen 5 3600X",
+                    graphics: "NVIDIA RTX 2070 8GB / AMD Radeon RX 6700 XT 12GB",
+                    ram: "16 GB",
+                    vram: "8-12 GB",
+                    storage: "60 GB SSD",
+                    directx: "Version 12"
+                },
+                news: {
+                    img1: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600",
+                    img2: "https://images.unsplash.com/photo-1505635330303-31953079b243?q=80&w=600",
+                    text2: "Follow in the footsteps of Miquella once more with this exclusive 2 disc vinyl collection, celebrating the sweeping, emotional journey of..."
+                },
+                languages: [
+                    { name: "English", interface: true, audio: true, subtitles: true },
+                    { name: "French", interface: true, audio: false, subtitles: true },
+                    { name: "Italian", interface: true, audio: false, subtitles: true },
+                    { name: "German", interface: true, audio: false, subtitles: true }
+                ],
                 defaultState: "install"
             }
         };
 
         const params = new URLSearchParams(window.location.search);
-        let gameKey = params.get('key');
-        let activeGame = Object.values(gameDb).find(g => g.id === gameKey) || gameDb[5]; // Default to Elden Ring
+        let gameKey = params.get('key') || params.get('id') || 'elden-ring';
+        let activeGame = gameDb[gameKey] || Object.values(gameDb).find(g => g.id === gameKey) || gameDb['elden-ring'];
 
         // Populate basic text
         document.getElementById('detail-title').textContent = activeGame.title.toUpperCase();
         document.getElementById('detail-desc').textContent = activeGame.desc;
         document.getElementById('detail-release').textContent = activeGame.release;
-        document.getElementById('detail-genre').innerHTML = `<i class="fas fa-tag"></i> ${activeGame.genre}`;
-        document.getElementById('main-preview-img').src = activeGame.img;
+        document.getElementById('detail-review').textContent = activeGame.rating;
         document.getElementById('detail-cover-art').src = activeGame.img;
 
-        // Populate author text
+        // Populate developer / publisher text
         document.getElementById('detail-sub').innerHTML = `
-            <span class="text-white">${activeGame.dev}</span> &nbsp;&bull;&nbsp; Publisher: <span class="text-white">Bandai Namco Entertainment</span>
+            <span class="text-white">${activeGame.dev}</span> &nbsp;&bull;&nbsp; Publisher: <span class="text-white">${activeGame.publisher}</span>
         `;
+
+        // Populate tags
+        const tagsContainer = document.getElementById('overview-tags');
+        if (tagsContainer) {
+            tagsContainer.innerHTML = '';
+            activeGame.tags.forEach(tag => {
+                tagsContainer.innerHTML += `<span class="gamedetail-tag-pill">${tag}</span>`;
+            });
+        }
+
+        // Populate screenshots list
+        const ssList = document.getElementById('detail-screenshot-list');
+        if (ssList && activeGame.screenshots) {
+            ssList.innerHTML = '';
+            activeGame.screenshots.forEach((url, index) => {
+                const activeClass = index === 0 ? 'active' : '';
+                ssList.innerHTML += `
+                    <div class="detail-screenshot-thumb ${activeClass}" onclick="changePreview(this, '${url}')">
+                        <img src="${url}" alt="Thumb ${index + 1}">
+                    </div>
+                `;
+            });
+            // Set initial preview to first screenshot
+            document.getElementById('main-preview-img').src = activeGame.screenshots[0];
+        }
+
+        // Populate news
+        const newsContainer = document.getElementById('news-grid-container');
+        if (newsContainer && activeGame.news) {
+            newsContainer.innerHTML = `
+                <div class="col-md-6">
+                    <div class="news-card-left" style="cursor: pointer;" onclick="showToast('Loading news event...')">
+                        <img src="${activeGame.news.img1}" alt="News Event 1">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="news-card-right" style="background-image: url('${activeGame.news.img2}'); cursor: pointer;" onclick="showToast('Loading news patch...')">
+                        <div class="news-card-content">
+                            <span class="news-tag">News</span>
+                            <h6 class="news-title">${activeGame.news.text2}</h6>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Populate languages
+        const langBody = document.getElementById('languages-table-body');
+        if (langBody && activeGame.languages) {
+            langBody.innerHTML = '';
+            activeGame.languages.forEach(lang => {
+                langBody.innerHTML += `
+                    <tr>
+                        <td>${lang.name}</td>
+                        <td>${lang.interface ? '<i class="fas fa-check"></i>' : '-'}</td>
+                        <td>${lang.audio ? '<i class="fas fa-check"></i>' : '-'}</td>
+                        <td>${lang.subtitles ? '<i class="fas fa-check"></i>' : '-'}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Render specs initial tab
+        renderSpecs();
+
+        function renderSpecs() {
+            const specsContainer = document.getElementById('specs-container');
+            if (!specsContainer) return;
+            
+            let minSpecsHtml = `
+                <div class="specs-sub-col">
+                    <h6 class="specs-sub-title"><i class="fab fa-windows"></i> Minimum</h6>
+                    <div class="specs-list">
+            `;
+            if (activeGame.minRequirements) {
+                for (const [key, value] of Object.entries(activeGame.minRequirements)) {
+                    const label = key === 'os' ? 'OS' : key.charAt(0).toUpperCase() + key.slice(1);
+                    minSpecsHtml += `
+                        <div class="specs-item">
+                            <strong>${label}:</strong> ${value}
+                        </div>
+                    `;
+                }
+            }
+            minSpecsHtml += `
+                    </div>
+                </div>
+            `;
+
+            let recSpecsHtml = `
+                <div class="specs-sub-col">
+                    <h6 class="specs-sub-title"><i class="fab fa-windows"></i> Recommended</h6>
+                    <div class="specs-list">
+            `;
+            if (activeGame.recRequirements) {
+                for (const [key, value] of Object.entries(activeGame.recRequirements)) {
+                    const label = key === 'os' ? 'OS' : key.charAt(0).toUpperCase() + key.slice(1);
+                    recSpecsHtml += `
+                        <div class="specs-item">
+                            <strong>${label}:</strong> ${value}
+                        </div>
+                    `;
+                }
+            }
+            recSpecsHtml += `
+                    </div>
+                </div>
+            `;
+
+            specsContainer.innerHTML = minSpecsHtml + recSpecsHtml;
+        }
+
+        function switchSpecsTab(tabName) {
+            const btnSpecs = document.getElementById('btn-tab-specs');
+            const btnReviews = document.getElementById('btn-tab-reviews');
+            const tabContent = document.getElementById('specs-tab-content');
+
+            if (tabName === 'specs') {
+                btnSpecs.classList.add('active');
+                btnReviews.classList.remove('active');
+                tabContent.innerHTML = `<div class="specs-sub-container" id="specs-container"></div>`;
+                renderSpecs();
+            } else {
+                btnSpecs.classList.remove('active');
+                btnReviews.classList.add('active');
+                tabContent.innerHTML = `
+                    <div class="text-muted p-2" style="font-size:12px; line-height:1.6;">
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <div class="bg-success rounded-circle" style="width:8px; height:8px;"></div>
+                            <strong class="text-white">Community Reviews</strong>
+                        </div>
+                        <div class="mb-3 pb-3 border-bottom border-secondary border-opacity-25">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="text-info fw-semibold">Recommend (Reviewer A)</span>
+                                <span class="text-muted">Play time: 42 hrs</span>
+                            </div>
+                            <p class="mb-0">This game has absolutely stunning visuals and runs incredibly well on my setup. Highly recommend to everyone!</p>
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="text-info fw-semibold">Recommend (Reviewer B)</span>
+                                <span class="text-muted">Play time: 104 hrs</span>
+                            </div>
+                            <p class="mb-0">One of the best titles released this year. The atmosphere is top-notch and the gameplay loop is extremely satisfying.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
 
         function renderDetailButton() {
             const btnWrapper = document.getElementById('action-btn-wrapper');
@@ -482,8 +748,10 @@
                 // Show title bar progress
                 const bar = document.getElementById('title-progress-bar');
                 const fill = document.getElementById('title-progress-fill');
-                bar.style.display = 'block';
-                fill.style.width = pct + '%';
+                if (bar && fill) {
+                    bar.style.display = 'block';
+                    fill.style.width = pct + '%';
+                }
             }
             updateCartBadge();
         }
