@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --bg-gradient: radial-gradient(circle at 80% 20%, #2f2542 0%, #110e17 70%);
-    --client-bg: #1c1a26;
+    --bg-gradient: linear-gradient(39.26deg, #5d07f3 0%, #c5dbe7 94.14%, #c5f2e6 100%);
+    --client-bg: rgba(255, 255, 255, 0.05);
     --card-bg: rgba(255, 255, 255, 0.03);
     --card-border: rgba(255, 255, 255, 0.06);
     --input-bg: #272435;
@@ -30,18 +30,32 @@ body {
     align-items: center;
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
+
 ::-webkit-scrollbar-track {
     background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
 }
@@ -364,7 +378,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
     text-decoration: none;
 }
 
-.tag-pill:hover, .tag-pill.active {
+.tag-pill:hover,
+.tag-pill.active {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.2);
     color: #fff;
@@ -635,7 +650,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     padding: 45px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
 }
 
 .auth-title {
@@ -955,7 +970,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
     transition: var(--transition);
 }
 
-.sub-nav-pill:hover, .sub-nav-pill.active {
+.sub-nav-pill:hover,
+.sub-nav-pill.active {
     background: var(--pill-active);
     color: #fff;
     border-color: rgba(255, 255, 255, 0.1);
@@ -1114,22 +1130,37 @@ input[type="range"]::-webkit-slider-thumb:hover {
     height: 8px;
     border-radius: 50px;
 }
-.status-online { background: #00ff66; box-shadow: 0 0 6px #00ff66; }
-.status-offline { background: var(--text-muted); }
-.status-ingame { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+
+.status-online {
+    background: #00ff66;
+    box-shadow: 0 0 6px #00ff66;
+}
+
+.status-offline {
+    background: var(--text-muted);
+}
+
+.status-ingame {
+    background: #38bdf8;
+    box-shadow: 0 0 6px #38bdf8;
+}
 
 /* Responsive utility */
 @media (max-width: 991.98px) {
     body {
         padding: 10px;
     }
+
     .app-window {
         border-radius: 12px;
     }
+
     .app-body {
         flex-direction: column;
     }
-    .sidebar-filter, .about-menu {
+
+    .sidebar-filter,
+    .about-menu {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -1302,7 +1333,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .btn-library-icon.active {
-    color: #f59e0b; /* Yellow star */
+    color: #f59e0b;
+    /* Yellow star */
 }
 
 /* ==================== ELDEN RING DETAIL LAYOUT ==================== */
@@ -1345,7 +1377,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
     object-fit: cover;
 }
 
-.detail-screenshot-thumb:hover, .detail-screenshot-thumb.active {
+.detail-screenshot-thumb:hover,
+.detail-screenshot-thumb.active {
     border-color: var(--accent-purple);
     transform: translateY(-2px);
 }
@@ -1359,7 +1392,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     margin-bottom: 25px;
     overflow: hidden;
     display: none;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .detail-progress-fill {
@@ -1515,7 +1548,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     justify-content: center;
     border: 3px solid #000;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     margin-bottom: 8px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -1542,7 +1575,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
     z-index: 10;
     padding: 10px 0 0 0;
     display: flex;
@@ -1550,7 +1583,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .video-timeline-track {
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
     height: 4px;
     width: 100%;
     cursor: pointer;
@@ -1583,7 +1616,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .volume-slider {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     width: 60px;
     height: 4px;
     border-radius: 2px;
@@ -1605,7 +1638,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 /* ==================== STEAM BUTTON OVERRIDES ==================== */
 .btn-steam-blue {
     background: #446e8c !important;
-    border: 1px solid rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
     color: #fff !important;
     border-radius: 8px !important;
     transition: var(--transition);
@@ -1619,7 +1652,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .btn-steam-play {
     background: #474454 !important;
-    border: 1px solid rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
     color: #fff !important;
     border-radius: 8px !important;
     transition: var(--transition);
